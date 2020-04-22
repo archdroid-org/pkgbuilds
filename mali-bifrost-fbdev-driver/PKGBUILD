@@ -1,0 +1,58 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=mali-bifrost-fbdev-driver
+pkgver=0.1
+pkgrel=5
+_pkgdate=202004131528
+pkgdesc="The framebuffer userspace binary driver for Mali GPU G31/G52."
+arch=('aarch64')
+url="https://developer.arm.com/products/software/mali-drivers/user-space"
+license=('custom:Mali-GPU-Userspace-Driver')
+depends=('mesa')
+conflicts=(
+  "mali-utgard-meson-libgl-fb"
+  "mali-utgard-meson-libgl-x11"
+  "odroid-c2-libgl-fb"
+  "odroid-c2-libgl-x11"
+  "mali-bifrost-wayland-driver"
+)
+options=('!strip')
+source=(
+  "mali.conf"
+  "http://ppa.linuxfactory.or.kr/pool/non-free/m/mali-bifrost-driver/mali-bifrost-fbdev-driver_${pkgver}-${pkgrel}+${_pkgdate}~focal_arm64.deb"
+)
+md5sums=(
+  '2ac761dc95cf5096d9313ad993dcf4be'
+  '768f65fda7361cd9a568b9a019cffca8'
+)
+
+build() {
+  cd ${srcdir}
+
+  ar x mali-bifrost-fbdev-driver_${pkgver}-${pkgrel}+${_pkgdate}~focal_arm64.deb
+  tar -xvJf data.tar.xz
+
+  cd usr/lib/aarch64-linux-gnu
+
+  ln -sf libEGL.so.1         libEGL.so
+  ln -sf libEGL.so.1.1.0     libEGL.so.1
+  ln -sf /usr/lib/libMali.so libEGL.so.1.1.0
+
+  ln -sf libGLESv1_CM.so.1   libGLESv1_CM.so
+  ln -sf /usr/lib/libMali.so libGLESv1_CM.so.1
+
+  ln -sf libGLESv2.so.2      libGLESv2.so
+  ln -sf libGLESv2.so.2.1.0  libGLESv2.so.2
+  ln -sf /usr/lib/libMali.so libGLESv2.so.2.1.0
+}
+
+package() {
+  install -d $pkgdir/etc/ld.so.conf.d
+  install -d $pkgdir/usr/lib/mali-egl
+  install -d $pkgdir/usr/share/doc/mali-bifrost-fbdev-driver
+
+  cp mali.conf $pkgdir/etc/ld.so.conf.d/
+  cp -a usr/lib/aarch64-linux-gnu/* $pkgdir/usr/lib/mali-egl/
+  mv $pkgdir/usr/lib/mali-egl/libMali.so $pkgdir/usr/lib/
+  cp usr/share/doc/mali-bifrost-fbdev-driver/copyright $pkgdir/usr/share/doc/mali-bifrost-fbdev-driver/
+}
