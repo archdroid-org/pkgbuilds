@@ -9,6 +9,7 @@ arch=('aarch64')
 url="https://developer.arm.com/products/software/mali-drivers/user-space"
 license=('custom:Mali-GPU-Userspace-Driver')
 depends=('mesa')
+install=${pkgname}.install
 conflicts=(
   "mali-utgard-meson-libgl-fb"
   "mali-utgard-meson-libgl-x11"
@@ -18,10 +19,12 @@ conflicts=(
 )
 options=('!strip')
 source=(
+  "mali.sh"
   "mali.conf"
   "http://ppa.linuxfactory.or.kr/pool/non-free/m/mali-bifrost-driver/mali-bifrost-fbdev-driver_${pkgver}-${pkgrel}+${_pkgdate}~focal_arm64.deb"
 )
 md5sums=(
+  '11c71896bcab2c59344b07c15722db0e'
   '2ac761dc95cf5096d9313ad993dcf4be'
   '768f65fda7361cd9a568b9a019cffca8'
 )
@@ -47,10 +50,12 @@ build() {
 }
 
 package() {
+  install -d $pkgdir/etc/profile.d
   install -d $pkgdir/etc/ld.so.conf.d
   install -d $pkgdir/usr/lib/mali-egl
   install -d $pkgdir/usr/share/doc/mali-bifrost-fbdev-driver
 
+  cp mali.sh $pkgdir/etc/profile.d/
   cp mali.conf $pkgdir/etc/ld.so.conf.d/
   cp -a usr/lib/aarch64-linux-gnu/* $pkgdir/usr/lib/mali-egl/
   mv $pkgdir/usr/lib/mali-egl/libMali.so $pkgdir/usr/lib/

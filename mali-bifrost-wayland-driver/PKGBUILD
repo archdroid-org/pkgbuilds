@@ -26,7 +26,7 @@ source=(
   "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1-compat_0.1.0+202004141650~focal_arm64.deb"
 )
 md5sums=(
-  'SKIP'
+  '11c71896bcab2c59344b07c15722db0e'
   '2ac761dc95cf5096d9313ad993dcf4be'
   'e6b9685e5d638984b0250c3958cb74e8'
   '50346762ed55a9c38de263d5a981d513'
