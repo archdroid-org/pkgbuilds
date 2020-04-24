@@ -19,12 +19,14 @@ conflicts=(
 )
 options=('!strip')
 source=(
+  "mali.sh"
   "mali.conf"
   "http://ppa.linuxfactory.or.kr/pool/non-free/m/mali-bifrost-driver/mali-bifrost-wayland-driver_0.1-5+202004131528~focal_arm64.deb"
   "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1_0.1.0+202004101002~focal_arm64.deb"
   "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1-compat_0.1.0+202004141650~focal_arm64.deb"
 )
 md5sums=(
+  'SKIP'
   '2ac761dc95cf5096d9313ad993dcf4be'
   'e6b9685e5d638984b0250c3958cb74e8'
   '50346762ed55a9c38de263d5a981d513'
@@ -62,11 +64,13 @@ build() {
 }
 
 package() {
+  install -d $pkgdir/etc/profile.d
   install -d $pkgdir/etc/ld.so.conf.d
   install -d $pkgdir/usr/lib/mali-egl
   install -d $pkgdir/usr/share/doc/mali-bifrost-wayland-driver/
 
-  cp mali-n2.conf $pkgdir/etc/ld.so.conf.d/
+  cp mali.sh $pkgdir/etc/profile.d/
+  cp mali.conf $pkgdir/etc/ld.so.conf.d/
   cp -a usr/lib/aarch64-linux-gnu/mali-g52/wayland/* $pkgdir/usr/lib/mali-egl/
 
   cp usr/lib/libgbm-compat.la $pkgdir/usr/lib/mali-egl/
