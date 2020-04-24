@@ -6,7 +6,7 @@ buildarch=8
 pkgbase=linux-aarch64-n2
 pkgname=('linux-aarch64-n2'
          'linux-aarch64-n2-headers')
-_commit=0fd7c5ba15be06be794f4f036b7c863777eadd48
+_commit=40b58dcff55ee1046f6d69953b241ff27b92f749
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="AArch64 Odroid-N2"
@@ -22,7 +22,7 @@ source=("https://github.com/hardkernel/linux/archive/${_commit}.zip"
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook')
-md5sums=('9d7dd74fd06498f7d8ddc80ebd566323'
+md5sums=('cde53d1ee9cef9bd2043f2fefacf397e'
          'b4f279811d7863e2ea54c4b196f5018b'
          '13f7d22e7f0ff81a742fb4c7b02098f5'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
