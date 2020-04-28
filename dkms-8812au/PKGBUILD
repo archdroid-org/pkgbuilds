@@ -1,16 +1,17 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
-pkgname=dkms-rtl8812au
-_pkgbase=rtl8812au
+pkgname=dkms-8812au
+_pkgbase=8812au
 _commit=40eafac156c1ce5e736f9767b27dd967a4ae5cbe
 pkgver=4.2.2.g${_commit:0:7}
 pkgrel=1
-pkgdesc="Stable RTL8812AU chipset driver."
-arch=('i686' 'x86_64' 'aarch64')
-url="https://github.com/gnab/rtl8812au"
-license=('GPL2')
-depends=('linux' 'linux-headers')
-conflicts=("dkms-${_pkgbase}")
+pkgdesc="Driver for Realtek RTL8812AU chipset wireless adaptors."
+arch=('arm' 'armv6h' 'armv7h' 'aarch64')
+url="http://www.realtek.com.tw/"
+license=('GPL')
+depends=('dkms' 'linux-headers')
+conflicts=()
+options=(!strip)
 source=(
   "https://github.com/gnab/rtl8812au/archive/${_commit}.zip"
   'dkms.conf'
@@ -19,17 +20,17 @@ source=(
 md5sums=(
   '19f23c615a12f9038d49a5aacfffbf6e'
   '7877b5f47f836eae200eb006a1a9474b'
-  'fe97a8c0b9f80bcac1f622a36646de29'
+  '6744a04569752913032ef033e1475376'
 )
 
 package() {
   cd ${srcdir}/rtl8812au-$_commit
 
   install -d ${pkgdir}/etc/modprobe.d
+  install -d ${pkgdir}/usr/src/${_pkgbase}-${pkgver}
 
-  mkdir -p ${pkgdir}/usr/src/${_pkgbase}-${pkgver}
-  cp -pr * ${pkgdir}/usr/src/${_pkgbase}-${pkgver}
-  cp ${srcdir}/dkms.conf ${pkgdir}/usr/src/${_pkgbase}-${pkgver}
+  cp -pr * ${pkgdir}/usr/src/${_pkgbase}-${pkgver}/
+  cp ${srcdir}/dkms.conf ${pkgdir}/usr/src/${_pkgbase}-${pkgver}/
   cp ${srcdir}/rtl8812au.conf ${pkgdir}/etc/modprobe.d/
 
   # Set name and version
