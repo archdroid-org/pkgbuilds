@@ -2,5 +2,6 @@
 */src
 */*.deb
 */*.zip
+*/*.tar
 */*.tar.xz
 */*.tar.zst
