@@ -33,7 +33,7 @@ package() {
   cp ${srcdir}/rtl8812au.conf ${pkgdir}/etc/modprobe.d/
 
   # Set name and version
-  sed -e "s/@PKGBASE@/${pkgname}/" \
+  sed -e "s/@PKGBASE@/${_pkgbase}/" \
     -e "s/@PKGVER@/${pkgver}/" \
     -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
 }
