@@ -26,6 +26,7 @@ Here is a list of what has been tested so far divided in 4 categories:
 ### List of Environments
 
 | Environment    | Status     | Notes                                  |
+| -------------- | ---------- | -------------------------------------- |
 | Weston         | YES        | Everything seems to work!              |
 | Sway           | PARTIALLY  | Crashes when running X applications.   |
 | Enlightenment  | PARTIALLY  | X applications run but, glmark2-es2-wayland segfaults on a regular user account, under root strangely works so something is wrong on the permissions system. |
