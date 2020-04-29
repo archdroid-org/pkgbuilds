@@ -1,0 +1,87 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=odroid-n2-libgl-wl
+pkgdesc="ODROID-C2 Mali driver (Wayland)"
+pkgver=r16p0
+pkgrel=1
+arch=('aarch64')
+url="https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali"
+license=('Proprietary')
+depends=('dkms-mali-bifrost')
+makedepends=('gcc')
+conflicts=(
+  "mali-utgard-meson-libgl-fb"
+  "mali-utgard-meson-libgl-x11"
+  "odroid-c2-libgl-fb"
+  "odroid-c2-libgl-x11"
+)
+provides=('odroid-n2-libgl')
+install=$pkgname.install
+options=('!strip')
+source=(
+  "mali.conf"
+  "license"
+  "gbm_compat.c"
+  "libmali-wl.so::https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/blob/aml64_buildroot_master/lib/arm64/gondul/r16p0/wayland/drm/libMali.so?raw=true"
+  "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1_0.1.0+202004101002~focal_arm64.deb"
+)
+md5sums=(
+  '2ac761dc95cf5096d9313ad993dcf4be'
+  '3da6d34563163f132815d9b8c5387a76'
+  'ce97bdcfcb275e613a0c6c917af13e34'
+  'a7798c5566551bdd0d4be79046248d43'
+  '50346762ed55a9c38de263d5a981d513'
+)
+
+prepare() {
+  if [ -e "$srcdir/libs" ]; then
+    rm -rf $srcdir/libs
+  fi
+}
+
+build() {
+  cd $srcdir
+  mkdir $srcdir/libs
+
+  gcc -shared gbm_compat.c -o libgbm-compat.so
+
+  cp libgbm-compat.so $srcdir/libs/
+
+  # for some unknown reason this libgbm prevents linking issues
+  # when compiling software.
+  ar x libgbm1_0.1.0+202004101002~focal_arm64.deb
+  tar -xvJf data.tar.xz
+
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.la libs/
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.so libs/
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.so.1 libs/
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.so.1.0.0 libs/
+
+  ln -sf libEGL.so.1               libs/libEGL.so
+  ln -sf libEGL.so.1.1.0           libs/libEGL.so.1
+  ln -sf libmali.so                libs/libEGL.so.1.1.0
+
+  ln -sf libGLESv1_CM.so.1         libs/libGLESv1_CM.so
+  ln -sf libmali.so                libs/libGLESv1_CM.so.1
+
+  ln -sf libGLESv2.so.2            libs/libGLESv2.so
+  ln -sf libGLESv2.so.2.1.0        libs/libGLESv2.so.2
+  ln -sf libmali.so                libs/libGLESv2.so.2.1.0
+
+  ln -sf libwayland-egl.so.1       libs/libwayland-egl.so
+  ln -sf libwayland-egl.so.1.0.0   libs/libwayland-egl.so.1
+  ln -sf libmali.so                libs/libwayland-egl.so.1.0.0
+}
+
+package() {
+  install -d $pkgdir/etc/ld.so.conf.d
+  install -d $pkgdir/usr/lib/mali-egl
+  install -d $pkgdir/usr/share/doc/$pkgname
+
+  cp mali.conf $pkgdir/etc/ld.so.conf.d/
+  cp libmali-wl.so $srcdir/libs/libmali.so
+  chmod 0755 $srcdir/libs/libmali.so
+  ln -sf /usr/lib/mali-egl/libmali.so $srcdir/libs/libmali.so.0
+  cp -a $srcdir/libs/* $pkgdir/usr/lib/mali-egl/
+  cp license $pkgdir/usr/share/doc/$pkgname/
+}
