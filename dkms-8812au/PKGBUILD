@@ -19,7 +19,7 @@ source=(
 )
 md5sums=(
   '19f23c615a12f9038d49a5aacfffbf6e'
-  '7877b5f47f836eae200eb006a1a9474b'
+  '1d9e2b78b4a2bdd48ea360550ed0aea7'
   '6744a04569752913032ef033e1475376'
 )
 
@@ -33,8 +33,17 @@ package() {
   cp ${srcdir}/dkms.conf ${pkgdir}/usr/src/${_pkgbase}-${pkgver}/
   cp ${srcdir}/rtl8812au.conf ${pkgdir}/etc/modprobe.d/
 
+  _arch="arm"
+  case "${CARCH}" in
+    aarch64|arm64)
+      _arch="arm64"
+      ;;
+    *)
+  esac
+
   # Set name and version
   sed -e "s/@PKGBASE@/${_pkgbase}/" \
     -e "s/@PKGVER@/${pkgver}/" \
+    -e "s/@ARCH@/${_arch}/" \
     -i "${pkgdir}"/usr/src/${_pkgbase}-${pkgver}/dkms.conf
 }
