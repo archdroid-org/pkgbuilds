@@ -4,8 +4,9 @@ buildarch=8
 
 pkgname=dkms-mali-bifrost
 _pkgbase=mali-bifrost
-_pkgdate=202004290606
-pkgver=24.0
+_pkgdate=202005011205
+_pkgver=24.0
+pkgver=${_pkgver}+${_pkgdate}
 pkgrel=1
 pkgdesc="Mali kernel driver for bifrost hardware in DKMS format."
 arch=('aarch64')
@@ -14,13 +15,13 @@ license=('GPL')
 depends=('linux>=5.6' 'linux-headers>=5.6' 'dkms')
 options=('!strip')
 source=(
-  "http://ppa.linuxfactory.or.kr/pool/testing/m/mali-bifrost/mali-bifrost-dkms_${pkgver}+${_pkgdate}~focal_arm64.deb"
+  "http://ppa.linuxfactory.or.kr/pool/contrib/m/mali-bifrost/mali-bifrost-dkms_${pkgver}~focal_arm64.deb"
   "mali_kbase.conf"
   "99-mali.rules"
   "dkms.conf"
 )
 md5sums=(
-  '6b250ce312ab52cb24f595be5575062e'
+  '9660bfc2ee9017e857dcf1bca2524548'
   '5d925319c2135f5b0ceb0b047ee3e0b9'
   'd786d5c32d7a10f2db522258200a1aa3'
   'b6e8f93a4c3004a6a15ae271a7464eff'
@@ -33,18 +34,18 @@ prepare() {
 package() {
   cd ${srcdir}
 
-  mali_path=$(ls usr/src/ | grep ${_pkgbase}-${pkgver})
+  mali_path=$(ls usr/src/ | grep ${_pkgbase}-${_pkgver})
 
   install -d $pkgdir/usr/lib/udev/rules.d/
   install -d ${pkgdir}/etc/modules-load.d/
-  install -d ${pkgdir}/usr/src/${_pkgbase}-${pkgver}
+  install -d ${pkgdir}/usr/src/${_pkgbase}-${_pkgver}
 
   cp 99-mali.rules $pkgdir/usr/lib/udev/rules.d/
   cp mali_kbase.conf ${pkgdir}/etc/modules-load.d/
-  cp -pr usr/src/$mali_path/* ${pkgdir}/usr/src/${_pkgbase}-${pkgver}/
+  cp -pr usr/src/$mali_path/* ${pkgdir}/usr/src/${_pkgbase}-${_pkgver}/
 
   sed -i "s/%PKGNAME%/${_pkgbase}/g" dkms.conf
-  sed -i "s/%PKGVER%/${pkgver}/g" dkms.conf
+  sed -i "s/%PKGVER%/${_pkgver}/g" dkms.conf
 
-  cp dkms.conf ${pkgdir}/usr/src/${_pkgbase}-${pkgver}/
+  cp dkms.conf ${pkgdir}/usr/src/${_pkgbase}-${_pkgver}/
 }
