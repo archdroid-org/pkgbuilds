@@ -27,12 +27,12 @@ Here is a list of what has been tested so far divided in 4 categories:
 
 | Environment    | Status     | Notes                                  |
 | -------------- | ---------- | -------------------------------------- |
+| GNOME          | YES        | Everything seems to work now!          |
 | Weston         | YES        | Everything seems to work! Don't forget to enable xwayland on weston.ini |
 | Sway           | PARTIALLY  | Crashes when running X applications.   |
 | Enlightenment  | PARTIALLY  | X applications run but, glmark2-es2-wayland segfaults on a regular user account, under root strangely works so something is wrong on the permissions system. |
 | KDE            | SLOW       | Kwayland and Xwayland processes running but everything is slow |
 | Wayfire        | NO         |                                        |
-| GNOME          | NO         |                                        |
 
 ## Requirements
 
@@ -112,11 +112,32 @@ After installing these two packages you may restart the system to make
 sure that the changes will take effect. After reboot you should be
 able to use one of the working environments listed before. You
 can refer to the [ArchLinux Wayland](https://wiki.archlinux.org/index.php/Wayland)
-wiki entry for installation instructions. The most pleasant experience
-so far is with running weston.
+wiki entry for installation instructions. The most lightweight
+experience so far is with running weston. But the most complete
+desktop environment would simply be GNOME.
 
-Below are some of the changes I did to improve the experience with
-weston.
+## GNOME Performance Tips
+
+Things you can do to decrease RAM usage of gnome and improve CPU
+usage when the system is idle.
+
+__Disable Trackers__ - The most important change
+
+> Settings -> Search -> Turn Off
+
+__Uninstall evolution data server__
+
+```sh
+sudo pacman -Rcs evolution-data-server
+```
+
+__Uninstall gnome software__
+
+```sh
+sudo pacman -Rcs gnome-software
+```
+
+Those changes should leave you a stable system.
 
 ## Weston
 
@@ -219,3 +240,29 @@ GTK applications.
 
 You can read more about configuring weston on the
 [ArchLinux Wiki](https://wiki.archlinux.org/index.php/Weston).
+
+## Troubleshooting
+
+Monitor screen resolution is not properly set with mainline kernel
+and instead a lower resolution is used.
+
+You can pass a parameter to the kernel to force a screen resolution
+as explained on the [ArchLinux Wiki](https://wiki.archlinux.org/index.php/Kernel_mode_setting#Forcing_modes).
+First you need to retrieve the proper display connector name by
+executing the following code on your terminal emulator:
+
+```sh
+for p in /sys/class/drm/*/status; do con=${p%/status}; echo -n "${con#*/card?-}: "; cat $p; done
+```
+
+This code would return something like:
+
+> HDMI-A-1
+
+Then edit your __/boot/boot.ini__ and append to your bootargs a line like:
+
+> video=HDMI-A-1:1920x1080@60
+
+Which should look similar to:
+
+> setenv bootargs "root=/dev/sda2 rootwait rw mitigations=off ${condev} ${amlogic} no_console_suspend fsck.repair=yes net.ifnames=0 clk_ignore_unused video=HDMI-A-1:1920x1080@60"
