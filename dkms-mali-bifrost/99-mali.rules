@@ -1,1 +1,1 @@
-KERNEL=="mali[0-9]*",SUBSYSTEM=="misc",MODE="0770",GROUP="video"
+KERNEL=="mali[0-9]*",SUBSYSTEM=="misc",MODE="0777",GROUP="video"
