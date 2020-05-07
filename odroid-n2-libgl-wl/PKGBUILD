@@ -15,7 +15,7 @@ conflicts=(
   "odroid-c2-libgl-fb"
   "odroid-c2-libgl-x11"
 )
-provides=('odroid-n2-libgl')
+provides=('odroid-n2-libgl' 'opencl-driver')
 install=$pkgname.install
 options=('!strip')
 source=(
@@ -71,6 +71,10 @@ build() {
   ln -sf libwayland-egl.so.1       libs/libwayland-egl.so
   ln -sf libwayland-egl.so.1.0.0   libs/libwayland-egl.so.1
   ln -sf libmali.so                libs/libwayland-egl.so.1.0.0
+
+  ln -sf libOpenCL.so.1            libs/libOpenCL.so
+  ln -sf libOpenCL.so.1.0.0        libs/libOpenCL.so.1
+  ln -sf libmali.so                libs/libOpenCL.so.1.0.0
 }
 
 package() {
