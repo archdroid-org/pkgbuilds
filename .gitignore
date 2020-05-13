@@ -6,3 +6,4 @@
 */*.tar
 */*.tar.xz
 */*.tar.zst
+*/gl4es
