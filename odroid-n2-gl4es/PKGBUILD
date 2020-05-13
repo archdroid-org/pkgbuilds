@@ -1,0 +1,47 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=odroid-n2-gl4es
+_gitname=gl4es
+pkgver=2200.14e6f33
+pkgrel=1
+pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library."
+arch=('aarch64')
+url="https://github.com/ptitSeb/gl4es"
+license=('MIT')
+depends=('mali-bifrost-fbdev-driver')
+makedepends=('git')
+source=(
+  'git+https://github.com/ptitSeb/gl4es'
+  'gl4es.conf'
+  'gl4es.sh'
+)
+md5sums=(
+  'SKIP'
+  '50b819dc12b12c37c8ee66355720144e'
+  'fe96cfb20d92d3631c924230a069eaf9'
+)
+
+pkgver() {
+  cd "${SRCDEST}/${_gitname}"
+  echo $(git rev-list --count master).$(git rev-parse --short master)
+}
+
+build() {
+  cd "${srcdir}/${_gitname}"
+
+  cmake -DODROID=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  make
+}
+
+package() {
+  install -d $pkgdir/etc/profile.d
+  install -d $pkgdir/etc/ld.so.conf.d
+  install -d $pkgdir/usr/lib/gl4es
+
+  cp gl4es.conf $pkgdir/etc/ld.so.conf.d/
+  cp gl4es.sh $pkgdir/etc/profile.d/
+
+  cp $srcdir/$_gitname/lib/libGL.so.1 $pkgdir/usr/lib/gl4es/libGL.so.1.2.0
+  ln -s /usr/lib/gl4es/libGL.so.1.2.0 $pkgdir/usr/lib/gl4es/libGL.so.1
+  ln -s /usr/lib/gl4es/libGL.so.1.2.0 $pkgdir/usr/lib/gl4es/libGL.so
+}
