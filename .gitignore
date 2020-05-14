@@ -4,6 +4,8 @@
 */*.deb
 */*.zip
 */*.tar
+*/*.tar.gz
 */*.tar.xz
 */*.tar.zst
 */gl4es
+*/engine
