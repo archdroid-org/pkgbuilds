@@ -21,7 +21,6 @@ conflicts=(
   'mali-bifrost-wayland-driver'
   'xf86-video-fbturbo-git'
 )
-install=$pkgname.install
 options=('!strip')
 source=(
   "mali.conf"
