@@ -8,7 +8,7 @@ pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library."
 arch=('aarch64')
 url="https://github.com/ptitSeb/gl4es"
 license=('MIT')
-depends=('mali-bifrost-fbdev-driver')
+depends=('mali-bifrost-fbdev-driver' 'xorg-xrefresh')
 makedepends=('git')
 source=(
   'git+https://github.com/ptitSeb/gl4es'
@@ -18,7 +18,7 @@ source=(
 md5sums=(
   'SKIP'
   '50b819dc12b12c37c8ee66355720144e'
-  'fe96cfb20d92d3631c924230a069eaf9'
+  '13f60f5a8be536a1a61a47ccaf7d6ca9'
 )
 
 pkgver() {
