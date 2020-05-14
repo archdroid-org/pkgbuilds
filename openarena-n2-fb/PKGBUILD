@@ -1,0 +1,71 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+# Contributor: Mark Vainomaa <mikroskeem@mikroskeem.eu>
+
+pkgname='openarena-n2-fb'
+pkgver='0.8.8'
+_pkgver='088'
+_commit=f507a7a87a86878d4d3b72315b9d9fe8c255e1e3 # Latest known working engine commit
+pkgrel='3'
+pkgdesc="A violent, sexy, multiplayer first person shooter based on the ioquake3 engine."
+arch=('aarch64')
+url="http://openarena.ws/"
+license=('GPL')
+depends=('sdl' 'libvorbis' 'openal' 'curl' 'libxmp')
+optdepends=(
+  'odroid-n2-gl4es: for accelerated graphics'
+)
+source=(
+  'git+https://github.com/OpenArena/engine'
+  "http://download.tuxfamily.org/openarena/rel/${_pkgver}/openarena-${pkgver}.zip"
+  'openarena-runner.sh'
+  'openarena.png'
+  'openarena-server.png'
+  'openarena.desktop'
+  'openarena-server.desktop'
+)
+md5sums=(
+  'SKIP'
+  '9f353d96d7889c377349d692c3905e5b'
+  '4a0160db68da16501a2fa980548df86e'
+  'c69f824dc500d436fc631b78b6a62dc8'
+  '17e2f4fa060ed97ff6fe1eaff647bcfb'
+  '229c87648c10e48b523c25d24aba8372'
+  '00649517a4dd08cd9c6e99d6703f01f1'
+)
+
+prepare() {
+  cd "${srcdir}"
+
+  sed -i 's/#elif defined __arm__/#elif defined __aarch64__/g' \
+    engine/code/qcommon/q_platform.h
+
+  cd "${srcdir}/openarena-${pkgver}"
+  rm *.dll *.exe
+  rm -rf __MACOSX *.app
+  rm *.i386
+  rm *.x86_64
+}
+
+build() {
+  cd "${srcdir}/engine"
+  make
+}
+
+package() {
+  output="${pkgdir}/opt"
+  install -dm755 "${output}" "$pkgdir"/usr/share/pixmaps/ "$pkgdir"/usr/share/applications/ "$pkgdir"/usr/bin
+  mv "${srcdir}/openarena-${pkgver}" "${pkgdir}/opt/openarena"
+
+  find "${pkgdir}/opt/openarena" -type f -exec chmod 644 {} \;
+  find "${pkgdir}/opt/openarena" -type d -exec chmod 755 {} \;
+
+  cp "${srcdir}/engine/build/release-linux-aarch64"/*.aarch64 "${pkgdir}"/opt/openarena/
+  chmod 755 "${pkgdir}"/opt/openarena/*.aarch64
+
+  install -Dm 644 "$srcdir"/openarena{,-server}.png "$pkgdir"/usr/share/pixmaps/
+  install -Dm 644 "$srcdir"/openarena{,-server}.desktop "$pkgdir"/usr/share/applications/
+
+  install -Dm 755 "$srcdir"/openarena-runner.sh "$pkgdir"/opt/openarena/openarena-runner.sh
+  ln -s /opt/openarena/openarena-runner.sh "$pkgdir"/usr/bin/openarena
+  ln -s /opt/openarena/openarena-runner.sh "$pkgdir"/usr/bin/openarena-server
+}
