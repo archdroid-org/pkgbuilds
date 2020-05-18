@@ -1,0 +1,54 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=cendric-git
+_gitname=Cendric2
+pkgver=20191022.3dce0091
+pkgrel=1
+pkgdesc='Cendric combines RPG and Platformer elements in one game, featuring both a sidescroller and top-down view.'
+url='https://github.com/tizian/Cendric2'
+license=('MIT' 'CCPL:by-sa')
+arch=('i686' 'x86_64' 'aarch64')
+makedepends=('git' 'cmake')
+depends=('sfml')
+source=('git://github.com/tizian/Cendric2.git' 'cendric.desktop')
+md5sums=('SKIP' '826f54010dd9654e6ed76635ba923ef7')
+
+pkgver() {
+  cd "${srcdir}/${_gitname}"
+  git log -1 --format='%cd.%h' --date=short | tr -d -
+}
+
+prepare() {
+  cd "${srcdir}/${_gitname}"
+
+  cmake . \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DSFML_USE_SYSTEM_DEPS=ON \
+    -DUSE_SYSTEM_SFML=1 \
+    -DCENDRIC_EXTERNAL_DOCUMENT_FOLDER=ON \
+    -DUSE_SYSTEM_PATHS=ON
+}
+
+build() {
+  cd "${srcdir}/${_gitname}"
+
+  make
+}
+
+package() {
+  cd "${srcdir}/${_gitname}"
+  make DESTDIR="${pkgdir}" install
+  mv "${pkgdir}"/usr/bin/Cendric "${pkgdir}"/usr/share/Cendric/
+
+  install -d "${pkgdir}"/usr/share/applications
+  cp "${srcdir}"/cendric.desktop "${pkgdir}"/usr/share/applications/
+
+  install -dm 0777 "${pkgdir}"/usr/share/Cendric/saves
+
+  echo "#!/bin/bash" > "${pkgdir}"/usr/bin/Cendric
+  echo "cd /usr/share/Cendric" >> "${pkgdir}"/usr/bin/Cendric
+  echo "./Cendric" >> "${pkgdir}"/usr/bin/Cendric
+
+  chmod 0755 "${pkgdir}"/usr/bin/Cendric
+}
