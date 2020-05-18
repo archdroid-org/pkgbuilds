@@ -2,7 +2,7 @@
 
 pkgname=odroid-n2-gl4es
 _gitname=gl4es
-pkgver=2200.14e6f33
+pkgver=2209.0bb4c6d
 pkgrel=1
 pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library."
 arch=('aarch64')
