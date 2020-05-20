@@ -1,4 +1,4 @@
-# GPU Accelerated Odroid N2 in ArchLinuxARM
+# GPU Accelerated Odroid N2/C4 in ArchLinuxARM
 
 Custom packages to enable gpu acceleration of Odroid N2 on
 ArchLinuxARM, based on the packages done for Ubuntu 20.04 by
