@@ -1,7 +1,7 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 # Contributor: Mark Vainomaa <mikroskeem@mikroskeem.eu>
 
-pkgname='openarena-n2-fb'
+pkgname='openarena'
 pkgver='0.8.8'
 _pkgver='088'
 _commit=f507a7a87a86878d4d3b72315b9d9fe8c255e1e3 # Latest known working engine commit
@@ -12,7 +12,7 @@ url="http://openarena.ws/"
 license=('GPL')
 depends=('sdl' 'libvorbis' 'openal' 'curl' 'libxmp')
 optdepends=(
-  'odroid-n2-gl4es: for accelerated graphics'
+  'odroid-gl4es: for accelerated graphics'
 )
 source=(
   'git+https://github.com/OpenArena/engine'

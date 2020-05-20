@@ -1,7 +1,7 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
 pkgname=odroid-n2-libgl-wl
-pkgdesc="ODROID-C2 Mali driver (Wayland)"
+pkgdesc="ODROID-N2 Mali driver (Wayland)"
 pkgver=r16p0
 pkgrel=1
 arch=('aarch64')
@@ -14,6 +14,8 @@ conflicts=(
   "mali-utgard-meson-libgl-x11"
   "odroid-c2-libgl-fb"
   "odroid-c2-libgl-x11"
+  "odroid-c4-libgl-fb"
+  "odroid-n2-libgl-fb"
 )
 provides=('odroid-n2-libgl' 'opencl-driver')
 install=$pkgname.install

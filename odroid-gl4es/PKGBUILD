@@ -1,15 +1,19 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
-pkgname=odroid-n2-gl4es
+pkgname=odroid-gl4es
 _gitname=gl4es
-pkgver=2209.0bb4c6d
+pkgver=2215.181f8d3
 pkgrel=1
-pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library."
+pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library. (Odroid Build)"
 arch=('aarch64')
 url="https://github.com/ptitSeb/gl4es"
 license=('MIT')
-depends=('mali-bifrost-fbdev-driver' 'xorg-xrefresh')
+depends=('xorg-xrefresh')
 makedepends=('git')
+optdepends=(
+  'odroid-n2-libgl-fb: hardware acceleration'
+  'odroid-c4-libgl-fb: hardware acceleration'
+)
 source=(
   'git+https://github.com/ptitSeb/gl4es'
   'gl4es.conf'
@@ -18,7 +22,7 @@ source=(
 md5sums=(
   'SKIP'
   '50b819dc12b12c37c8ee66355720144e'
-  '13f60f5a8be536a1a61a47ccaf7d6ca9'
+  '5a487a20ccf85844f4bbe0e599085e7b'
 )
 
 pkgver() {
