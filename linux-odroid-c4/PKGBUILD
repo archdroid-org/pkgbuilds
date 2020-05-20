@@ -1,5 +1,6 @@
 # ODROID-C4
 # Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+# Contributor: Jefferson Gonzalez <jgmdev@gmail.com>
 
 buildarch=8
 
