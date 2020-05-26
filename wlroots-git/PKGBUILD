@@ -1,0 +1,80 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+# Contributor: Adrian Perez de Castro <aperez@igalia.com>
+
+pkgname=wlroots-git
+pkgver=0.9.1.r7.g6d3f3b93
+pkgrel=2
+license=(custom:MIT)
+pkgdesc='Modular Wayland compositor library (with libMali fix)'
+url=https://github.com/swaywm/wlroots
+arch=(x86_64)
+provides=("wlroots=${pkgver%%.r*}")
+conflicts=(wlroots)
+options=(debug)
+depends=(
+  libcap systemd wayland opengl-driver libxcb xcb-util-errors
+  xcb-util-wm pixman libinput libxkbcommon
+)
+makedepends=(meson ninja git wayland-protocols xorgproto)
+source=("${pkgname}::git+${url}")
+sha512sums=('SKIP')
+
+pkgver () {
+  cd "${pkgname}"
+  (
+    set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+}
+
+prepare () {
+  cd "${srcdir}/${pkgname}"
+
+  # Apply changes to fix XWayland not working and crashing
+  # mali driver: https://github.com/swaywm/wlroots/pull/1815
+
+  # Add needed header for signal functions
+  sed -i "s/#include <libinput.h>/#include <libinput.h>\\
+#include <signal.h>/g" backend/backend.c
+
+  # Replace:
+  # struct wlr_backend *backend = wlr_multi_backend_create(display);
+  sed -i "214s/.*/\tsigset_t mask;\\
+\twlr_log(WLR_ERROR, \"setting sigmask\\\n\");\\
+\tsigemptyset(\&mask);\\
+\tsigaddset(\&mask, SIGUSR1);\\
+\tpthread_sigmask(SIG_BLOCK, \&mask, NULL);\\
+\\
+\tstruct wlr_backend *backend = wlr_multi_backend_create(display);/g" \
+  backend/backend.c
+
+  # Add threads as dependency
+  sed -i "s/rt = cc.find_library('rt')/rt = cc.find_library('rt')\\
+threads = dependency('threads')/g" meson.build
+
+  sed -i "s/\trt,/\trt,\n\tthreads,/g" meson.build
+}
+
+build () {
+  cd "${pkgname}"
+  rm -rf build
+  meson build \
+    --prefix /usr \
+    --buildtype debug \
+    -Dlibcap=enabled \
+    -Dlogind=enabled \
+    -Dlogind-provider=systemd \
+    -Dxcb-errors=enabled \
+    -Dxcb-icccm=enabled \
+    -Dxwayland=enabled \
+    -Dx11-backend=enabled \
+    -Dexamples=true
+  ninja -C build
+}
+
+package () {
+  cd "${pkgname}"
+  DESTDIR="${pkgdir}" ninja -C build install
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
