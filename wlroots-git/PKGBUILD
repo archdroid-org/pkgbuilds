@@ -2,15 +2,14 @@
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 
 pkgname=wlroots-git
-pkgver=0.9.1.r7.g6d3f3b93
-pkgrel=2
+pkgver=0.10.0.r149.g21c6cc5e
+pkgrel=1
 license=(custom:MIT)
 pkgdesc='Modular Wayland compositor library (with libMali fix)'
 url=https://github.com/swaywm/wlroots
-arch=(x86_64)
+arch=(x86_64 aarch64)
 provides=("wlroots=${pkgver%%.r*}")
 conflicts=(wlroots)
-options=(debug)
 depends=(
   libcap systemd wayland opengl-driver libxcb xcb-util-errors
   xcb-util-wm pixman libinput libxkbcommon
@@ -41,7 +40,6 @@ prepare () {
   # Replace:
   # struct wlr_backend *backend = wlr_multi_backend_create(display);
   sed -i "214s/.*/\tsigset_t mask;\\
-\twlr_log(WLR_ERROR, \"setting sigmask\\\n\");\\
 \tsigemptyset(\&mask);\\
 \tsigaddset(\&mask, SIGUSR1);\\
 \tpthread_sigmask(SIG_BLOCK, \&mask, NULL);\\
@@ -61,7 +59,7 @@ build () {
   rm -rf build
   meson build \
     --prefix /usr \
-    --buildtype debug \
+    --buildtype plain \
     -Dlibcap=enabled \
     -Dlogind=enabled \
     -Dlogind-provider=systemd \
