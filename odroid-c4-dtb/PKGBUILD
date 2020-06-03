@@ -13,7 +13,7 @@ source=(
   "meson-sm1-odroid-c4.dts"
 )
 md5sums=(
-  '9b8a05ba6c65208156d1fbd5b7e8605f'
+  '83d2d228e0658fc36ce6ae83f842819c'
 )
 
 build() {

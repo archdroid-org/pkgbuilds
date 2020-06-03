@@ -19,7 +19,6 @@
 			clocks = <0x02 0xa8 0x02 0x35 0x02 0x3a>;
 			status = "disabled";
 			power-domains = <0x03 0x00>;
-			phandle = <0x39>;
 		};
 
 		framebuffer-hdmi {
@@ -28,7 +27,6 @@
 			clocks = <0x02 0xa8 0x02 0x35 0x02 0x3a>;
 			status = "disabled";
 			power-domains = <0x03 0x00>;
-			phandle = <0x3a>;
 		};
 	};
 
@@ -39,7 +37,6 @@
 		#size-cells = <0x01>;
 		read-only;
 		secure-monitor = <0x04>;
-		phandle = <0x3b>;
 	};
 
 	psci {
@@ -55,7 +52,6 @@
 		secmon@5000000 {
 			reg = <0x00 0x5000000 0x00 0x300000>;
 			no-map;
-			phandle = <0x3c>;
 		};
 
 		linux,cma {
@@ -100,7 +96,6 @@
 			phy-names = "pcie";
 			status = "disabled";
 			power-domains = <0x03 0x03>;
-			phandle = <0x3d>;
 		};
 
 		thermal-zones {
@@ -109,7 +104,6 @@
 				polling-delay = <0x3e8>;
 				polling-delay-passive = <0x64>;
 				thermal-sensors = <0x07>;
-				phandle = <0x3e>;
 
 				trips {
 
@@ -117,21 +111,18 @@
 						temperature = <0x14c08>;
 						hysteresis = <0x7d0>;
 						type = "passive";
-						phandle = <0x3f>;
 					};
 
 					cpu-hot {
 						temperature = <0x17318>;
 						hysteresis = <0x7d0>;
 						type = "hot";
-						phandle = <0x40>;
 					};
 
 					cpu-critical {
 						temperature = <0x1adb0>;
 						hysteresis = <0x7d0>;
 						type = "critical";
-						phandle = <0x41>;
 					};
 				};
 			};
@@ -140,7 +131,6 @@
 				polling-delay = <0x3e8>;
 				polling-delay-passive = <0x64>;
 				thermal-sensors = <0x08>;
-				phandle = <0x42>;
 
 				trips {
 
@@ -155,7 +145,6 @@
 						temperature = <0x1adb0>;
 						hysteresis = <0x7d0>;
 						type = "critical";
-						phandle = <0x43>;
 					};
 				};
 
@@ -185,7 +174,6 @@
 			phy-mode = "rgmii";
 			phy-handle = <0x0d>;
 			amlogic,tx-delay-ns = <0x02>;
-			phandle = <0x44>;
 
 			mdio {
 				#address-cells = <0x01>;
@@ -201,7 +189,6 @@
 			#address-cells = <0x02>;
 			#size-cells = <0x02>;
 			ranges = <0x00 0x00 0x00 0xff600000 0x00 0x200000>;
-			phandle = <0x45>;
 
 			hdmi-tx@0 {
 				compatible = "amlogic,meson-g12a-dw-hdmi";
@@ -218,11 +205,10 @@
 				pinctrl-0 = <0x0e 0x0f>;
 				pinctrl-names = "default";
 				hdmi-supply = <0x10>;
-				phandle = <0x46>;
+				phandle = <0x40>;
 
 				port@0 {
 					reg = <0x00>;
-					phandle = <0x47>;
 
 					endpoint {
 						remote-endpoint = <0x11>;
@@ -232,11 +218,10 @@
 
 				port@1 {
 					reg = <0x01>;
-					phandle = <0x48>;
 
 					endpoint {
 						remote-endpoint = <0x12>;
-						phandle = <0x38>;
+						phandle = <0x39>;
 					};
 				};
 			};
@@ -247,12 +232,10 @@
 				#address-cells = <0x02>;
 				#size-cells = <0x02>;
 				ranges = <0x00 0x00 0x00 0x30000 0x00 0x2000>;
-				phandle = <0x49>;
 
 				rng@218 {
 					compatible = "amlogic,meson-rng";
 					reg = <0x00 0x218 0x00 0x04>;
-					phandle = <0x4a>;
 				};
 			};
 
@@ -262,7 +245,6 @@
 				#address-cells = <0x02>;
 				#size-cells = <0x02>;
 				ranges = <0x00 0x00 0x00 0x34400 0x00 0x400>;
-				phandle = <0x4b>;
 
 				pinctrl@40 {
 					compatible = "amlogic,meson-g12a-periphs-pinctrl";
@@ -289,7 +271,6 @@
 					};
 
 					cec_ao_a_h {
-						phandle = <0x4c>;
 
 						mux {
 							groups = "cec_ao_a_h";
@@ -299,7 +280,6 @@
 					};
 
 					cec_ao_b_h {
-						phandle = <0x4d>;
 
 						mux {
 							groups = "cec_ao_b_h";
@@ -309,7 +289,7 @@
 					};
 
 					emmc-ctrl {
-						phandle = <0x27>;
+						phandle = <0x28>;
 
 						mux-0 {
 							groups = "emmc_cmd";
@@ -327,7 +307,6 @@
 					};
 
 					emmc-data-4b {
-						phandle = <0x4e>;
 
 						mux-0 {
 							groups = "emmc_nand_d0\0emmc_nand_d1\0emmc_nand_d2\0emmc_nand_d3";
@@ -338,7 +317,7 @@
 					};
 
 					emmc-data-8b {
-						phandle = <0x28>;
+						phandle = <0x29>;
 
 						mux-0 {
 							groups = "emmc_nand_d0\0emmc_nand_d1\0emmc_nand_d2\0emmc_nand_d3\0emmc_nand_d4\0emmc_nand_d5\0emmc_nand_d6\0emmc_nand_d7";
@@ -349,7 +328,7 @@
 					};
 
 					emmc-ds {
-						phandle = <0x29>;
+						phandle = <0x2a>;
 
 						mux {
 							groups = "emmc_nand_ds";
@@ -360,7 +339,7 @@
 					};
 
 					emmc_clk_gate {
-						phandle = <0x2a>;
+						phandle = <0x2b>;
 
 						mux {
 							groups = "BOOT_8";
@@ -392,7 +371,6 @@
 					};
 
 					i2c0-sda-c {
-						phandle = <0x4f>;
 
 						mux {
 							groups = "i2c0_sda_c";
@@ -403,7 +381,6 @@
 					};
 
 					i2c0-sck-c {
-						phandle = <0x50>;
 
 						mux {
 							groups = "i2c0_sck_c";
@@ -414,7 +391,6 @@
 					};
 
 					i2c0-sda-z0 {
-						phandle = <0x51>;
 
 						mux {
 							groups = "i2c0_sda_z0";
@@ -425,7 +401,6 @@
 					};
 
 					i2c0-sck-z1 {
-						phandle = <0x52>;
 
 						mux {
 							groups = "i2c0_sck_z1";
@@ -436,7 +411,6 @@
 					};
 
 					i2c0-sda-z7 {
-						phandle = <0x53>;
 
 						mux {
 							groups = "i2c0_sda_z7";
@@ -447,7 +421,6 @@
 					};
 
 					i2c0-sda-z8 {
-						phandle = <0x54>;
 
 						mux {
 							groups = "i2c0_sda_z8";
@@ -458,7 +431,6 @@
 					};
 
 					i2c1-sda-x {
-						phandle = <0x55>;
 
 						mux {
 							groups = "i2c1_sda_x";
@@ -469,7 +441,6 @@
 					};
 
 					i2c1-sck-x {
-						phandle = <0x56>;
 
 						mux {
 							groups = "i2c1_sck_x";
@@ -480,7 +451,6 @@
 					};
 
 					i2c1-sda-h2 {
-						phandle = <0x57>;
 
 						mux {
 							groups = "i2c1_sda_h2";
@@ -491,7 +461,6 @@
 					};
 
 					i2c1-sck-h3 {
-						phandle = <0x58>;
 
 						mux {
 							groups = "i2c1_sck_h3";
@@ -502,7 +471,6 @@
 					};
 
 					i2c1-sda-h6 {
-						phandle = <0x59>;
 
 						mux {
 							groups = "i2c1_sda_h6";
@@ -513,7 +481,6 @@
 					};
 
 					i2c1-sck-h7 {
-						phandle = <0x5a>;
 
 						mux {
 							groups = "i2c1_sck_h7";
@@ -524,7 +491,6 @@
 					};
 
 					i2c2-sda-x {
-						phandle = <0x5b>;
 
 						mux {
 							groups = "i2c2_sda_x";
@@ -535,7 +501,6 @@
 					};
 
 					i2c2-sck-x {
-						phandle = <0x5c>;
 
 						mux {
 							groups = "i2c2_sck_x";
@@ -546,7 +511,6 @@
 					};
 
 					i2c2-sda-z {
-						phandle = <0x5d>;
 
 						mux {
 							groups = "i2c2_sda_z";
@@ -557,7 +521,6 @@
 					};
 
 					i2c2-sck-z {
-						phandle = <0x5e>;
 
 						mux {
 							groups = "i2c2_sck_z";
@@ -568,7 +531,6 @@
 					};
 
 					i2c3-sda-h {
-						phandle = <0x5f>;
 
 						mux {
 							groups = "i2c3_sda_h";
@@ -579,7 +541,6 @@
 					};
 
 					i2c3-sck-h {
-						phandle = <0x60>;
 
 						mux {
 							groups = "i2c3_sck_h";
@@ -590,7 +551,6 @@
 					};
 
 					i2c3-sda-a {
-						phandle = <0x61>;
 
 						mux {
 							groups = "i2c3_sda_a";
@@ -601,7 +561,6 @@
 					};
 
 					i2c3-sck-a {
-						phandle = <0x62>;
 
 						mux {
 							groups = "i2c3_sck_a";
@@ -612,7 +571,6 @@
 					};
 
 					mclk0-a {
-						phandle = <0x63>;
 
 						mux {
 							groups = "mclk0_a";
@@ -623,7 +581,6 @@
 					};
 
 					mclk1-a {
-						phandle = <0x64>;
 
 						mux {
 							groups = "mclk1_a";
@@ -634,7 +591,6 @@
 					};
 
 					mclk1-x {
-						phandle = <0x65>;
 
 						mux {
 							groups = "mclk1_x";
@@ -645,7 +601,6 @@
 					};
 
 					mclk1-z {
-						phandle = <0x66>;
 
 						mux {
 							groups = "mclk1_z";
@@ -656,7 +611,6 @@
 					};
 
 					nor {
-						phandle = <0x67>;
 
 						mux {
 							groups = "nor_d\0nor_q\0nor_c\0nor_cs";
@@ -666,7 +620,6 @@
 					};
 
 					pdm-din0-a {
-						phandle = <0x68>;
 
 						mux {
 							groups = "pdm_din0_a";
@@ -676,7 +629,6 @@
 					};
 
 					pdm-din0-c {
-						phandle = <0x69>;
 
 						mux {
 							groups = "pdm_din0_c";
@@ -686,7 +638,6 @@
 					};
 
 					pdm-din0-x {
-						phandle = <0x6a>;
 
 						mux {
 							groups = "pdm_din0_x";
@@ -696,7 +647,6 @@
 					};
 
 					pdm-din0-z {
-						phandle = <0x6b>;
 
 						mux {
 							groups = "pdm_din0_z";
@@ -706,7 +656,6 @@
 					};
 
 					pdm-din1-a {
-						phandle = <0x6c>;
 
 						mux {
 							groups = "pdm_din1_a";
@@ -716,7 +665,6 @@
 					};
 
 					pdm-din1-c {
-						phandle = <0x6d>;
 
 						mux {
 							groups = "pdm_din1_c";
@@ -726,7 +674,6 @@
 					};
 
 					pdm-din1-x {
-						phandle = <0x6e>;
 
 						mux {
 							groups = "pdm_din1_x";
@@ -736,7 +683,6 @@
 					};
 
 					pdm-din1-z {
-						phandle = <0x6f>;
 
 						mux {
 							groups = "pdm_din1_z";
@@ -746,7 +692,6 @@
 					};
 
 					pdm-din2-a {
-						phandle = <0x70>;
 
 						mux {
 							groups = "pdm_din2_a";
@@ -756,7 +701,6 @@
 					};
 
 					pdm-din2-c {
-						phandle = <0x71>;
 
 						mux {
 							groups = "pdm_din2_c";
@@ -766,7 +710,6 @@
 					};
 
 					pdm-din2-x {
-						phandle = <0x72>;
 
 						mux {
 							groups = "pdm_din2_x";
@@ -776,7 +719,6 @@
 					};
 
 					pdm-din2-z {
-						phandle = <0x73>;
 
 						mux {
 							groups = "pdm_din2_z";
@@ -786,7 +728,6 @@
 					};
 
 					pdm-din3-a {
-						phandle = <0x74>;
 
 						mux {
 							groups = "pdm_din3_a";
@@ -796,7 +737,6 @@
 					};
 
 					pdm-din3-c {
-						phandle = <0x75>;
 
 						mux {
 							groups = "pdm_din3_c";
@@ -806,7 +746,6 @@
 					};
 
 					pdm-din3-x {
-						phandle = <0x76>;
 
 						mux {
 							groups = "pdm_din3_x";
@@ -816,7 +755,6 @@
 					};
 
 					pdm-din3-z {
-						phandle = <0x77>;
 
 						mux {
 							groups = "pdm_din3_z";
@@ -826,7 +764,6 @@
 					};
 
 					pdm-dclk-a {
-						phandle = <0x78>;
 
 						mux {
 							groups = "pdm_dclk_a";
@@ -837,7 +774,6 @@
 					};
 
 					pdm-dclk-c {
-						phandle = <0x79>;
 
 						mux {
 							groups = "pdm_dclk_c";
@@ -848,7 +784,6 @@
 					};
 
 					pdm-dclk-x {
-						phandle = <0x7a>;
 
 						mux {
 							groups = "pdm_dclk_x";
@@ -859,7 +794,6 @@
 					};
 
 					pdm-dclk-z {
-						phandle = <0x7b>;
 
 						mux {
 							groups = "pdm_dclk_z";
@@ -870,7 +804,6 @@
 					};
 
 					pwm-a {
-						phandle = <0x7c>;
 
 						mux {
 							groups = "pwm_a";
@@ -880,7 +813,6 @@
 					};
 
 					pwm-b-x7 {
-						phandle = <0x7d>;
 
 						mux {
 							groups = "pwm_b_x7";
@@ -890,7 +822,6 @@
 					};
 
 					pwm-b-x19 {
-						phandle = <0x7e>;
 
 						mux {
 							groups = "pwm_b_x19";
@@ -900,7 +831,6 @@
 					};
 
 					pwm-c-c {
-						phandle = <0x7f>;
 
 						mux {
 							groups = "pwm_c_c";
@@ -910,7 +840,6 @@
 					};
 
 					pwm-c-x5 {
-						phandle = <0x80>;
 
 						mux {
 							groups = "pwm_c_x5";
@@ -920,7 +849,6 @@
 					};
 
 					pwm-c-x8 {
-						phandle = <0x81>;
 
 						mux {
 							groups = "pwm_c_x8";
@@ -930,7 +858,6 @@
 					};
 
 					pwm-d-x3 {
-						phandle = <0x82>;
 
 						mux {
 							groups = "pwm_d_x3";
@@ -940,7 +867,6 @@
 					};
 
 					pwm-d-x6 {
-						phandle = <0x83>;
 
 						mux {
 							groups = "pwm_d_x6";
@@ -950,7 +876,6 @@
 					};
 
 					pwm-e {
-						phandle = <0x84>;
 
 						mux {
 							groups = "pwm_e";
@@ -960,7 +885,6 @@
 					};
 
 					pwm-f-x {
-						phandle = <0x85>;
 
 						mux {
 							groups = "pwm_f_x";
@@ -970,7 +894,6 @@
 					};
 
 					pwm-f-h {
-						phandle = <0x86>;
 
 						mux {
 							groups = "pwm_f_h";
@@ -980,7 +903,7 @@
 					};
 
 					sdcard_c {
-						phandle = <0x23>;
+						phandle = <0x24>;
 
 						mux-0 {
 							groups = "sdcard_d0_c\0sdcard_d1_c\0sdcard_d2_c\0sdcard_d3_c\0sdcard_cmd_c";
@@ -998,7 +921,7 @@
 					};
 
 					sdcard_clk_gate_c {
-						phandle = <0x24>;
+						phandle = <0x25>;
 
 						mux {
 							groups = "GPIOC_4";
@@ -1009,7 +932,6 @@
 					};
 
 					sdcard_z {
-						phandle = <0x87>;
 
 						mux-0 {
 							groups = "sdcard_d0_z\0sdcard_d1_z\0sdcard_d2_z\0sdcard_d3_z\0sdcard_cmd_z";
@@ -1027,7 +949,6 @@
 					};
 
 					sdcard_clk_gate_z {
-						phandle = <0x88>;
 
 						mux {
 							groups = "GPIOZ_6";
@@ -1038,7 +959,6 @@
 					};
 
 					sdio {
-						phandle = <0x89>;
 
 						mux {
 							groups = "sdio_d0\0sdio_d1\0sdio_d2\0sdio_d3\0sdio_clk\0sdio_cmd";
@@ -1049,7 +969,6 @@
 					};
 
 					sdio_clk_gate {
-						phandle = <0x8a>;
 
 						mux {
 							groups = "GPIOX_4";
@@ -1060,7 +979,6 @@
 					};
 
 					spdif-in-a10 {
-						phandle = <0x8b>;
 
 						mux {
 							groups = "spdif_in_a10";
@@ -1070,7 +988,6 @@
 					};
 
 					spdif-in-a12 {
-						phandle = <0x8c>;
 
 						mux {
 							groups = "spdif_in_a12";
@@ -1080,7 +997,6 @@
 					};
 
 					spdif-in-h {
-						phandle = <0x8d>;
 
 						mux {
 							groups = "spdif_in_h";
@@ -1090,7 +1006,6 @@
 					};
 
 					spdif-out-h {
-						phandle = <0x8e>;
 
 						mux {
 							groups = "spdif_out_h";
@@ -1101,7 +1016,6 @@
 					};
 
 					spdif-out-a11 {
-						phandle = <0x8f>;
 
 						mux {
 							groups = "spdif_out_a11";
@@ -1112,7 +1026,6 @@
 					};
 
 					spdif-out-a13 {
-						phandle = <0x90>;
 
 						mux {
 							groups = "spdif_out_a13";
@@ -1123,7 +1036,6 @@
 					};
 
 					spicc0-x {
-						phandle = <0x91>;
 
 						mux {
 							groups = "spi0_mosi_x\0spi0_miso_x\0spi0_clk_x";
@@ -1134,7 +1046,6 @@
 					};
 
 					spicc0-ss0-x {
-						phandle = <0x92>;
 
 						mux {
 							groups = "spi0_ss0_x";
@@ -1145,7 +1056,6 @@
 					};
 
 					spicc0-c {
-						phandle = <0x93>;
 
 						mux {
 							groups = "spi0_mosi_c\0spi0_miso_c\0spi0_ss0_c\0spi0_clk_c";
@@ -1156,7 +1066,6 @@
 					};
 
 					spicc1 {
-						phandle = <0x94>;
 
 						mux {
 							groups = "spi1_mosi\0spi1_miso\0spi1_clk";
@@ -1166,7 +1075,6 @@
 					};
 
 					spicc1-ss0 {
-						phandle = <0x95>;
 
 						mux {
 							groups = "spi1_ss0";
@@ -1177,7 +1085,6 @@
 					};
 
 					tdm-a-din0 {
-						phandle = <0x96>;
 
 						mux {
 							groups = "tdm_a_din0";
@@ -1187,7 +1094,6 @@
 					};
 
 					tdm-a-din1 {
-						phandle = <0x97>;
 
 						mux {
 							groups = "tdm_a_din1";
@@ -1197,7 +1103,6 @@
 					};
 
 					tdm-a-dout0 {
-						phandle = <0x98>;
 
 						mux {
 							groups = "tdm_a_dout0";
@@ -1208,7 +1113,6 @@
 					};
 
 					tdm-a-dout1 {
-						phandle = <0x99>;
 
 						mux {
 							groups = "tdm_a_dout1";
@@ -1219,7 +1123,6 @@
 					};
 
 					tdm-a-fs {
-						phandle = <0x9a>;
 
 						mux {
 							groups = "tdm_a_fs";
@@ -1230,7 +1133,6 @@
 					};
 
 					tdm-a-sclk {
-						phandle = <0x9b>;
 
 						mux {
 							groups = "tdm_a_sclk";
@@ -1241,7 +1143,6 @@
 					};
 
 					tdm-a-slv-fs {
-						phandle = <0x9c>;
 
 						mux {
 							groups = "tdm_a_slv_fs";
@@ -1251,7 +1152,6 @@
 					};
 
 					tdm-a-slv-sclk {
-						phandle = <0x9d>;
 
 						mux {
 							groups = "tdm_a_slv_sclk";
@@ -1261,7 +1161,6 @@
 					};
 
 					tdm-b-din0 {
-						phandle = <0x9e>;
 
 						mux {
 							groups = "tdm_b_din0";
@@ -1271,7 +1170,6 @@
 					};
 
 					tdm-b-din1 {
-						phandle = <0x9f>;
 
 						mux {
 							groups = "tdm_b_din1";
@@ -1281,7 +1179,6 @@
 					};
 
 					tdm-b-din2 {
-						phandle = <0xa0>;
 
 						mux {
 							groups = "tdm_b_din2";
@@ -1291,7 +1188,6 @@
 					};
 
 					tdm-b-din3-a {
-						phandle = <0xa1>;
 
 						mux {
 							groups = "tdm_b_din3_a";
@@ -1301,7 +1197,6 @@
 					};
 
 					tdm-b-din3-h {
-						phandle = <0xa2>;
 
 						mux {
 							groups = "tdm_b_din3_h";
@@ -1311,7 +1206,6 @@
 					};
 
 					tdm-b-dout0 {
-						phandle = <0xa3>;
 
 						mux {
 							groups = "tdm_b_dout0";
@@ -1322,7 +1216,6 @@
 					};
 
 					tdm-b-dout1 {
-						phandle = <0xa4>;
 
 						mux {
 							groups = "tdm_b_dout1";
@@ -1333,7 +1226,6 @@
 					};
 
 					tdm-b-dout2 {
-						phandle = <0xa5>;
 
 						mux {
 							groups = "tdm_b_dout2";
@@ -1344,7 +1236,6 @@
 					};
 
 					tdm-b-dout3-a {
-						phandle = <0xa6>;
 
 						mux {
 							groups = "tdm_b_dout3_a";
@@ -1355,7 +1246,6 @@
 					};
 
 					tdm-b-dout3-h {
-						phandle = <0xa7>;
 
 						mux {
 							groups = "tdm_b_dout3_h";
@@ -1366,7 +1256,6 @@
 					};
 
 					tdm-b-fs {
-						phandle = <0xa8>;
 
 						mux {
 							groups = "tdm_b_fs";
@@ -1377,7 +1266,6 @@
 					};
 
 					tdm-b-sclk {
-						phandle = <0xa9>;
 
 						mux {
 							groups = "tdm_b_sclk";
@@ -1388,7 +1276,6 @@
 					};
 
 					tdm-b-slv-fs {
-						phandle = <0xaa>;
 
 						mux {
 							groups = "tdm_b_slv_fs";
@@ -1398,7 +1285,6 @@
 					};
 
 					tdm-b-slv-sclk {
-						phandle = <0xab>;
 
 						mux {
 							groups = "tdm_b_slv_sclk";
@@ -1408,7 +1294,6 @@
 					};
 
 					tdm-c-din0-a {
-						phandle = <0xac>;
 
 						mux {
 							groups = "tdm_c_din0_a";
@@ -1418,7 +1303,6 @@
 					};
 
 					tdm-c-din0-z {
-						phandle = <0xad>;
 
 						mux {
 							groups = "tdm_c_din0_z";
@@ -1428,7 +1312,6 @@
 					};
 
 					tdm-c-din1-a {
-						phandle = <0xae>;
 
 						mux {
 							groups = "tdm_c_din1_a";
@@ -1438,7 +1321,6 @@
 					};
 
 					tdm-c-din1-z {
-						phandle = <0xaf>;
 
 						mux {
 							groups = "tdm_c_din1_z";
@@ -1448,7 +1330,6 @@
 					};
 
 					tdm-c-din2-a {
-						phandle = <0xb0>;
 
 						mux {
 							groups = "tdm_c_din2_a";
@@ -1458,7 +1339,6 @@
 					};
 
 					eth-leds {
-						phandle = <0xb1>;
 
 						mux {
 							groups = "eth_link_led\0eth_act_led";
@@ -1490,7 +1370,6 @@
 					};
 
 					tdm-c-din2-z {
-						phandle = <0xb2>;
 
 						mux {
 							groups = "tdm_c_din2_z";
@@ -1500,7 +1379,6 @@
 					};
 
 					tdm-c-din3-a {
-						phandle = <0xb3>;
 
 						mux {
 							groups = "tdm_c_din3_a";
@@ -1510,7 +1388,6 @@
 					};
 
 					tdm-c-din3-z {
-						phandle = <0xb4>;
 
 						mux {
 							groups = "tdm_c_din3_z";
@@ -1520,7 +1397,6 @@
 					};
 
 					tdm-c-dout0-a {
-						phandle = <0xb5>;
 
 						mux {
 							groups = "tdm_c_dout0_a";
@@ -1531,7 +1407,6 @@
 					};
 
 					tdm-c-dout0-z {
-						phandle = <0xb6>;
 
 						mux {
 							groups = "tdm_c_dout0_z";
@@ -1542,7 +1417,6 @@
 					};
 
 					tdm-c-dout1-a {
-						phandle = <0xb7>;
 
 						mux {
 							groups = "tdm_c_dout1_a";
@@ -1553,7 +1427,6 @@
 					};
 
 					tdm-c-dout1-z {
-						phandle = <0xb8>;
 
 						mux {
 							groups = "tdm_c_dout1_z";
@@ -1564,7 +1437,6 @@
 					};
 
 					tdm-c-dout2-a {
-						phandle = <0xb9>;
 
 						mux {
 							groups = "tdm_c_dout2_a";
@@ -1575,7 +1447,6 @@
 					};
 
 					tdm-c-dout2-z {
-						phandle = <0xba>;
 
 						mux {
 							groups = "tdm_c_dout2_z";
@@ -1586,7 +1457,6 @@
 					};
 
 					tdm-c-dout3-a {
-						phandle = <0xbb>;
 
 						mux {
 							groups = "tdm_c_dout3_a";
@@ -1597,7 +1467,6 @@
 					};
 
 					tdm-c-dout3-z {
-						phandle = <0xbc>;
 
 						mux {
 							groups = "tdm_c_dout3_z";
@@ -1608,7 +1477,6 @@
 					};
 
 					tdm-c-fs-a {
-						phandle = <0xbd>;
 
 						mux {
 							groups = "tdm_c_fs_a";
@@ -1619,7 +1487,6 @@
 					};
 
 					tdm-c-fs-z {
-						phandle = <0xbe>;
 
 						mux {
 							groups = "tdm_c_fs_z";
@@ -1630,7 +1497,6 @@
 					};
 
 					tdm-c-sclk-a {
-						phandle = <0xbf>;
 
 						mux {
 							groups = "tdm_c_sclk_a";
@@ -1641,7 +1507,6 @@
 					};
 
 					tdm-c-sclk-z {
-						phandle = <0xc0>;
 
 						mux {
 							groups = "tdm_c_sclk_z";
@@ -1652,7 +1517,6 @@
 					};
 
 					tdm-c-slv-fs-a {
-						phandle = <0xc1>;
 
 						mux {
 							groups = "tdm_c_slv_fs_a";
@@ -1662,7 +1526,6 @@
 					};
 
 					tdm-c-slv-fs-z {
-						phandle = <0xc2>;
 
 						mux {
 							groups = "tdm_c_slv_fs_z";
@@ -1672,7 +1535,6 @@
 					};
 
 					tdm-c-slv-sclk-a {
-						phandle = <0xc3>;
 
 						mux {
 							groups = "tdm_c_slv_sclk_a";
@@ -1682,7 +1544,6 @@
 					};
 
 					tdm-c-slv-sclk-z {
-						phandle = <0xc4>;
 
 						mux {
 							groups = "tdm_c_slv_sclk_z";
@@ -1692,7 +1553,7 @@
 					};
 
 					uart-a {
-						phandle = <0xc5>;
+						phandle = <0x23>;
 
 						mux {
 							groups = "uart_a_tx\0uart_a_rx";
@@ -1702,7 +1563,6 @@
 					};
 
 					uart-a-cts-rts {
-						phandle = <0xc6>;
 
 						mux {
 							groups = "uart_a_cts\0uart_a_rts";
@@ -1712,7 +1572,6 @@
 					};
 
 					uart-b {
-						phandle = <0xc7>;
 
 						mux {
 							groups = "uart_b_tx\0uart_b_rx";
@@ -1722,7 +1581,6 @@
 					};
 
 					uart-c {
-						phandle = <0xc8>;
 
 						mux {
 							groups = "uart_c_tx\0uart_c_rx";
@@ -1732,7 +1590,6 @@
 					};
 
 					uart-c-cts-rts {
-						phandle = <0xc9>;
 
 						mux {
 							groups = "uart_c_cts\0uart_c_rts";
@@ -1772,7 +1629,7 @@
 				reset-names = "phy";
 				#phy-cells = <0x00>;
 				phy-supply = <0x10>;
-				phandle = <0x2e>;
+				phandle = <0x2f>;
 			};
 
 			bus@38000 {
@@ -1781,7 +1638,6 @@
 				#address-cells = <0x02>;
 				#size-cells = <0x02>;
 				ranges = <0x00 0x00 0x00 0x38000 0x00 0x400>;
-				phandle = <0xca>;
 
 				video-lut@48 {
 					compatible = "amlogic,canvas";
@@ -1799,7 +1655,7 @@
 				reset-names = "phy";
 				#phy-cells = <0x00>;
 				phy-supply = <0x16>;
-				phandle = <0x2f>;
+				phandle = <0x30>;
 			};
 
 			bus@3c000 {
@@ -1808,12 +1664,10 @@
 				#address-cells = <0x02>;
 				#size-cells = <0x02>;
 				ranges = <0x00 0x00 0x00 0x3c000 0x00 0x1400>;
-				phandle = <0xcb>;
 
 				system-controller@0 {
 					compatible = "amlogic,meson-gx-hhi-sysctrl\0simple-mfd\0syscon";
 					reg = <0x00 0x00 0x00 0x400>;
-					phandle = <0xcc>;
 
 					clock-controller {
 						compatible = "amlogic,sm1-clkc";
@@ -1860,13 +1714,11 @@
 				mdio-parent-bus = <0x18>;
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
-				phandle = <0xcd>;
 
 				mdio@0 {
 					reg = <0x00>;
 					#address-cells = <0x01>;
 					#size-cells = <0x00>;
-					phandle = <0xce>;
 
 					ethernet-phy@0 {
 						reg = <0x00>;
@@ -1884,14 +1736,12 @@
 					reg = <0x01>;
 					#address-cells = <0x01>;
 					#size-cells = <0x00>;
-					phandle = <0xcf>;
 
 					ethernet_phy@8 {
 						compatible = "ethernet-phy-id0180.3301\0ethernet-phy-ieee802.3-c22";
 						interrupts = <0x00 0x09 0x04>;
 						reg = <0x08>;
 						max-speed = <0x64>;
-						phandle = <0xd0>;
 					};
 				};
 			};
@@ -1902,10 +1752,9 @@
 				#address-cells = <0x02>;
 				#size-cells = <0x02>;
 				ranges = <0x00 0x00 0x00 0x60000 0x00 0x1000>;
-				phandle = <0xd1>;
 
 				clock-controller@0 {
-					status = "disabled";
+					status = "okay";
 					compatible = "amlogic,sm1-audio-clkc";
 					reg = <0x00 0x00 0x00 0xb4>;
 					#clock-cells = <0x01>;
@@ -1927,7 +1776,6 @@
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x2000>;
 					status = "disabled";
-					phandle = <0xd2>;
 				};
 
 				audio-controller@140 {
@@ -1941,7 +1789,6 @@
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x100>;
 					status = "disabled";
-					phandle = <0xd3>;
 				};
 
 				audio-controller@180 {
@@ -1955,7 +1802,6 @@
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x100>;
 					status = "disabled";
-					phandle = <0xd4>;
 				};
 
 				audio-controller@1c0 {
@@ -1968,8 +1814,8 @@
 					resets = <0x1c 0x03 0x1b 0x09>;
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x200>;
-					status = "disabled";
-					phandle = <0xd5>;
+					status = "okay";
+					phandle = <0x3b>;
 				};
 
 				audio-controller@200 {
@@ -1982,8 +1828,8 @@
 					resets = <0x1c 0x04 0x1b 0x0a>;
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x100>;
-					status = "disabled";
-					phandle = <0xd6>;
+					status = "okay";
+					phandle = <0x3c>;
 				};
 
 				audio-controller@240 {
@@ -1996,12 +1842,12 @@
 					resets = <0x1c 0x05 0x1b 0x0b>;
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x100>;
-					status = "disabled";
-					phandle = <0xd7>;
+					status = "okay";
+					phandle = <0x3d>;
 				};
 
 				reset-controller@280 {
-					status = "disabled";
+					status = "okay";
 					compatible = "amlogic,meson-sm1-audio-arb";
 					reg = <0x00 0x280 0x00 0x04>;
 					#reset-cells = <0x01>;
@@ -2017,7 +1863,6 @@
 					clocks = <0x1b 0x1f 0x1b 0x7b 0x1b 0x74 0x1b 0x82 0x1b 0x82>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
 					status = "disabled";
-					phandle = <0xd8>;
 				};
 
 				audio-controller@340 {
@@ -2028,7 +1873,6 @@
 					clocks = <0x1b 0x20 0x1b 0x7c 0x1b 0x75 0x1b 0x83 0x1b 0x83>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
 					status = "disabled";
-					phandle = <0xd9>;
 				};
 
 				audio-controller@380 {
@@ -2039,7 +1883,6 @@
 					clocks = <0x1b 0x21 0x1b 0x7d 0x1b 0x76 0x1b 0x84 0x1b 0x84>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
 					status = "disabled";
-					phandle = <0xda>;
 				};
 
 				audio-controller@3c0 {
@@ -2050,7 +1893,6 @@
 					clocks = <0x1b 0x22 0x1b 0x7e 0x1b 0x77 0x1b 0x85 0x1b 0x85>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
 					status = "disabled";
-					phandle = <0xdb>;
 				};
 
 				audio-controller@500 {
@@ -2061,7 +1903,6 @@
 					clocks = <0x1b 0x23 0x1b 0x7f 0x1b 0x78 0x1b 0x86 0x1b 0x86>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
 					status = "disabled";
-					phandle = <0xdc>;
 				};
 
 				audio-controller@540 {
@@ -2071,8 +1912,8 @@
 					resets = <0x1b 0x0d>;
 					clocks = <0x1b 0x24 0x1b 0x80 0x1b 0x79 0x1b 0x87 0x1b 0x87>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
-					status = "disabled";
-					phandle = <0xdd>;
+					status = "okay";
+					phandle = <0x3a>;
 				};
 
 				audio-controller@580 {
@@ -2083,7 +1924,6 @@
 					clocks = <0x1b 0x25 0x1b 0x81 0x1b 0x7a 0x1b 0x88 0x1b 0x88>;
 					clock-names = "pclk\0sclk\0sclk_sel\0lrclk\0lrclk_sel";
 					status = "disabled";
-					phandle = <0xde>;
 				};
 
 				audio-controller@744 {
@@ -2092,8 +1932,8 @@
 					#sound-dai-cells = <0x01>;
 					sound-name-prefix = "TOHDMITX";
 					resets = <0x1b 0x18>;
-					status = "disabled";
-					phandle = <0xdf>;
+					status = "okay";
+					phandle = <0x3f>;
 				};
 
 				audio-controller@840 {
@@ -2107,7 +1947,6 @@
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x100>;
 					status = "disabled";
-					phandle = <0xe0>;
 				};
 
 				audio-controller@880 {
@@ -2121,7 +1960,6 @@
 					reset-names = "arb\0rst";
 					amlogic,fifo-depth = <0x100>;
 					status = "disabled";
-					phandle = <0xe1>;
 				};
 			};
 
@@ -2134,7 +1972,6 @@
 				clock-names = "pclk\0dclk\0sysclk";
 				resets = <0x1b 0x00>;
 				status = "disabled";
-				phandle = <0xe2>;
 			};
 		};
 
@@ -2144,7 +1981,6 @@
 			#address-cells = <0x02>;
 			#size-cells = <0x02>;
 			ranges = <0x00 0x00 0x00 0xff800000 0x00 0x100000>;
-			phandle = <0xe3>;
 
 			sys-ctrl@0 {
 				compatible = "amlogic,meson-gx-ao-sysctrl\0simple-mfd\0syscon";
@@ -2177,11 +2013,10 @@
 						#gpio-cells = <0x02>;
 						gpio-ranges = <0x1d 0x00 0x00 0x0f>;
 						gpio-line-names = "\0\0\0\0PIN_47\0\0\0PIN_45\0PIN_46\0PIN_44\0PIN_42\0\0\0\0";
-						phandle = <0x34>;
+						phandle = <0x35>;
 					};
 
 					i2c_ao_sck_pins {
-						phandle = <0xe4>;
 
 						mux {
 							groups = "i2c_ao_sck";
@@ -2192,7 +2027,6 @@
 					};
 
 					i2c_ao_sda {
-						phandle = <0xe5>;
 
 						mux {
 							groups = "i2c_ao_sda";
@@ -2203,7 +2037,6 @@
 					};
 
 					i2c_ao_sck_e {
-						phandle = <0xe6>;
 
 						mux {
 							groups = "i2c_ao_sck_e";
@@ -2214,7 +2047,6 @@
 					};
 
 					i2c_ao_sda_e {
-						phandle = <0xe7>;
 
 						mux {
 							groups = "i2c_ao_sda_e";
@@ -2225,7 +2057,6 @@
 					};
 
 					mclk0-ao {
-						phandle = <0xe8>;
 
 						mux {
 							groups = "mclk0_ao";
@@ -2236,7 +2067,6 @@
 					};
 
 					tdm-ao-b-din0 {
-						phandle = <0xe9>;
 
 						mux {
 							groups = "tdm_ao_b_din0";
@@ -2246,7 +2076,6 @@
 					};
 
 					spdif-ao-out {
-						phandle = <0xea>;
 
 						mux {
 							groups = "spdif_ao_out";
@@ -2257,7 +2086,6 @@
 					};
 
 					tdm-ao-b-din1 {
-						phandle = <0xeb>;
 
 						mux {
 							groups = "tdm_ao_b_din1";
@@ -2267,7 +2095,6 @@
 					};
 
 					tdm-ao-b-din2 {
-						phandle = <0xec>;
 
 						mux {
 							groups = "tdm_ao_b_din2";
@@ -2277,7 +2104,6 @@
 					};
 
 					tdm-ao-b-dout0 {
-						phandle = <0xed>;
 
 						mux {
 							groups = "tdm_ao_b_dout0";
@@ -2288,7 +2114,6 @@
 					};
 
 					tdm-ao-b-dout1 {
-						phandle = <0xee>;
 
 						mux {
 							groups = "tdm_ao_b_dout1";
@@ -2299,7 +2124,6 @@
 					};
 
 					tdm-ao-b-dout2 {
-						phandle = <0xef>;
 
 						mux {
 							groups = "tdm_ao_b_dout2";
@@ -2310,7 +2134,6 @@
 					};
 
 					tdm-ao-b-fs {
-						phandle = <0xf0>;
 
 						mux {
 							groups = "tdm_ao_b_fs";
@@ -2321,7 +2144,6 @@
 					};
 
 					tdm-ao-b-sclk {
-						phandle = <0xf1>;
 
 						mux {
 							groups = "tdm_ao_b_sclk";
@@ -2332,7 +2154,6 @@
 					};
 
 					tdm-ao-b-slv-fs {
-						phandle = <0xf2>;
 
 						mux {
 							groups = "tdm_ao_b_slv_fs";
@@ -2342,7 +2163,6 @@
 					};
 
 					tdm-ao-b-slv-sclk {
-						phandle = <0xf3>;
 
 						mux {
 							groups = "tdm_ao_b_slv_sclk";
@@ -2362,7 +2182,6 @@
 					};
 
 					uart-ao-a-cts-rts {
-						phandle = <0xf4>;
 
 						mux {
 							groups = "uart_ao_a_cts\0uart_ao_a_rts";
@@ -2372,7 +2191,6 @@
 					};
 
 					pwm-a-e {
-						phandle = <0xf5>;
 
 						mux {
 							groups = "pwm_a_e";
@@ -2382,7 +2200,6 @@
 					};
 
 					pwm-ao-a {
-						phandle = <0xf6>;
 
 						mux {
 							groups = "pwm_ao_a";
@@ -2392,7 +2209,6 @@
 					};
 
 					pwm-ao-b {
-						phandle = <0xf7>;
 
 						mux {
 							groups = "pwm_ao_b";
@@ -2402,7 +2218,6 @@
 					};
 
 					pwm-ao-c-4 {
-						phandle = <0xf8>;
 
 						mux {
 							groups = "pwm_ao_c_4";
@@ -2412,7 +2227,6 @@
 					};
 
 					pwm-ao-c-6 {
-						phandle = <0xf9>;
 
 						mux {
 							groups = "pwm_ao_c_6";
@@ -2422,7 +2236,6 @@
 					};
 
 					pwm-ao-d-5 {
-						phandle = <0xfa>;
 
 						mux {
 							groups = "pwm_ao_d_5";
@@ -2432,7 +2245,6 @@
 					};
 
 					pwm-ao-d-10 {
-						phandle = <0xfb>;
 
 						mux {
 							groups = "pwm_ao_d_10";
@@ -2451,7 +2263,6 @@
 					};
 
 					remote-input-ao {
-						phandle = <0xfc>;
 
 						mux {
 							groups = "remote_ao_input";
@@ -2465,7 +2276,6 @@
 			rtc@0a8 {
 				compatible = "amlogic,meson-vrtc";
 				reg = <0x00 0xa8 0x00 0x04>;
-				phandle = <0xfd>;
 			};
 
 			cec@100 {
@@ -2475,7 +2285,6 @@
 				clocks = <0x1e 0x1b>;
 				clock-names = "core";
 				status = "disabled";
-				phandle = <0xfe>;
 			};
 
 			ao-secure@140 {
@@ -2492,7 +2301,6 @@
 				clocks = <0x1e 0x13>;
 				clock-names = "oscin";
 				status = "disabled";
-				phandle = <0xff>;
 			};
 
 			pwm@2000 {
@@ -2504,7 +2312,7 @@
 				pinctrl-names = "default";
 				clocks = <0x15>;
 				clock-names = "clkin1";
-				phandle = <0x37>;
+				phandle = <0x38>;
 			};
 
 			serial@3000 {
@@ -2516,7 +2324,6 @@
 				status = "okay";
 				pinctrl-0 = <0x20>;
 				pinctrl-names = "default";
-				phandle = <0x100>;
 			};
 
 			serial@4000 {
@@ -2526,7 +2333,6 @@
 				clocks = <0x15 0x1e 0x06 0x15>;
 				clock-names = "xtal\0pclk\0baud";
 				status = "disabled";
-				phandle = <0x101>;
 			};
 
 			i2c@5000 {
@@ -2537,7 +2343,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x02 0x18>;
-				phandle = <0x102>;
 			};
 
 			pwm@7000 {
@@ -2545,7 +2350,6 @@
 				reg = <0x00 0x7000 0x00 0x20>;
 				#pwm-cells = <0x03>;
 				status = "disabled";
-				phandle = <0x103>;
 			};
 
 			ir@8000 {
@@ -2553,7 +2357,6 @@
 				reg = <0x00 0x8000 0x00 0x20>;
 				interrupts = <0x00 0xc4 0x01>;
 				status = "disabled";
-				phandle = <0x104>;
 			};
 
 			adc@9000 {
@@ -2564,7 +2367,6 @@
 				clocks = <0x15 0x1e 0x08 0x1e 0x12 0x1e 0x10>;
 				clock-names = "clkin\0core\0adc_clk\0adc_sel";
 				status = "okay";
-				phandle = <0x105>;
 			};
 		};
 
@@ -2580,7 +2382,6 @@
 			clock-names = "dos_parser\0dos\0vdec_1\0vdec_hevc\0vdec_hevcf";
 			resets = <0x05 0x28>;
 			reset-names = "esparser";
-			phandle = <0x106>;
 		};
 
 		vpu@ff900000 {
@@ -2592,16 +2393,13 @@
 			#size-cells = <0x00>;
 			amlogic,canvas = <0x21>;
 			power-domains = <0x03 0x00>;
-			phandle = <0x107>;
 
 			port@0 {
 				reg = <0x00>;
-				phandle = <0x108>;
 			};
 
 			port@1 {
 				reg = <0x01>;
-				phandle = <0x109>;
 
 				endpoint {
 					remote-endpoint = <0x22>;
@@ -2626,7 +2424,6 @@
 			#address-cells = <0x02>;
 			#size-cells = <0x02>;
 			ranges = <0x00 0x00 0x00 0xffd00000 0x00 0x100000>;
-			phandle = <0x10a>;
 
 			reset-controller@1004 {
 				compatible = "amlogic,meson-axg-reset";
@@ -2653,7 +2450,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				status = "disabled";
-				phandle = <0x10b>;
 			};
 
 			spi@15000 {
@@ -2665,7 +2461,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				status = "disabled";
-				phandle = <0x10c>;
 			};
 
 			spi@14000 {
@@ -2675,7 +2470,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x02 0x0a>;
-				phandle = <0x10d>;
 			};
 
 			pwm@19000 {
@@ -2683,7 +2477,6 @@
 				reg = <0x00 0x19000 0x00 0x20>;
 				#pwm-cells = <0x03>;
 				status = "disabled";
-				phandle = <0x10e>;
 			};
 
 			pwm@1a000 {
@@ -2691,7 +2484,6 @@
 				reg = <0x00 0x1a000 0x00 0x20>;
 				#pwm-cells = <0x03>;
 				status = "disabled";
-				phandle = <0x10f>;
 			};
 
 			pwm@1b000 {
@@ -2699,7 +2491,6 @@
 				reg = <0x00 0x1b000 0x00 0x20>;
 				#pwm-cells = <0x03>;
 				status = "disabled";
-				phandle = <0x110>;
 			};
 
 			i2c@1c000 {
@@ -2710,7 +2501,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x02 0x18>;
-				phandle = <0x111>;
 			};
 
 			i2c@1d000 {
@@ -2721,7 +2511,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x02 0x18>;
-				phandle = <0x112>;
 			};
 
 			i2c@1e000 {
@@ -2732,7 +2521,6 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x02 0x18>;
-				phandle = <0x113>;
 			};
 
 			i2c@1f000 {
@@ -2743,13 +2531,11 @@
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
 				clocks = <0x02 0x18>;
-				phandle = <0x114>;
 			};
 
 			clock-measure@18000 {
 				compatible = "amlogic,meson-sm1-clk-measure";
 				reg = <0x00 0x18000 0x00 0x10>;
-				phandle = <0x115>;
 			};
 
 			serial@22000 {
@@ -2759,7 +2545,6 @@
 				clocks = <0x15 0x02 0x39 0x15>;
 				clock-names = "xtal\0pclk\0baud";
 				status = "disabled";
-				phandle = <0x116>;
 			};
 
 			serial@23000 {
@@ -2769,7 +2554,6 @@
 				clocks = <0x15 0x02 0x2a 0x15>;
 				clock-names = "xtal\0pclk\0baud";
 				status = "disabled";
-				phandle = <0x117>;
 			};
 
 			serial@24000 {
@@ -2778,8 +2562,9 @@
 				interrupts = <0x00 0x1a 0x01>;
 				clocks = <0x15 0x02 0x1c 0x15>;
 				clock-names = "xtal\0pclk\0baud";
-				status = "disabled";
-				phandle = <0x118>;
+				status = "okay";
+				pinctrl-names = "default";
+				pinctrl-0 = <0x23>;
 			};
 		};
 
@@ -2791,7 +2576,6 @@
 			clocks = <0x02 0x21 0x02 0x3c 0x02 0x02>;
 			clock-names = "core\0clkin0\0clkin1";
 			resets = <0x05 0x2c>;
-			phandle = <0x119>;
 		};
 
 		sd@ffe05000 {
@@ -2802,8 +2586,8 @@
 			clocks = <0x02 0x22 0x02 0x3d 0x02 0x02>;
 			clock-names = "core\0clkin0\0clkin1";
 			resets = <0x05 0x2d>;
-			pinctrl-0 = <0x23>;
-			pinctrl-1 = <0x24>;
+			pinctrl-0 = <0x24>;
+			pinctrl-1 = <0x25>;
 			pinctrl-names = "default\0clk-gate";
 			bus-width = <0x04>;
 			cap-sd-highspeed;
@@ -2814,9 +2598,8 @@
 			sd-uhs-sdr104;
 			disable-wp;
 			cd-gpios = <0x19 0x2f 0x01>;
-			vmmc-supply = <0x25>;
-			vqmmc-supply = <0x26>;
-			phandle = <0x11a>;
+			vmmc-supply = <0x26>;
+			vqmmc-supply = <0x27>;
 		};
 
 		mmc@ffe07000 {
@@ -2827,8 +2610,8 @@
 			clocks = <0x02 0x23 0x02 0x3e 0x02 0x02>;
 			clock-names = "core\0clkin0\0clkin1";
 			resets = <0x05 0x2e>;
-			pinctrl-0 = <0x27 0x28 0x29>;
-			pinctrl-1 = <0x2a>;
+			pinctrl-0 = <0x28 0x29 0x2a>;
+			pinctrl-1 = <0x2b>;
 			pinctrl-names = "default\0clk-gate";
 			bus-width = <0x08>;
 			cap-mmc-highspeed;
@@ -2836,10 +2619,9 @@
 			mmc-hs200-1_8v;
 			max-frequency = <0xbebc200>;
 			disable-wp;
-			mmc-pwrseq = <0x2b>;
-			vmmc-supply = <0x2c>;
-			vqmmc-supply = <0x2d>;
-			phandle = <0x11b>;
+			mmc-pwrseq = <0x2c>;
+			vmmc-supply = <0x2d>;
+			vqmmc-supply = <0x2e>;
 		};
 
 		usb@ffe09000 {
@@ -2853,25 +2635,23 @@
 			clocks = <0x02 0x2f>;
 			resets = <0x05 0x22>;
 			dr_mode = "otg";
-			phys = <0x2e 0x2f 0x06 0x04>;
+			phys = <0x2f 0x30 0x06 0x04>;
 			phy-names = "usb2-phy0\0usb2-phy1\0usb3-phy0";
 			power-domains = <0x03 0x02>;
-			vbus-supply = <0x30>;
-			phandle = <0x11c>;
+			vbus-supply = <0x31>;
 
 			usb@ff400000 {
 				compatible = "amlogic,meson-g12a-usb\0snps,dwc2";
 				reg = <0x00 0xff400000 0x00 0x40000>;
 				interrupts = <0x00 0x1f 0x04>;
 				clocks = <0x02 0x37>;
-				clock-names = "otg";
-				phys = <0x2f>;
+				clock-names = "ddr";
+				phys = <0x30>;
 				phy-names = "usb2-phy";
 				dr_mode = "peripheral";
 				g-rx-fifo-size = <0xc0>;
 				g-np-tx-fifo-size = <0x80>;
 				g-tx-fifo-size = <0x80 0x80 0x10 0x10 0x10>;
-				phandle = <0x11d>;
 			};
 
 			usb@ff500000 {
@@ -2882,7 +2662,6 @@
 				snps,dis_u2_susphy_quirk;
 				snps,quirk-frame-length-adjustment;
 				snps,parkmode-disable-ss-quirk;
-				phandle = <0x11e>;
 			};
 		};
 
@@ -2923,7 +2702,6 @@
 		clocks = <0x1b 0x31 0x1b 0x4f 0x1b 0x56>;
 		clock-names = "mclk\0sclk\0lrclk";
 		status = "disabled";
-		phandle = <0x11f>;
 	};
 
 	audio-controller-1 {
@@ -2932,8 +2710,8 @@
 		sound-name-prefix = "TDM_B";
 		clocks = <0x1b 0x32 0x1b 0x50 0x1b 0x57>;
 		clock-names = "mclk\0sclk\0lrclk";
-		status = "disabled";
-		phandle = <0x120>;
+		status = "okay";
+		phandle = <0x3e>;
 	};
 
 	audio-controller-2 {
@@ -2943,7 +2721,6 @@
 		clocks = <0x1b 0x33 0x1b 0x51 0x1b 0x58>;
 		clock-names = "mclk\0sclk\0lrclk";
 		status = "disabled";
-		phandle = <0x121>;
 	};
 
 	cpus {
@@ -2955,12 +2732,11 @@
 			compatible = "arm,cortex-a55";
 			reg = <0x00 0x00>;
 			enable-method = "psci";
-			next-level-cache = <0x31>;
-			cpu-supply = <0x32>;
-			operating-points-v2 = <0x33>;
+			next-level-cache = <0x32>;
+			cpu-supply = <0x33>;
+			operating-points-v2 = <0x34>;
 			clocks = <0x02 0xbb>;
 			clock-latency = <0xc350>;
-			phandle = <0x122>;
 		};
 
 		cpu@1 {
@@ -2968,12 +2744,11 @@
 			compatible = "arm,cortex-a55";
 			reg = <0x00 0x01>;
 			enable-method = "psci";
-			next-level-cache = <0x31>;
-			cpu-supply = <0x32>;
-			operating-points-v2 = <0x33>;
+			next-level-cache = <0x32>;
+			cpu-supply = <0x33>;
+			operating-points-v2 = <0x34>;
 			clocks = <0x02 0xfd>;
 			clock-latency = <0xc350>;
-			phandle = <0x123>;
 		};
 
 		cpu@2 {
@@ -2981,12 +2756,11 @@
 			compatible = "arm,cortex-a55";
 			reg = <0x00 0x02>;
 			enable-method = "psci";
-			next-level-cache = <0x31>;
-			cpu-supply = <0x32>;
-			operating-points-v2 = <0x33>;
+			next-level-cache = <0x32>;
+			cpu-supply = <0x33>;
+			operating-points-v2 = <0x34>;
 			clocks = <0x02 0xfe>;
 			clock-latency = <0xc350>;
-			phandle = <0x124>;
 		};
 
 		cpu@3 {
@@ -2994,24 +2768,23 @@
 			compatible = "arm,cortex-a55";
 			reg = <0x00 0x03>;
 			enable-method = "psci";
-			next-level-cache = <0x31>;
-			cpu-supply = <0x32>;
-			operating-points-v2 = <0x33>;
+			next-level-cache = <0x32>;
+			cpu-supply = <0x33>;
+			operating-points-v2 = <0x34>;
 			clocks = <0x02 0xff>;
 			clock-latency = <0xc350>;
-			phandle = <0x125>;
 		};
 
 		l2-cache0 {
 			compatible = "cache";
-			phandle = <0x31>;
+			phandle = <0x32>;
 		};
 	};
 
 	opp-table {
 		compatible = "operating-points-v2";
 		opp-shared;
-		phandle = <0x33>;
+		phandle = <0x34>;
 
 		opp-100000000 {
 			opp-hz = <0x00 0x5f5e100>;
@@ -3075,8 +2848,9 @@
 	};
 
 	aliases {
-		serial0 = "/soc/bus@ff800000/serial@3000";
 		ethernet0 = "/soc/ethernet@ff3f0000";
+		serial0 = "/soc/bus@ff800000/serial@3000";
+		serial1 = "/soc/bus@ffd00000/serial@24000";
 	};
 
 	memory@0 {
@@ -3087,7 +2861,7 @@
 	emmc-pwrseq {
 		compatible = "mmc-pwrseq-emmc";
 		reset-gpios = <0x19 0x25 0x01>;
-		phandle = <0x2b>;
+		phandle = <0x2c>;
 	};
 
 	leds {
@@ -3096,7 +2870,7 @@
 		led-blue {
 			color = <0x03>;
 			function = "status";
-			gpios = <0x34 0x0b 0x00>;
+			gpios = <0x35 0x0b 0x00>;
 			linux,default-trigger = "heartbeat";
 			panic-indicator;
 		};
@@ -3107,10 +2881,10 @@
 		regulator-name = "TFLASH_VDD";
 		regulator-min-microvolt = <0x325aa0>;
 		regulator-max-microvolt = <0x325aa0>;
-		gpio = <0x34 0x03 0x00>;
+		gpio = <0x35 0x03 0x00>;
 		enable-active-high;
 		regulator-always-on;
-		phandle = <0x25>;
+		phandle = <0x26>;
 	};
 
 	gpio-regulator-tf_io {
@@ -3118,10 +2892,10 @@
 		regulator-name = "TF_IO";
 		regulator-min-microvolt = <0x1b7740>;
 		regulator-max-microvolt = <0x325aa0>;
-		gpios = <0x34 0x06 0x00>;
+		gpios = <0x35 0x06 0x00>;
 		gpios-states = <0x00>;
 		states = <0x325aa0 0x00 0x1b7740 0x01>;
-		phandle = <0x26>;
+		phandle = <0x27>;
 	};
 
 	regulator-flash_1v8 {
@@ -3129,9 +2903,9 @@
 		regulator-name = "FLASH_1V8";
 		regulator-min-microvolt = <0x1b7740>;
 		regulator-max-microvolt = <0x1b7740>;
-		vin-supply = <0x2c>;
+		vin-supply = <0x2d>;
 		regulator-always-on;
-		phandle = <0x2d>;
+		phandle = <0x2e>;
 	};
 
 	regulator-main_12v {
@@ -3140,7 +2914,7 @@
 		regulator-min-microvolt = <0xb71b00>;
 		regulator-max-microvolt = <0xb71b00>;
 		regulator-always-on;
-		phandle = <0x35>;
+		phandle = <0x36>;
 	};
 
 	regulator-vcc_5v {
@@ -3149,7 +2923,7 @@
 		regulator-min-microvolt = <0x4c4b40>;
 		regulator-max-microvolt = <0x4c4b40>;
 		regulator-always-on;
-		vin-supply = <0x35>;
+		vin-supply = <0x36>;
 		phandle = <0x10>;
 	};
 
@@ -3158,9 +2932,8 @@
 		regulator-name = "VCC_1V8";
 		regulator-min-microvolt = <0x1b7740>;
 		regulator-max-microvolt = <0x1b7740>;
-		vin-supply = <0x2c>;
+		vin-supply = <0x2d>;
 		regulator-always-on;
-		phandle = <0x126>;
 	};
 
 	regulator-vcc_3v3 {
@@ -3168,9 +2941,9 @@
 		regulator-name = "VCC_3V3";
 		regulator-min-microvolt = <0x325aa0>;
 		regulator-max-microvolt = <0x325aa0>;
-		vin-supply = <0x36>;
+		vin-supply = <0x37>;
 		regulator-always-on;
-		phandle = <0x2c>;
+		phandle = <0x2d>;
 	};
 
 	regulator-vddcpu {
@@ -3178,12 +2951,12 @@
 		regulator-name = "VDDCPU";
 		regulator-min-microvolt = <0xb0068>;
 		regulator-max-microvolt = <0xf9830>;
-		vin-supply = <0x35>;
-		pwms = <0x37 0x01 0x4e2 0x00>;
+		vin-supply = <0x36>;
+		pwms = <0x38 0x01 0x4e2 0x00>;
 		pwm-dutycycle-range = <0x64 0x00>;
 		regulator-boot-on;
 		regulator-always-on;
-		phandle = <0x32>;
+		phandle = <0x33>;
 	};
 
 	regulator-hub_5v {
@@ -3203,9 +2976,9 @@
 		regulator-min-microvolt = <0x4c4b40>;
 		regulator-max-microvolt = <0x4c4b40>;
 		vin-supply = <0x10>;
-		gpio = <0x34 0x02 0x00>;
+		gpio = <0x35 0x02 0x00>;
 		enable-active-high;
-		phandle = <0x30>;
+		phandle = <0x31>;
 	};
 
 	regulator-vddao_1v8 {
@@ -3213,19 +2986,18 @@
 		regulator-name = "VDDAO_1V8";
 		regulator-min-microvolt = <0x1b7740>;
 		regulator-max-microvolt = <0x1b7740>;
-		vin-supply = <0x36>;
+		vin-supply = <0x37>;
 		regulator-always-on;
-		phandle = <0x127>;
 	};
 
 	regulator-vddao_3v3 {
 		compatible = "regulator-fixed";
-		regultor-name = "VDDAO_3V3";
+		regulator-name = "VDDAO_3V3";
 		regulator-min-microvolt = <0x325aa0>;
 		regulator-max-microvolt = <0x325aa0>;
-		vin-supply = <0x35>;
+		vin-supply = <0x36>;
 		regulator-always-on;
-		phandle = <0x36>;
+		phandle = <0x37>;
 	};
 
 	hdmi-connector {
@@ -3235,307 +3007,54 @@
 		port {
 
 			endpoint {
-				remote-endpoint = <0x38>;
+				remote-endpoint = <0x39>;
 				phandle = <0x12>;
 			};
 		};
 	};
 
-	__symbols__ {
-		simplefb_cvbs = "/chosen/framebuffer-cvbs";
-		simplefb_hdmi = "/chosen/framebuffer-hdmi";
-		efuse = "/efuse";
-		secmon_reserved = "/reserved-memory/secmon@5000000";
-		sm = "/secure-monitor";
-		pcie = "/soc/pcie@fc000000";
-		cpu_thermal = "/soc/thermal-zones/cpu-thermal";
-		cpu_passive = "/soc/thermal-zones/cpu-thermal/trips/cpu-passive";
-		cpu_hot = "/soc/thermal-zones/cpu-thermal/trips/cpu-hot";
-		cpu_critical = "/soc/thermal-zones/cpu-thermal/trips/cpu-critical";
-		ddr_thermal = "/soc/thermal-zones/ddr-thermal";
-		ddr_passive = "/soc/thermal-zones/ddr-thermal/trips/ddr-passive";
-		ddr_critical = "/soc/thermal-zones/ddr-thermal/trips/ddr-critical";
-		ethmac = "/soc/ethernet@ff3f0000";
-		mdio0 = "/soc/ethernet@ff3f0000/mdio";
-		apb = "/soc/bus@ff600000";
-		hdmi_tx = "/soc/bus@ff600000/hdmi-tx@0";
-		hdmi_tx_venc_port = "/soc/bus@ff600000/hdmi-tx@0/port@0";
-		hdmi_tx_in = "/soc/bus@ff600000/hdmi-tx@0/port@0/endpoint";
-		hdmi_tx_tmds_port = "/soc/bus@ff600000/hdmi-tx@0/port@1";
-		hdmi_tx_tmds_out = "/soc/bus@ff600000/hdmi-tx@0/port@1/endpoint";
-		apb_efuse = "/soc/bus@ff600000/bus@30000";
-		hwrng = "/soc/bus@ff600000/bus@30000/rng@218";
-		periphs = "/soc/bus@ff600000/bus@34400";
-		periphs_pinctrl = "/soc/bus@ff600000/bus@34400/pinctrl@40";
-		gpio = "/soc/bus@ff600000/bus@34400/pinctrl@40/bank@40";
-		cec_ao_a_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/cec_ao_a_h";
-		cec_ao_b_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/cec_ao_b_h";
-		emmc_ctrl_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/emmc-ctrl";
-		emmc_data_4b_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/emmc-data-4b";
-		emmc_data_8b_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/emmc-data-8b";
-		emmc_ds_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/emmc-ds";
-		emmc_clk_gate_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/emmc_clk_gate";
-		hdmitx_ddc_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/hdmitx_ddc";
-		hdmitx_hpd_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/hdmitx_hpd";
-		i2c0_sda_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c0-sda-c";
-		i2c0_sck_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c0-sck-c";
-		i2c0_sda_z0_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c0-sda-z0";
-		i2c0_sck_z1_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c0-sck-z1";
-		i2c0_sda_z7_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c0-sda-z7";
-		i2c0_sda_z8_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c0-sda-z8";
-		i2c1_sda_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c1-sda-x";
-		i2c1_sck_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c1-sck-x";
-		i2c1_sda_h2_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c1-sda-h2";
-		i2c1_sck_h3_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c1-sck-h3";
-		i2c1_sda_h6_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c1-sda-h6";
-		i2c1_sck_h7_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c1-sck-h7";
-		i2c2_sda_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c2-sda-x";
-		i2c2_sck_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c2-sck-x";
-		i2c2_sda_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c2-sda-z";
-		i2c2_sck_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c2-sck-z";
-		i2c3_sda_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c3-sda-h";
-		i2c3_sck_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c3-sck-h";
-		i2c3_sda_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c3-sda-a";
-		i2c3_sck_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/i2c3-sck-a";
-		mclk0_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/mclk0-a";
-		mclk1_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/mclk1-a";
-		mclk1_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/mclk1-x";
-		mclk1_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/mclk1-z";
-		nor_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/nor";
-		pdm_din0_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din0-a";
-		pdm_din0_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din0-c";
-		pdm_din0_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din0-x";
-		pdm_din0_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din0-z";
-		pdm_din1_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din1-a";
-		pdm_din1_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din1-c";
-		pdm_din1_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din1-x";
-		pdm_din1_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din1-z";
-		pdm_din2_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din2-a";
-		pdm_din2_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din2-c";
-		pdm_din2_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din2-x";
-		pdm_din2_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din2-z";
-		pdm_din3_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din3-a";
-		pdm_din3_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din3-c";
-		pdm_din3_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din3-x";
-		pdm_din3_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-din3-z";
-		pdm_dclk_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-dclk-a";
-		pdm_dclk_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-dclk-c";
-		pdm_dclk_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-dclk-x";
-		pdm_dclk_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pdm-dclk-z";
-		pwm_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-a";
-		pwm_b_x7_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-b-x7";
-		pwm_b_x19_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-b-x19";
-		pwm_c_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-c-c";
-		pwm_c_x5_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-c-x5";
-		pwm_c_x8_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-c-x8";
-		pwm_d_x3_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-d-x3";
-		pwm_d_x6_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-d-x6";
-		pwm_e_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-e";
-		pwm_f_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-f-x";
-		pwm_f_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/pwm-f-h";
-		sdcard_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/sdcard_c";
-		sdcard_clk_gate_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/sdcard_clk_gate_c";
-		sdcard_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/sdcard_z";
-		sdcard_clk_gate_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/sdcard_clk_gate_z";
-		sdio_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/sdio";
-		sdio_clk_gate_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/sdio_clk_gate";
-		spdif_in_a10_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spdif-in-a10";
-		spdif_in_a12_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spdif-in-a12";
-		spdif_in_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spdif-in-h";
-		spdif_out_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spdif-out-h";
-		spdif_out_a11_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spdif-out-a11";
-		spdif_out_a13_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spdif-out-a13";
-		spicc0_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spicc0-x";
-		spicc0_ss0_x_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spicc0-ss0-x";
-		spicc0_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spicc0-c";
-		spicc1_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spicc1";
-		spicc1_ss0_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/spicc1-ss0";
-		tdm_a_din0_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-din0";
-		tdm_a_din1_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-din1";
-		tdm_a_dout0_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-dout0";
-		tdm_a_dout1_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-dout1";
-		tdm_a_fs_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-fs";
-		tdm_a_sclk_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-sclk";
-		tdm_a_slv_fs_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-slv-fs";
-		tdm_a_slv_sclk_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-a-slv-sclk";
-		tdm_b_din0_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-din0";
-		tdm_b_din1_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-din1";
-		tdm_b_din2_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-din2";
-		tdm_b_din3_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-din3-a";
-		tdm_b_din3_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-din3-h";
-		tdm_b_dout0_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-dout0";
-		tdm_b_dout1_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-dout1";
-		tdm_b_dout2_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-dout2";
-		tdm_b_dout3_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-dout3-a";
-		tdm_b_dout3_h_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-dout3-h";
-		tdm_b_fs_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-fs";
-		tdm_b_sclk_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-sclk";
-		tdm_b_slv_fs_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-slv-fs";
-		tdm_b_slv_sclk_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-b-slv-sclk";
-		tdm_c_din0_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din0-a";
-		tdm_c_din0_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din0-z";
-		tdm_c_din1_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din1-a";
-		tdm_c_din1_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din1-z";
-		tdm_c_din2_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din2-a";
-		eth_leds_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/eth-leds";
-		eth_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/eth";
-		eth_rgmii_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/eth-rgmii";
-		tdm_c_din2_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din2-z";
-		tdm_c_din3_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din3-a";
-		tdm_c_din3_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-din3-z";
-		tdm_c_dout0_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout0-a";
-		tdm_c_dout0_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout0-z";
-		tdm_c_dout1_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout1-a";
-		tdm_c_dout1_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout1-z";
-		tdm_c_dout2_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout2-a";
-		tdm_c_dout2_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout2-z";
-		tdm_c_dout3_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout3-a";
-		tdm_c_dout3_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-dout3-z";
-		tdm_c_fs_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-fs-a";
-		tdm_c_fs_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-fs-z";
-		tdm_c_sclk_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-sclk-a";
-		tdm_c_sclk_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-sclk-z";
-		tdm_c_slv_fs_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-slv-fs-a";
-		tdm_c_slv_fs_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-slv-fs-z";
-		tdm_c_slv_sclk_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-slv-sclk-a";
-		tdm_c_slv_sclk_z_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/tdm-c-slv-sclk-z";
-		uart_a_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/uart-a";
-		uart_a_cts_rts_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/uart-a-cts-rts";
-		uart_b_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/uart-b";
-		uart_c_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/uart-c";
-		uart_c_cts_rts_pins = "/soc/bus@ff600000/bus@34400/pinctrl@40/uart-c-cts-rts";
-		cpu_temp = "/soc/bus@ff600000/temperature-sensor@34800";
-		ddr_temp = "/soc/bus@ff600000/temperature-sensor@34c00";
-		usb2_phy0 = "/soc/bus@ff600000/phy@36000";
-		dmc = "/soc/bus@ff600000/bus@38000";
-		canvas = "/soc/bus@ff600000/bus@38000/video-lut@48";
-		usb2_phy1 = "/soc/bus@ff600000/phy@3a000";
-		hiu = "/soc/bus@ff600000/bus@3c000";
-		hhi = "/soc/bus@ff600000/bus@3c000/system-controller@0";
-		clkc = "/soc/bus@ff600000/bus@3c000/system-controller@0/clock-controller";
-		pwrc = "/soc/bus@ff600000/bus@3c000/system-controller@0/power-controller";
-		usb3_pcie_phy = "/soc/bus@ff600000/phy@46000";
-		eth_phy = "/soc/bus@ff600000/mdio-multiplexer@4c000";
-		ext_mdio = "/soc/bus@ff600000/mdio-multiplexer@4c000/mdio@0";
-		external_phy = "/soc/bus@ff600000/mdio-multiplexer@4c000/mdio@0/ethernet-phy@0";
-		int_mdio = "/soc/bus@ff600000/mdio-multiplexer@4c000/mdio@1";
-		internal_ephy = "/soc/bus@ff600000/mdio-multiplexer@4c000/mdio@1/ethernet_phy@8";
-		audio = "/soc/bus@ff600000/bus@60000";
-		clkc_audio = "/soc/bus@ff600000/bus@60000/clock-controller@0";
-		toddr_a = "/soc/bus@ff600000/bus@60000/audio-controller@100";
-		toddr_b = "/soc/bus@ff600000/bus@60000/audio-controller@140";
-		toddr_c = "/soc/bus@ff600000/bus@60000/audio-controller@180";
-		frddr_a = "/soc/bus@ff600000/bus@60000/audio-controller@1c0";
-		frddr_b = "/soc/bus@ff600000/bus@60000/audio-controller@200";
-		frddr_c = "/soc/bus@ff600000/bus@60000/audio-controller@240";
-		arb = "/soc/bus@ff600000/bus@60000/reset-controller@280";
-		tdmin_a = "/soc/bus@ff600000/bus@60000/audio-controller@300";
-		tdmin_b = "/soc/bus@ff600000/bus@60000/audio-controller@340";
-		tdmin_c = "/soc/bus@ff600000/bus@60000/audio-controller@380";
-		tdmin_lb = "/soc/bus@ff600000/bus@60000/audio-controller@3c0";
-		tdmout_a = "/soc/bus@ff600000/bus@60000/audio-controller@500";
-		tdmout_b = "/soc/bus@ff600000/bus@60000/audio-controller@540";
-		tdmout_c = "/soc/bus@ff600000/bus@60000/audio-controller@580";
-		tohdmitx = "/soc/bus@ff600000/bus@60000/audio-controller@744";
-		toddr_d = "/soc/bus@ff600000/bus@60000/audio-controller@840";
-		frddr_d = "/soc/bus@ff600000/bus@60000/audio-controller@880";
-		pdm = "/soc/bus@ff600000/audio-controller@61000";
-		aobus = "/soc/bus@ff800000";
-		rti = "/soc/bus@ff800000/sys-ctrl@0";
-		clkc_AO = "/soc/bus@ff800000/sys-ctrl@0/clock-controller";
-		ao_pinctrl = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14";
-		gpio_ao = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/bank@14";
-		i2c_ao_sck_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/i2c_ao_sck_pins";
-		i2c_ao_sda_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/i2c_ao_sda";
-		i2c_ao_sck_e_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/i2c_ao_sck_e";
-		i2c_ao_sda_e_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/i2c_ao_sda_e";
-		mclk0_ao_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/mclk0-ao";
-		tdm_ao_b_din0_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-din0";
-		spdif_ao_out_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/spdif-ao-out";
-		tdm_ao_b_din1_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-din1";
-		tdm_ao_b_din2_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-din2";
-		tdm_ao_b_dout0_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-dout0";
-		tdm_ao_b_dout1_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-dout1";
-		tdm_ao_b_dout2_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-dout2";
-		tdm_ao_b_fs_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-fs";
-		tdm_ao_b_sclk_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-sclk";
-		tdm_ao_b_slv_fs_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-slv-fs";
-		tdm_ao_b_slv_sclk_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/tdm-ao-b-slv-sclk";
-		uart_ao_a_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/uart-a-ao";
-		uart_ao_a_cts_rts_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/uart-ao-a-cts-rts";
-		pwm_a_e_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-a-e";
-		pwm_ao_a_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-a";
-		pwm_ao_b_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-b";
-		pwm_ao_c_4_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-c-4";
-		pwm_ao_c_6_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-c-6";
-		pwm_ao_d_5_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-d-5";
-		pwm_ao_d_10_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-d-10";
-		pwm_ao_d_e_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/pwm-ao-d-e";
-		remote_input_ao_pins = "/soc/bus@ff800000/sys-ctrl@0/pinctrl@14/remote-input-ao";
-		vrtc = "/soc/bus@ff800000/rtc@0a8";
-		cec_AO = "/soc/bus@ff800000/cec@100";
-		sec_AO = "/soc/bus@ff800000/ao-secure@140";
-		cecb_AO = "/soc/bus@ff800000/cec@280";
-		pwm_AO_cd = "/soc/bus@ff800000/pwm@2000";
-		uart_AO = "/soc/bus@ff800000/serial@3000";
-		uart_AO_B = "/soc/bus@ff800000/serial@4000";
-		i2c_AO = "/soc/bus@ff800000/i2c@5000";
-		pwm_AO_ab = "/soc/bus@ff800000/pwm@7000";
-		ir = "/soc/bus@ff800000/ir@8000";
-		saradc = "/soc/bus@ff800000/adc@9000";
-		vdec = "/soc/video-decoder@ff620000";
-		vpu = "/soc/vpu@ff900000";
-		cvbs_vdac_port = "/soc/vpu@ff900000/port@0";
-		hdmi_tx_port = "/soc/vpu@ff900000/port@1";
-		hdmi_tx_out = "/soc/vpu@ff900000/port@1/endpoint";
-		gic = "/soc/interrupt-controller@ffc01000";
-		cbus = "/soc/bus@ffd00000";
-		reset = "/soc/bus@ffd00000/reset-controller@1004";
-		gpio_intc = "/soc/bus@ffd00000/interrupt-controller@f080";
-		spicc0 = "/soc/bus@ffd00000/spi@13000";
-		spicc1 = "/soc/bus@ffd00000/spi@15000";
-		spifc = "/soc/bus@ffd00000/spi@14000";
-		pwm_ef = "/soc/bus@ffd00000/pwm@19000";
-		pwm_cd = "/soc/bus@ffd00000/pwm@1a000";
-		pwm_ab = "/soc/bus@ffd00000/pwm@1b000";
-		i2c3 = "/soc/bus@ffd00000/i2c@1c000";
-		i2c2 = "/soc/bus@ffd00000/i2c@1d000";
-		i2c1 = "/soc/bus@ffd00000/i2c@1e000";
-		i2c0 = "/soc/bus@ffd00000/i2c@1f000";
-		clk_msr = "/soc/bus@ffd00000/clock-measure@18000";
-		uart_C = "/soc/bus@ffd00000/serial@22000";
-		uart_B = "/soc/bus@ffd00000/serial@23000";
-		uart_A = "/soc/bus@ffd00000/serial@24000";
-		sd_emmc_a = "/soc/sd@ffe03000";
-		sd_emmc_b = "/soc/sd@ffe05000";
-		sd_emmc_c = "/soc/mmc@ffe07000";
-		usb = "/soc/usb@ffe09000";
-		dwc2 = "/soc/usb@ffe09000/usb@ff400000";
-		dwc3 = "/soc/usb@ffe09000/usb@ff500000";
-		mali = "/soc/gpu@ffe40000";
-		xtal = "/xtal-clk";
-		tdmif_a = "/audio-controller-0";
-		tdmif_b = "/audio-controller-1";
-		tdmif_c = "/audio-controller-2";
-		cpu0 = "/cpus/cpu@0";
-		cpu1 = "/cpus/cpu@1";
-		cpu2 = "/cpus/cpu@2";
-		cpu3 = "/cpus/cpu@3";
-		l2 = "/cpus/l2-cache0";
-		cpu_opp_table = "/opp-table";
-		emmc_pwrseq = "/emmc-pwrseq";
-		tflash_vdd = "/regulator-tflash_vdd";
-		tf_io = "/gpio-regulator-tf_io";
-		flash_1v8 = "/regulator-flash_1v8";
-		main_12v = "/regulator-main_12v";
-		vcc_5v = "/regulator-vcc_5v";
-		vcc_1v8 = "/regulator-vcc_1v8";
-		vcc_3v3 = "/regulator-vcc_3v3";
-		vddcpu = "/regulator-vddcpu";
-		hub_5v = "/regulator-hub_5v";
-		usb_pwr_en = "/regulator-usb_pwr_en";
-		vddao_1v8 = "/regulator-vddao_1v8";
-		vddao_3v3 = "/regulator-vddao_3v3";
-		hdmi_connector_in = "/hdmi-connector/port/endpoint";
+	sound {
+		compatible = "amlogic,axg-sound-card";
+		model = "SM1-ODROID-C4";
+		audio-aux-devs = <0x3a>;
+		audio-routing = "TDMOUT_B IN 0\0FRDDR_A OUT 1\0TDMOUT_B IN 1\0FRDDR_B OUT 1\0TDMOUT_B IN 2\0FRDDR_C OUT 1\0TDM_B Playback\0TDMOUT_B OUT";
+		assigned-clocks = <0x02 0x0d 0x02 0x0b 0x02 0x0c>;
+		assigned-clock-parents = <0x00 0x00 0x00>;
+		assigned-clock-rates = <0x11940000 0x10266000 0x17700000>;
+		status = "okay";
+
+		dai-link-0 {
+			sound-dai = <0x3b>;
+		};
+
+		dai-link-1 {
+			sound-dai = <0x3c>;
+		};
+
+		dai-link-2 {
+			sound-dai = <0x3d>;
+		};
+
+		dai-link-3 {
+			sound-dai = <0x3e>;
+			dai-format = "i2s";
+			dai-tdm-slot-tx-mask-0 = <0x01 0x01>;
+			dai-tdm-slot-tx-mask-1 = <0x01 0x01>;
+			dai-tdm-slot-tx-mask-2 = <0x01 0x01>;
+			dai-tdm-slot-tx-mask-3 = <0x01 0x01>;
+			mclk-fs = <0x100>;
+
+			codec {
+				sound-dai = <0x3f 0x01>;
+			};
+		};
+
+		dai-link-4 {
+			sound-dai = <0x3f 0x03>;
+
+			codec {
+				sound-dai = <0x40>;
+			};
+		};
 	};
 };
