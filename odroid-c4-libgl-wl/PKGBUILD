@@ -1,7 +1,7 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
-pkgname=odroid-c4-libgl-gbm
-pkgdesc="ODROID-C4 Mali driver (GBM)"
+pkgname=odroid-c4-libgl-wl
+pkgdesc="ODROID-C4 Mali driver (Wayland)"
 pkgver=r16p0
 pkgrel=1
 arch=('aarch64')
@@ -24,16 +24,12 @@ options=('!strip')
 source=(
   "mali.conf"
   "license"
-  "gbm_compat.c"
-  "libmali.so::https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/blob/aml64_buildroot_master/lib/arm64/dvalin/r16p0/gbm/libMali.so?raw=true"
-  "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1_0.1.0+202004101002~focal_arm64.deb"
+  "http://ppa.linuxfactory.or.kr/pool/non-free/m/mali-bifrost-driver/mali-bifrost-wayland-driver_0.1-5+202005160249~focal_arm64.deb"
 )
 md5sums=(
   '2ac761dc95cf5096d9313ad993dcf4be'
   '3da6d34563163f132815d9b8c5387a76'
-  'ce97bdcfcb275e613a0c6c917af13e34'
-  'e71174477c06bf882ef7cab8b5908d9d'
-  '50346762ed55a9c38de263d5a981d513'
+  'e072997f63b0596025f5b928952a19eb'
 )
 
 prepare() {
@@ -46,19 +42,10 @@ build() {
   cd $srcdir
   mkdir $srcdir/libs
 
-  gcc -shared gbm_compat.c -o libgbm-compat.so
-
-  cp libgbm-compat.so $srcdir/libs/
-
   # for some unknown reason this libgbm prevents linking issues
   # when compiling software.
-  ar x libgbm1_0.1.0+202004101002~focal_arm64.deb
+  ar x mali-bifrost-wayland-driver_0.1-5+202005160249~focal_arm64.deb
   tar -xvJf data.tar.xz
-
-  cp -a usr/lib/aarch64-linux-gnu/libgbm.la libs/
-  cp -a usr/lib/aarch64-linux-gnu/libgbm.so libs/
-  cp -a usr/lib/aarch64-linux-gnu/libgbm.so.1 libs/
-  cp -a usr/lib/aarch64-linux-gnu/libgbm.so.1.0.0 libs/
 
   ln -sf libEGL.so.1               libs/libEGL.so
   ln -sf libEGL.so.1.1.0           libs/libEGL.so.1
@@ -86,7 +73,7 @@ package() {
   install -d $pkgdir/usr/share/doc/$pkgname
 
   cp mali.conf $pkgdir/etc/ld.so.conf.d/
-  cp libmali.so $srcdir/libs/libmali.so
+  cp $srcdir/usr/lib/aarch64-linux-gnu/mali-g31/wayland/libmali.so $srcdir/libs/libmali.so
   chmod 0755 $srcdir/libs/libmali.so
   ln -sf /usr/lib/mali-egl/libmali.so $srcdir/libs/libmali.so.0
   cp -a $srcdir/libs/* $pkgdir/usr/lib/mali-egl/
