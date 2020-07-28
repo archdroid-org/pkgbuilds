@@ -2,10 +2,7 @@
 #
 # Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
 
-# Note: must be built on x86 with an old cross toolchain
-
 buildarch=8
-noautobuild=1
 
 pkgname=uboot-odroid-n2plus
 _revision=136
@@ -20,7 +17,7 @@ depends=('uboot-tools')
 conflicts=('uboot-odroid-n2')
 makedepends=('git' 'bc')
 backup=('boot/boot.ini')
-source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-136/u-boot-odroidn2-${_revision}.tar.gz"
+source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidn2-${_revision}.tar.gz"
         'boot.ini'
         '0001-sd_fusing-tweaks.patch'
         '91-uboot-uimg.hook')
