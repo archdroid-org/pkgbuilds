@@ -7,7 +7,6 @@ pkgrel=1
 arch=('aarch64')
 url="https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali"
 license=('Proprietary')
-depends=('dkms-mali-bifrost')
 makedepends=('gcc')
 conflicts=(
   "mali-utgard-meson-libgl-fb"

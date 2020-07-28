@@ -1,0 +1,43 @@
+# U-Boot: ODROID-N2/N2+
+#
+# Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+
+# Note: must be built on x86 with an old cross toolchain
+
+buildarch=8
+noautobuild=1
+
+pkgname=uboot-odroid-n2plus
+_revision=136
+pkgver=2015.01.${_revision}
+pkgrel=1
+pkgdesc="U-Boot for ODROID-N2/N2+"
+arch=('aarch64')
+url="https://github.com/hardkernel/u-boot"
+license=('GPL')
+install=$pkgname.install
+depends=('uboot-tools')
+conflicts=('uboot-odroid-n2')
+makedepends=('git' 'bc')
+backup=('boot/boot.ini')
+source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-136/u-boot-odroidn2-${_revision}.tar.gz"
+        'boot.ini'
+        '0001-sd_fusing-tweaks.patch'
+        '91-uboot-uimg.hook')
+md5sums=('6e575f95a6519bf31355c6a7d2e0637a'
+         '6578affa2826b335f6fdce3571280dd7'
+         'cc18cda0bc75936e602341efd5a2fe93'
+         '1931c8dfde7088530f173ca59fdb8989')
+
+prepare() {
+  patch -p1 < 0001-sd_fusing-tweaks.patch
+}
+
+package() {
+  cd sd_fuse
+
+  mkdir -p "${pkgdir}"/boot
+  cp sd_fusing.sh u-boot.bin "${pkgdir}"/boot
+  cp "${srcdir}"/boot.ini "${pkgdir}"/boot
+  install -Dm644 "${srcdir}/91-uboot-uimg.hook" "${pkgdir}/usr/share/libalpm/hooks/91-uboot-uimg.hook"
+}
