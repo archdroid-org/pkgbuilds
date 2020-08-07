@@ -1,0 +1,45 @@
+post_install() {
+  model=""
+  if [ -e /sys/devices/soc0/machine ]; then
+    model="$(cat /sys/devices/soc0/machine | sed "s/Hardkernel //g")"
+  elif [ -e /sys/firmware/devicetree/base/model ]; then
+    model="$(cat /sys/firmware/devicetree/base/model | sed "s/Hardkernel //g")"
+  fi
+
+  case "$model" in
+    "ODROID-N2" | "ODROID-N2Plus")
+      echo "Setting up alsa for OdroidN2/N2+..."
+      amixer sset 'FRDDR_A SINK 1 SEL' 'OUT 1' || true
+      amixer sset 'FRDDR_A SRC 1 EN' 'on' || true
+      amixer sset 'TDMOUT_B SRC SEL' 'IN 0' || true
+      amixer sset 'TOHDMITX I2S SRC' 'I2S B' || true
+      amixer sset 'TOHDMITX' 'on' || true
+
+      amixer sset 'FRDDR_B SINK 1 SEL' 'OUT 2' || true
+      amixer sset 'FRDDR_B SRC 1 EN' 'on' || true
+      amixer sset 'TDMOUT_C SRC SEL' 'IN 1' || true
+      amixer sset 'TOACODEC SRC' 'I2S C' || true
+      amixer sset 'TOACODEC OUT EN' 'on' || true
+      amixer sset 'TOACODEC Lane Select' '0' || true
+      amixer sset 'ACODEC' '255'
+
+      amixer sset 'FRDDR_C SINK 1 SEL' 'OUT 3' || true
+      amixer sset 'FRDDR_C SRC 1 EN' 'on' || true
+      amixer sset 'SPDIFOUT SRC SEL' 'IN 2' || true
+
+      alsactl store
+      ;;
+
+    "ODROID-C4")
+      echo "Setting up alsa for OdroidC4..."
+      amixer sset 'FRDDR_A SINK 1 SEL' 'OUT 1' || true
+      amixer sset 'FRDDR_A SRC 1 EN' 'on' || true
+      amixer sset 'TDMOUT_B SRC SEL' 'IN 0' || true
+      amixer sset 'TOHDMITX I2S SRC' 'I2S B' || true
+      amixer sset 'TOHDMITX' 'on' || true
+      alsactl store
+      ;;
+    *)
+      ;;
+  esac
+}

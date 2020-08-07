@@ -1,0 +1,31 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=odroid-alsa
+_pkgdate=202004270349
+_commit=beea8de0b0765dcfa7fc9b455902e52824d4017b
+_srcname=${pkgname}-${_commit}
+pkgver=1
+pkgrel=1
+pkgdesc="Alsa audio enablement for Odroid N2/N2+/C4."
+arch=('aarch64')
+url="https://github.com/tobetter/odroid-alsa"
+license=('MIT')
+depends=('alsa-utils')
+options=('!strip')
+source=(
+  "https://github.com/tobetter/odroid-alsa/archive/${_commit}.zip"
+)
+md5sums=(
+  'SKIP'
+)
+install=${pkgname}.install
+
+package() {
+  cd ${srcdir}/${_srcname}
+
+  install -d ${pkgdir}/etc/alsa/conf.d
+  install -d ${pkgdir}/usr/share/alsa/cards
+
+  cp etc/asound.conf ${pkgdir}/etc/alsa/conf.d/100-odroid.conf
+  cp usr/share/alsa/cards/* ${pkgdir}/usr/share/alsa/cards/
+}
