@@ -12,7 +12,11 @@ pkgdesc="Mali kernel driver for bifrost hardware in DKMS format."
 arch=('aarch64')
 url="http://ppa.linuxfactory.or.kr"
 license=('GPL')
-depends=('linux>=5.6' 'linux-headers>=5.6' 'dkms')
+depends=(
+  'linux>=5.6' 'linux<5.8'
+  'linux-headers>=5.6' 'linux-headers<5.8'
+  'dkms'
+)
 options=('!strip')
 source=(
   "http://ppa.linuxfactory.or.kr/pool/contrib/m/mali-bifrost/mali-bifrost-dkms_${pkgver}~focal_arm64.deb"
