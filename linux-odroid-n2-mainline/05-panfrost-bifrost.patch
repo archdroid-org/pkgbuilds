@@ -1,0 +1,44 @@
+From c72b80faaf4522cdeaad8682e68df20256a6181f Mon Sep 17 00:00:00 2001
+From: Neil Armstrong <narmstrong@baylibre.com>
+Date: Thu, 23 Jul 2020 12:07:08 +0200
+Subject: [PATCH] drm/panfrost: add Amlogic GPU integration quirks
+
+Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
+---
+ drivers/gpu/drm/panfrost/panfrost_drv.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/drivers/gpu/drm/panfrost/panfrost_drv.c b/drivers/gpu/drm/panfrost/panfrost_drv.c
+index 8ff8e140f91e2..162354990bcb9 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_drv.c
++++ b/drivers/gpu/drm/panfrost/panfrost_drv.c
+@@ -667,7 +667,29 @@ static const struct panfrost_compatible default_data = {
+ 	.pm_domain_names = NULL,
+ };
+ 
++static const struct panfrost_compatible amlogic_gxm_data = {
++	.num_supplies = ARRAY_SIZE(default_supplies),
++	.supply_names = default_supplies,
++	.num_pm_domains = 1, /* optional */
++	.pm_domain_names = NULL,
++	.requires_external_reset = true,
++	.vendor_quirks = panfrost_gpu_amlogic_quirks,
++};
++
++static const struct panfrost_compatible amlogic_g12a_data = {
++	.num_supplies = ARRAY_SIZE(default_supplies),
++	.supply_names = default_supplies,
++	.num_pm_domains = 1, /* optional */
++	.pm_domain_names = NULL,
++	.vendor_quirks = panfrost_gpu_amlogic_quirks,
++};
++
+ static const struct of_device_id dt_match[] = {
++	/* Set first to probe before the generic compatibles */
++	{ .compatible = "amlogic,meson-gxm-mali",
++	  .data = &amlogic_gxm_data, },
++	{ .compatible = "amlogic,meson-g12a-mali",
++	  .data = &amlogic_g12a_data, },
+ 	{ .compatible = "arm,mali-t604", .data = &default_data, },
+ 	{ .compatible = "arm,mali-t624", .data = &default_data, },
+ 	{ .compatible = "arm,mali-t628", .data = &default_data, },
