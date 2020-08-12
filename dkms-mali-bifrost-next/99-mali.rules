@@ -1,0 +1,1 @@
+KERNEL=="mali[0-9]*",MODE="0666",GROUP="video"
