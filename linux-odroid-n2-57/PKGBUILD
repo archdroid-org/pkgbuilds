@@ -3,9 +3,9 @@
 
 buildarch=8
 
-pkgbase=linux-odroid-n2-mainline
-pkgname=('linux-odroid-n2-mainline'
-         'linux-odroid-n2-mainline-headers')
+pkgbase=linux-odroid-n2-57
+pkgname=('linux-odroid-n2-57'
+         'linux-odroid-n2-57-headers')
 _commit=bba2090502c72dc31233e6c3527ea75a574b4c8f
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
@@ -76,7 +76,7 @@ build() {
   make ${MAKEFLAGS} DTC_FLAGS="-@" dtbs
 }
 
-package_linux-odroid-n2-mainline() {
+package_linux-odroid-n2-57() {
   pkgdesc="The Linux Kernel and modules - ${_desc}"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('crda: to set the correct wireless channels of your country')
@@ -135,7 +135,7 @@ package_linux-odroid-n2-mainline() {
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
 }
 
-package_linux-odroid-n2-mainline-headers() {
+package_linux-odroid-n2-57-headers() {
   pkgdesc="Header files and scripts for building modules for linux kernel - ${_desc}"
   provides=("linux-headers=${pkgver}")
   conflicts=('linux-headers')
