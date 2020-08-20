@@ -5,7 +5,7 @@ _pkgdate=202004270349
 _commit=beea8de0b0765dcfa7fc9b455902e52824d4017b
 _srcname=${pkgname}-${_commit}
 pkgver=1
-pkgrel=1
+pkgrel=2
 pkgdesc="Alsa audio enablement for Odroid N2/N2+/C4."
 arch=('aarch64')
 url="https://github.com/tobetter/odroid-alsa"
@@ -18,7 +18,6 @@ source=(
 md5sums=(
   'SKIP'
 )
-install=${pkgname}.install
 
 package() {
   cd ${srcdir}/${_srcname}
