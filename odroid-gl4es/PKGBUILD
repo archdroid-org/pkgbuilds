@@ -34,7 +34,7 @@ md5sums=(
   'SKIP'
   '50b819dc12b12c37c8ee66355720144e'
   '0d6cd06e83b7832f778b3d9fad1224dc'
-  'ab6b70f451f5b52263e76985d2c839ce'
+  'f3181def2bdab7da9d1e1fafd1a94ba2'
 )
 
 pkgver() {

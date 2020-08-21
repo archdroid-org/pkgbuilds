@@ -8,6 +8,15 @@ alarm_check_root() {
 }
 
 case "$1" in
+    "status")
+        if grep "/usr/lib" /etc/ld.so.conf.d/gl4es.conf > /dev/null ; then
+            echo "GL4ES Enabled"
+        else
+            echo "GL4ES Disabled"
+        fi
+
+        exit 0
+        ;;
     "toggle")
         alarm_check_root
 
@@ -34,6 +43,8 @@ case "$1" in
         echo "Usage: gl4es-setup <command>"
         echo ""
         echo "COMMANDS:"
+        echo ""
+        echo "  status - Print the gl4es activation status."
         echo ""
         echo "  toggle - Enable or disable gl4es OpenGL hi-jacking."
         echo ""
