@@ -2,32 +2,46 @@
 
 pkgname=odroid-gl4es
 _gitname=gl4es
-pkgver=2342.7e6fad2
+_commit=69f03920acbc3b60eaa247f91372f4c8b3d59707
+# This commit broke Cendric:
+# b1fc44a55413a9571721e79b6e8b321cda70c99e
+# Working commits with Cendric
+#_commit=69f03920acbc3b60eaa247f91372f4c8b3d59707
+#_commit=5df4c7626b73e33e891b13e6faa82b0d3610078a
+#_commit=a5555c173d70d292e43c13a6d951fa06ddb413fe  Bumped to v1.1.4
+#_commit=d26709bd16d62295a4c67ad28043d4a25f6256a8
+#_commit=125cdbfd775802ce4197518373ac2610f347b9a7
+#_commit=3f02a6cf7243d9919bd93c49e2beb6bace3c73f5
+pkgver=1.1.4.${_commit:0:7}
 pkgrel=1
 pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library. (Odroid Build)"
 arch=('aarch64')
 url="https://github.com/ptitSeb/gl4es"
 license=('MIT')
-depends=('xorg-xrefresh')
+depends=('xorg-xrefresh' 'nano' 'grep')
 makedepends=('git')
 optdepends=(
   'odroid-n2-libgl-fb: hardware acceleration'
   'odroid-c4-libgl-fb: hardware acceleration'
 )
 source=(
-  'git+https://github.com/ptitSeb/gl4es'
+  "git://github.com/ptitSeb/gl4es.git#commit=${_commit}"
   'gl4es.conf'
   'gl4es.sh'
+  'odroid-gl4es.sh'
 )
 md5sums=(
   'SKIP'
   '50b819dc12b12c37c8ee66355720144e'
-  'b1f7508c328628b662456d77798ffaba'
+  '0d6cd06e83b7832f778b3d9fad1224dc'
+  'ab6b70f451f5b52263e76985d2c839ce'
 )
 
 pkgver() {
   cd "${SRCDEST}/${_gitname}"
-  echo $(git rev-list --count master).$(git rev-parse --short master)
+
+  #echo $(git rev-list --count master).$(git rev-parse --short master)
+  echo "1.1.4.${_commit:0:7}"
 }
 
 build() {
@@ -38,12 +52,15 @@ build() {
 }
 
 package() {
+  install -d $pkgdir/usr/bin
+  install -d $pkgdir/usr/lib/gl4es
   install -d $pkgdir/etc/profile.d
   install -d $pkgdir/etc/ld.so.conf.d
-  install -d $pkgdir/usr/lib/gl4es
 
   cp gl4es.conf $pkgdir/etc/ld.so.conf.d/
   cp gl4es.sh $pkgdir/etc/profile.d/
+  cp odroid-gl4es.sh $pkgdir/usr/bin/odroid-gl4es
+  chmod 0755 $pkgdir/usr/bin/odroid-gl4es
 
   cp $srcdir/$_gitname/lib/libGL.so.1 $pkgdir/usr/lib/gl4es/libGL.so.1.2.0
   ln -s /usr/lib/gl4es/libGL.so.1.2.0 $pkgdir/usr/lib/gl4es/libGL.so.1
