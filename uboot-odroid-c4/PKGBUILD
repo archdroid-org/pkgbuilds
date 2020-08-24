@@ -1,6 +1,6 @@
-# U-Boot: ODROID-N2/N2+
+# U-Boot: ODROID-C4
 #
-# Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
 buildarch=8
 
@@ -22,7 +22,7 @@ source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidc4-
         '0001-sd_fusing-tweaks.patch'
         '91-uboot-uimg.hook')
 md5sums=('6025f8ff8d28effcd84dcd4c41b6dd3c'
-         '32b8c35abad9d8d976bc480307a016c3'
+         'eacdaa891869f3548d3844283590d3e2'
          'cc18cda0bc75936e602341efd5a2fe93'
          '1931c8dfde7088530f173ca59fdb8989')
 
