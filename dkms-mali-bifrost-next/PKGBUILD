@@ -2,7 +2,7 @@
 
 buildarch=8
 
-pkgname=dkms-mali-bifrost
+pkgname=dkms-mali-bifrost-next
 _pkgbase=mali-bifrost
 _pkgver=25.0
 _commit=38578e60ed89c445abab9eb9779124e77115d192
