@@ -16,7 +16,7 @@ conflicts=(
   "odroid-c4-libgl-fb"
   "odroid-n2-libgl-fb"
 )
-provides=('odroid-n2-libgl' 'opencl-driver')
+provides=('odroid-n2-libgl')
 install=$pkgname.install
 options=('!strip')
 source=(
@@ -25,6 +25,7 @@ source=(
   "gbm_compat.c"
   "libmali-wl.so::https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/blob/aml64_buildroot_master/lib/arm64/gondul/r16p0/wayland/drm/libMali.so?raw=true"
   "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1_0.1.0+202004101002~focal_arm64.deb"
+  "odroid-mali.sh"
 )
 md5sums=(
   '2ac761dc95cf5096d9313ad993dcf4be'
@@ -32,6 +33,7 @@ md5sums=(
   'ce97bdcfcb275e613a0c6c917af13e34'
   'a7798c5566551bdd0d4be79046248d43'
   '50346762ed55a9c38de263d5a981d513'
+  '24e5c6b037507bf72da770d0ef2a6678'
 )
 
 prepare() {
@@ -76,10 +78,13 @@ build() {
 
 package() {
   install -d $pkgdir/etc/ld.so.conf.d
+  install -d $pkgdir/usr/bin
   install -d $pkgdir/usr/lib/mali-egl
   install -d $pkgdir/usr/share/doc/$pkgname
 
   cp mali.conf $pkgdir/etc/ld.so.conf.d/
+  cp odroid-mali.sh $pkgdir/usr/bin/odroid-mali
+  chmod 0755 $pkgdir/usr/bin/odroid-mali
   cp libmali-wl.so $srcdir/libs/libmali.so
   chmod 0755 $srcdir/libs/libmali.so
   ln -sf /usr/lib/mali-egl/libmali.so $srcdir/libs/libmali.so.0
