@@ -3,7 +3,7 @@
 pkgname=odroid-n2-libgl-wl
 pkgdesc="ODROID-N2 Mali driver (Wayland)"
 pkgver=r16p0
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali"
 license=('Proprietary')
@@ -72,10 +72,6 @@ build() {
   ln -sf libwayland-egl.so.1       libs/libwayland-egl.so
   ln -sf libwayland-egl.so.1.0.0   libs/libwayland-egl.so.1
   ln -sf libmali.so                libs/libwayland-egl.so.1.0.0
-
-  ln -sf libOpenCL.so.1            libs/libOpenCL.so
-  ln -sf libOpenCL.so.1.0.0        libs/libOpenCL.so.1
-  ln -sf libmali.so                libs/libOpenCL.so.1.0.0
 }
 
 package() {

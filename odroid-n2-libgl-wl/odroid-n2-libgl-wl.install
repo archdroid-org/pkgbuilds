@@ -6,9 +6,13 @@ post_install() {
 
   sed -i "/\/usr\/lib\/mali-egl\/libmali.so/d" /etc/ld.so.preload
   echo "/usr/lib/mali-egl/libmali.so" >> /etc/ld.so.preload
+
+  ldconfig
 }
 
 post_remove() {
   sed -i "/\/usr\/lib\/mali-egl\/libgbm-compat.so/d" /etc/ld.so.preload
   sed -i "/\/usr\/lib\/mali-egl\/libmali.so/d" /etc/ld.so.preload
+
+  ldconfig
 }
