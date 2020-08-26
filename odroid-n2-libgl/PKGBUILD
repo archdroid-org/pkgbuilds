@@ -2,7 +2,7 @@
 
 pkgbase=odroid-n2-libgl
 pkgname=("${pkgbase}-wl" "${pkgbase}-fb" "${pkgbase}-headers")
-pkgver=r16p0
+pkgver=1.0
 pkgrel=3
 _commit=06306afc3b65cb7e8a50e6006d9fda2dd647d8a0
 _srcdir=buildroot_linux_amlogic_meson_mali-${_commit}
