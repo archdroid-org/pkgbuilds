@@ -52,7 +52,7 @@ case "$1" in
         ;;
     *)
         echo "Basic utility to administer gl4es."
-        echo "Usage: gl4es-setup <command>"
+        echo "Usage: odroid-gl4es <command>"
         echo ""
         echo "COMMANDS:"
         echo ""
