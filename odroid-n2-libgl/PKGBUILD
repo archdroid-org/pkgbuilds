@@ -1,0 +1,160 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgbase=odroid-n2-libgl
+pkgname=("${pkgbase}-wl" "${pkgbase}-fb" "${pkgbase}-headers")
+pkgver=r16p0
+pkgrel=3
+_commit=06306afc3b65cb7e8a50e6006d9fda2dd647d8a0
+_srcdir=buildroot_linux_amlogic_meson_mali-${_commit}
+arch=('aarch64')
+url="https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali"
+license=('Proprietary')
+makedepends=('gcc')
+options=('!strip')
+conflicts=(
+  "mali-utgard-meson-libgl-fb"
+  "mali-utgard-meson-libgl-x11"
+  "odroid-c2-libgl-fb"
+  "odroid-c2-libgl-x11"
+  "odroid-c4-libgl-fb"
+  "odroid-c4-libgl-wl"
+)
+source=(
+  "license"
+  "gbm_compat.c"
+  "mali.zip::https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/archive/${_commit}.zip"
+  "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1_0.1.0+202004101002~focal_arm64.deb"
+  "odroid-mali-wl.sh"
+  "odroid-mali-fb.sh"
+  "mali-wl.pc"
+  "mali-fb.pc"
+)
+md5sums=(
+  '3da6d34563163f132815d9b8c5387a76'
+  'ce97bdcfcb275e613a0c6c917af13e34'
+  'e0f952ff6586a034a454233d58dbdb9e'
+  '50346762ed55a9c38de263d5a981d513'
+  '73048d756b07d9b6350e7ee3f7d3b83a'
+  '1560b32d875eb4fb626a8fcb8e74c341'
+  '542cd2f5f061178c523df883ff4fbc9f'
+  '753a9edd786d69e236260dc95bb1964b'
+)
+
+prepare() {
+  if [ -e "$srcdir/libs" ]; then
+    rm -rf $srcdir/libs
+  fi
+}
+
+build() {
+  cd $srcdir
+
+  mkdir $srcdir/libs
+
+  gcc -shared gbm_compat.c -o libgbm-compat.so
+
+  # for some unknown reason this libgbm prevents linking issues
+  # when compiling software.
+  ar x libgbm1_0.1.0+202004101002~focal_arm64.deb
+  tar -xvJf data.tar.xz
+
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.la libs/
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.so libs/
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.so.1 libs/
+  cp -a usr/lib/aarch64-linux-gnu/libgbm.so.1.0.0 libs/
+}
+
+package_odroid-n2-libgl-wl() {
+  pkgdesc="ODROID-N2 Mali driver (Wayland)"
+  install=$pkgname.install
+
+  install -d $pkgdir/etc/ld.so.conf.d
+  install -d $pkgdir/usr/bin
+  install -d $pkgdir/usr/lib/mali-egl-wl
+  install -d $pkgdir/usr/lib/pkgconfig
+  install -d $pkgdir/usr/share/doc/$pkgname
+
+  touch $pkgdir/etc/ld.so.conf.d/mali-wl.conf
+  cp libgbm-compat.so $pkgdir/usr/lib/mali-egl-wl/
+  cp mali-wl.pc $pkgdir/usr/lib/pkgconfig/
+  cp odroid-mali-wl.sh $pkgdir/usr/bin/odroid-mali-wl
+  chmod 0755 $pkgdir/usr/bin/odroid-mali-wl
+
+  cp $srcdir/$_srcdir/lib/arm64/gondul/r16p0/wayland/drm/libMali.so \
+    $pkgdir/usr/lib/mali-egl-wl/libmali.so
+
+  chmod 0755 $pkgdir/usr/lib/mali-egl-wl/libmali.so
+
+  ln -sf /usr/lib/mali-egl-wl/libmali.so \
+    $pkgdir/usr/lib/mali-egl-wl/libmali.so.0
+
+  cp -a $srcdir/libs/* $pkgdir/usr/lib/mali-egl-wl/
+
+  cp license $pkgdir/usr/share/doc/$pkgname/
+
+  ln -sf libEGL.so.1               $pkgdir/usr/lib/mali-egl-wl/libEGL.so
+  ln -sf libEGL.so.1.1.0           $pkgdir/usr/lib/mali-egl-wl/libEGL.so.1
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-wl/libEGL.so.1.1.0
+
+  ln -sf libGLESv1_CM.so.1         $pkgdir/usr/lib/mali-egl-wl/libGLESv1_CM.so
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-wl/libGLESv1_CM.so.1
+
+  ln -sf libGLESv2.so.2            $pkgdir/usr/lib/mali-egl-wl/libGLESv2.so
+  ln -sf libGLESv2.so.2.1.0        $pkgdir/usr/lib/mali-egl-wl/libGLESv2.so.2
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-wl/libGLESv2.so.2.1.0
+
+  ln -sf libwayland-egl.so.1       $pkgdir/usr/lib/mali-egl-wl/libwayland-egl.so
+  ln -sf libwayland-egl.so.1.0.0   $pkgdir/usr/lib/mali-egl-wl/libwayland-egl.so.1
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-wl/libwayland-egl.so.1.0.0
+}
+
+package_odroid-n2-libgl-fb() {
+  pkgdesc="ODROID-N2 Mali driver (framebuffer)"
+  depends=('mesa' 'xf86-video-fbdev')
+  install=$pkgname.install
+
+  install -d $pkgdir/etc/ld.so.conf.d
+  install -d $pkgdir/etc/X11/xorg.conf.d
+  install -d $pkgdir/usr/bin
+  install -d $pkgdir/usr/lib/mali-egl-fb
+  install -d $pkgdir/usr/lib/pkgconfig
+  install -d $pkgdir/usr/share/doc/$pkgname
+
+  touch $pkgdir/etc/ld.so.conf.d/mali-fb.conf
+  touch $pkgdir/etc/X11/xorg.conf.d/60-fbdev.conf
+  cp mali-fb.pc $pkgdir/usr/lib/pkgconfig/
+  cp odroid-mali-fb.sh $pkgdir/usr/bin/odroid-mali-fb
+  chmod 0755 $pkgdir/usr/bin/odroid-mali-fb
+
+  cp $srcdir/$_srcdir/lib/arm64/gondul/r12p0/fbdev/libMali.so \
+    $pkgdir/usr/lib/mali-egl-fb/libmali.so
+
+  chmod 0755 $pkgdir/usr/lib/mali-egl-fb/libmali.so
+
+  ln -sf /usr/lib/mali-egl-fb/libmali.so $srcdir/libs/libmali.so.0
+
+  cp license $pkgdir/usr/share/doc/$pkgname/
+
+  ln -sf libEGL.so.1               $pkgdir/usr/lib/mali-egl-fb/libEGL.so
+  ln -sf libEGL.so.1.1.0           $pkgdir/usr/lib/mali-egl-fb/libEGL.so.1
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-fb/libEGL.so.1.1.0
+
+  ln -sf libGLESv1_CM.so.1         $pkgdir/usr/lib/mali-egl-fb/libGLESv1_CM.so
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-fb/libGLESv1_CM.so.1
+
+  ln -sf libGLESv2.so.2            $pkgdir/usr/lib/mali-egl-fb/libGLESv2.so
+  ln -sf libGLESv2.so.2.1.0        $pkgdir/usr/lib/mali-egl-fb/libGLESv2.so.2
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-fb/libGLESv2.so.2.1.0
+
+  ln -sf libOpenCL.so.1            $pkgdir/usr/lib/mali-egl-fb/libOpenCL.so
+  ln -sf libOpenCL.so.1.0.0        $pkgdir/usr/lib/mali-egl-fb/libOpenCL.so.1
+  ln -sf libmali.so                $pkgdir/usr/lib/mali-egl-fb/libOpenCL.so.1.0.0
+}
+
+package_odroid-n2-libgl-headers() {
+  pkgdesc="ODROID-N2 Mali driver headers"
+
+  install -d $pkgdir/usr/include/mali
+
+  cp -a $srcdir/$_srcdir/include/* $pkgdir/usr/include/mali/
+}
