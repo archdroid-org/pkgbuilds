@@ -13,7 +13,7 @@ _commit=69f03920acbc3b60eaa247f91372f4c8b3d59707
 #_commit=125cdbfd775802ce4197518373ac2610f347b9a7
 #_commit=3f02a6cf7243d9919bd93c49e2beb6bace3c73f5
 pkgver=1.1.4.${_commit:0:7}
-pkgrel=1
+pkgrel=2
 pkgdesc="OpenGL 2.1/1.5 to GL ES 2.0/1.1 translation library. (Odroid Build)"
 arch=('aarch64')
 url="https://github.com/ptitSeb/gl4es"
@@ -33,8 +33,8 @@ source=(
 md5sums=(
   'SKIP'
   '50b819dc12b12c37c8ee66355720144e'
-  '0d6cd06e83b7832f778b3d9fad1224dc'
-  'f3181def2bdab7da9d1e1fafd1a94ba2'
+  '75253b65dc4623fc5e4c880af202991f'
+  'fa386e1e02e1d9c6753268257c767815'
 )
 
 pkgver() {
