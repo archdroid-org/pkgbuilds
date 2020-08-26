@@ -3,7 +3,7 @@
 pkgbase=odroid-n2-libgl
 pkgname=("${pkgbase}-wl" "${pkgbase}-fb" "${pkgbase}-headers")
 pkgver=1.0
-pkgrel=3
+pkgrel=4
 _commit=06306afc3b65cb7e8a50e6006d9fda2dd647d8a0
 _srcdir=buildroot_linux_amlogic_meson_mali-${_commit}
 arch=('aarch64')
@@ -36,8 +36,8 @@ md5sums=(
   '50346762ed55a9c38de263d5a981d513'
   '73048d756b07d9b6350e7ee3f7d3b83a'
   '1560b32d875eb4fb626a8fcb8e74c341'
-  '542cd2f5f061178c523df883ff4fbc9f'
-  '753a9edd786d69e236260dc95bb1964b'
+  '6dc44eed56cc166907601dc3bf04df00'
+  'bf61b83f0980c497f7b6b70727e1d805'
 )
 
 prepare() {
@@ -51,7 +51,7 @@ build() {
 
   mkdir $srcdir/libs
 
-  gcc -shared gbm_compat.c -o libgbm-compat.so
+  gcc -shared gbm_compat.c -o libmali-gbm-compat.so
 
   # for some unknown reason this libgbm prevents linking issues
   # when compiling software.
@@ -75,15 +75,15 @@ package_odroid-n2-libgl-wl() {
   install -d $pkgdir/usr/share/doc/$pkgname
 
   touch $pkgdir/etc/ld.so.conf.d/mali-wl.conf
-  cp libgbm-compat.so $pkgdir/usr/lib/mali-egl-wl/
+  cp libmali-gbm-compat.so $pkgdir/usr/lib/
   cp mali-wl.pc $pkgdir/usr/lib/pkgconfig/
   cp odroid-mali-wl.sh $pkgdir/usr/bin/odroid-mali-wl
   chmod 0755 $pkgdir/usr/bin/odroid-mali-wl
 
   cp $srcdir/$_srcdir/lib/arm64/gondul/r16p0/wayland/drm/libMali.so \
-    $pkgdir/usr/lib/mali-egl-wl/libmali.so
+    $pkgdir/usr/lib/libmali-wl.so
 
-  chmod 0755 $pkgdir/usr/lib/mali-egl-wl/libmali.so
+  chmod 0755 $pkgdir/usr/lib/libmali-wl.so
 
   ln -sf /usr/lib/mali-egl-wl/libmali.so \
     $pkgdir/usr/lib/mali-egl-wl/libmali.so.0
@@ -91,6 +91,9 @@ package_odroid-n2-libgl-wl() {
   cp -a $srcdir/libs/* $pkgdir/usr/lib/mali-egl-wl/
 
   cp license $pkgdir/usr/share/doc/$pkgname/
+
+  ln -sf /usr/lib/libmali-wl.so    $pkgdir/usr/lib/mali-egl-wl/libmali.so
+  ln -sf /usr/lib/libmali-gbm-compat.so    $pkgdir/usr/lib/mali-egl-wl/libgbm-compat.so
 
   ln -sf libEGL.so.1               $pkgdir/usr/lib/mali-egl-wl/libEGL.so
   ln -sf libEGL.so.1.1.0           $pkgdir/usr/lib/mali-egl-wl/libEGL.so.1
@@ -127,13 +130,15 @@ package_odroid-n2-libgl-fb() {
   chmod 0755 $pkgdir/usr/bin/odroid-mali-fb
 
   cp $srcdir/$_srcdir/lib/arm64/gondul/r12p0/fbdev/libMali.so \
-    $pkgdir/usr/lib/mali-egl-fb/libmali.so
+    $pkgdir/usr/lib/libmali-fb.so
 
-  chmod 0755 $pkgdir/usr/lib/mali-egl-fb/libmali.so
+  chmod 0755 $pkgdir/usr/lib/libmali-fb.so
 
   ln -sf /usr/lib/mali-egl-fb/libmali.so $srcdir/libs/libmali.so.0
 
   cp license $pkgdir/usr/share/doc/$pkgname/
+
+  ln -sf /usr/lib/libmali-fb.so    $pkgdir/usr/lib/mali-egl-fb/libmali.so
 
   ln -sf libEGL.so.1               $pkgdir/usr/lib/mali-egl-fb/libEGL.so
   ln -sf libEGL.so.1.1.0           $pkgdir/usr/lib/mali-egl-fb/libEGL.so.1

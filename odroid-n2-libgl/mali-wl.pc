@@ -8,5 +8,5 @@ includedir=${prefix}/include/mali
 Name: mali-wl
 Description: Amlogic implementation of OpenGL ES/GLES/WaylandEGL for Mali G52 GPU's.
 Version: r16p0
-Libs: -L${libdir} -lgbm-compat -lmali
+Libs: -L${libdir} -lmali-gbm-compat -L${exec_prefix}/lib -lmali-wl
 Cflags: -I${includedir}/
