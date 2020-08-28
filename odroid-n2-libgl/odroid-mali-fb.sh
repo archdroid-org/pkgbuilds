@@ -68,7 +68,7 @@ case "$1" in
         fi
 
         if grep "/usr/lib" /etc/ld.so.conf.d/mali-fb.conf > /dev/null ; then
-            $@
+            LD_PRELOAD="/usr/lib/mali-egl-fb/libmali.so" $@
         else
             LD_PRELOAD="/usr/lib/mali-egl-fb/libmali.so" \
                 LD_LIBRARY_PATH=/usr/lib/mesa-egl-fb \

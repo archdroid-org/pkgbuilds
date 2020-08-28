@@ -3,7 +3,7 @@
 pkgbase=odroid-n2-libgl
 pkgname=("${pkgbase}-wl" "${pkgbase}-fb" "${pkgbase}-headers")
 pkgver=1.0
-pkgrel=4
+pkgrel=5
 _commit=06306afc3b65cb7e8a50e6006d9fda2dd647d8a0
 _srcdir=buildroot_linux_amlogic_meson_mali-${_commit}
 arch=('aarch64')
@@ -35,7 +35,7 @@ md5sums=(
   'e0f952ff6586a034a454233d58dbdb9e'
   '50346762ed55a9c38de263d5a981d513'
   '73048d756b07d9b6350e7ee3f7d3b83a'
-  '1560b32d875eb4fb626a8fcb8e74c341'
+  '7278c961ccacede3e61b2f65a9215fc0'
   '6dc44eed56cc166907601dc3bf04df00'
   'bf61b83f0980c497f7b6b70727e1d805'
 )
