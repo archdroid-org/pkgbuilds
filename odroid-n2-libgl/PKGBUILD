@@ -134,8 +134,6 @@ package_odroid-n2-libgl-fb() {
 
   chmod 0755 $pkgdir/usr/lib/libmali-fb.so
 
-  ln -sf /usr/lib/mali-egl-fb/libmali.so $srcdir/libs/libmali.so.0
-
   cp license $pkgdir/usr/share/doc/$pkgname/
 
   ln -sf /usr/lib/libmali-fb.so    $pkgdir/usr/lib/mali-egl-fb/libmali.so
