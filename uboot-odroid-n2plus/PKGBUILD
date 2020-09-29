@@ -5,7 +5,7 @@
 buildarch=8
 
 pkgname=uboot-odroid-n2plus
-_revision=136
+_revision=141
 pkgver=2015.01.${_revision}
 pkgrel=2
 pkgdesc="U-Boot for ODROID-N2/N2+"
@@ -21,7 +21,7 @@ source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-
         'boot.ini'
         '0001-sd_fusing-tweaks.patch'
         '91-uboot-uimg.hook')
-md5sums=('6e575f95a6519bf31355c6a7d2e0637a'
+md5sums=('05468f84b817ea12375a9fffd1bfd311'
          'e01a6040f1f68159ea54ad7340aa2efd'
          'cc18cda0bc75936e602341efd5a2fe93'
          '1931c8dfde7088530f173ca59fdb8989')
