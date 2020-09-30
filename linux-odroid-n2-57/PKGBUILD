@@ -6,11 +6,11 @@ buildarch=8
 pkgbase=linux-odroid-n2-57
 pkgname=('linux-odroid-n2-57'
          'linux-odroid-n2-57-headers')
-_commit=bba2090502c72dc31233e6c3527ea75a574b4c8f
+_commit=ca3708953c9916dd6c545b600cbc7b8d0b5586f8
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Odroid-N2"
-pkgver=5.7.14
+pkgver=5.7.18
 pkgrel=1
 arch=('aarch64')
 url="https://github.com/tobetter/linux"
@@ -28,6 +28,7 @@ source=("https://github.com/tobetter/linux/archive/${_commit}.zip"
         '04-panfrost-bifrost.patch'
         '05-panfrost-bifrost.patch'
         '06-panfrost-bifrost.patch'
+        'crypto.patch'
 )
 md5sums=('SKIP'
          'SKIP'
@@ -40,6 +41,7 @@ md5sums=('SKIP'
          '0d7501fc9ade6eef47e5b7b3f7774019'
          '88a11711b834fbe6e8267acc40eeaeb2'
          '45477d42c6bd305d980d7b23ed3e3a76'
+         'a4f45dd491148536f89046344a62eeff'
 )
 
 prepare() {
@@ -61,6 +63,9 @@ prepare() {
   patch -p1 -i ../04-panfrost-bifrost.patch
   patch -p1 -i ../05-panfrost-bifrost.patch
   patch -p1 -i ../06-panfrost-bifrost.patch
+
+  # Fix latest gcc compiling errors with the aegis crypto module.
+  patch -p1 -i ../crypto.patch
 }
 
 build() {
