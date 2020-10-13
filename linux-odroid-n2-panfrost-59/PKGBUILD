@@ -4,13 +4,14 @@ pkgbase=linux-odroid-n2-panfrost-59
 pkgname=('linux-odroid-n2-panfrost-59'
          'linux-odroid-n2-panfrost-59-headers')
 _commit=4c22796fcba36e302b8598f251ab4eb9ee7dd4f8
-_srcname=linux-odroid-5.9.panfrost
+_branch=odroid-5.9.chewitt
+_srcname=linux-${_branch}
 _kernelname=${pkgbase#linux}
 _desc="Odroid-N2"
-pkgver=5.9.0.rc8
+pkgver=5.9.0
 pkgrel=1
 arch=('aarch64')
-url="https://github.com/jgmdev/linux/tree/odroid-5.9.panfrost"
+url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
 makedepends=(
   'xmlto' 'docbook-xsl' 'kmod' 'inetutils' 'bc'
@@ -18,7 +19,7 @@ makedepends=(
 )
 options=('!strip')
 source=(
-  "https://github.com/jgmdev/linux/archive/odroid-5.9.panfrost.zip"
+  "https://github.com/jgmdev/linux/archive/${_branch}.zip"
   'config'
   'linux.preset'
   '60-linux.hook'
