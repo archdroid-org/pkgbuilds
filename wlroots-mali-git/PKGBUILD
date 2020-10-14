@@ -1,25 +1,26 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 
-pkgname=wlroots-git
-pkgver=0.10.0.r149.g21c6cc5e
+pkgname=wlroots-mali-git
+_pkgnamebase=wlroots-git
+pkgver=0.11.0.r57.g99f3c643
 pkgrel=1
 license=(custom:MIT)
 pkgdesc='Modular Wayland compositor library (with libMali fix)'
 url=https://github.com/swaywm/wlroots
 arch=(x86_64 aarch64)
-provides=("wlroots=${pkgver%%.r*}")
+provides=("wlroots=${pkgver%%.r*}" "wlroots-git")
 conflicts=(wlroots)
 depends=(
   libcap systemd wayland opengl-driver libxcb xcb-util-errors
   xcb-util-wm pixman libinput libxkbcommon
 )
 makedepends=(meson ninja git wayland-protocols xorgproto)
-source=("${pkgname}::git+${url}")
+source=("${_pkgnamebase}::git+${url}")
 sha512sums=('SKIP')
 
 pkgver () {
-  cd "${pkgname}"
+  cd "${_pkgnamebase}"
   (
     set -o pipefail
     git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
@@ -28,7 +29,7 @@ pkgver () {
 }
 
 prepare () {
-  cd "${srcdir}/${pkgname}"
+  cd "${srcdir}/${_pkgnamebase}"
 
   # Apply changes to fix XWayland not working and crashing
   # mali driver: https://github.com/swaywm/wlroots/pull/1815
@@ -55,7 +56,7 @@ threads = dependency('threads')/g" meson.build
 }
 
 build () {
-  cd "${pkgname}"
+  cd "${_pkgnamebase}"
   rm -rf build
   meson build \
     --prefix /usr \
@@ -72,7 +73,7 @@ build () {
 }
 
 package () {
-  cd "${pkgname}"
+  cd "${_pkgnamebase}"
   DESTDIR="${pkgdir}" ninja -C build install
   install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
