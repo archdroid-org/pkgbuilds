@@ -28,7 +28,7 @@ source=("https://github.com/tobetter/linux/archive/${_commit}.zip"
         '04-panfrost-bifrost.patch'
         '05-panfrost-bifrost.patch'
         '06-panfrost-bifrost.patch'
-        'crypto.patch'
+        '01-aegis-crypto.patch'
 )
 md5sums=('SKIP'
          'SKIP'
@@ -65,7 +65,7 @@ prepare() {
   patch -p1 -i ../06-panfrost-bifrost.patch
 
   # Fix latest gcc compiling errors with the aegis crypto module.
-  patch -p1 -i ../crypto.patch
+  patch -p1 -i ../01-aegis-crypto.patch
 }
 
 build() {
