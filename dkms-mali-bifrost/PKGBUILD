@@ -6,7 +6,7 @@ pkgname=dkms-mali-bifrost
 _pkgbase=mali-bifrost
 _pkgdate=202005011205
 _pkgver=24.0
-pkgver=${_pkgver}+${_pkgdate}
+pkgver=${_pkgver}
 pkgrel=1
 pkgdesc="Mali kernel driver for bifrost hardware in DKMS format."
 arch=('aarch64')
@@ -19,7 +19,7 @@ depends=(
 )
 options=('!strip')
 source=(
-  "http://ppa.linuxfactory.or.kr/pool/contrib/m/mali-bifrost/mali-bifrost-dkms_${pkgver}~focal_arm64.deb"
+  "http://ppa.linuxfactory.or.kr/pool/contrib/m/mali-bifrost/mali-bifrost-dkms_${_pkgver}+${_pkgdate}~focal_arm64.deb"
   "mali_kbase.conf"
   "99-mali.rules"
   "dkms.conf"
