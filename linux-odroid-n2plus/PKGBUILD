@@ -4,11 +4,11 @@
 buildarch=8
 
 pkgbase=linux-odroid-n2plus
-_commit=9f68d81199bfef0941a6e5ddfff02d85f5d8f8c0
+_commit=cbb49c05e14eceed1b88434381f6939e18f024bb
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="ODROID-N2/N2+"
-pkgver=4.9.230
+pkgver=4.9.236
 pkgrel=3
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidg12-4.9.y"
@@ -20,8 +20,8 @@ source=("https://github.com/hardkernel/linux/archive/${_commit}.tar.gz"
         'linux.preset'
         '60-linux.hook'
         '90-linux.hook')
-md5sums=('321ebb6d0cce3a0ed8fe70c08bdb7d84'
-         'af350199c5016ede1d356c2b03253baf'
+md5sums=('f1c7469ef9a3df83e7ef0997f7e108d5'
+         'd9b9b971e37dc8174352346dd58ec296'
          '86d4a35722b5410e3b29fc92dae15d4b'
          'ce6c81ad1ad1f8b333fd6077d47abdaf'
          '3dc88030a8f2f5a5f97266d99b149f77')

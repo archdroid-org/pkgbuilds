@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.230-2 Kernel Configuration
+# Linux/arm64 4.9.236-3 Kernel Configuration
 #
 CONFIG_ARM64=y
 CONFIG_64BIT=y
@@ -6515,7 +6515,6 @@ CONFIG_SECURITY_SMACK=y
 # CONFIG_SECURITY_LOADPIN is not set
 # CONFIG_SECURITY_YAMA is not set
 # CONFIG_INTEGRITY is not set
-# CONFIG_DEFAULT_SECURITY_SELINUX is not set
 CONFIG_DEFAULT_SECURITY_SMACK=y
 # CONFIG_DEFAULT_SECURITY_DAC is not set
 CONFIG_DEFAULT_SECURITY="smack"
