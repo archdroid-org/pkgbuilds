@@ -1,0 +1,31 @@
+enable_repo() {
+  line=$(grep -n "\[archlinuxdroid\]" /etc/pacman.conf | cut -d: -f1)
+
+  if [ "$line" == "" ]; then
+    echo "" >> /etc/pacman.conf
+    echo "[archlinuxdroid]" >> /etc/pacman.conf
+    echo "SigLevel = Optional TrustedOnly" >> /etc/pacman.conf
+    echo "Server = http://104.131.53.77/\$repo/\$arch" >> /etc/pacman.conf
+  fi
+}
+
+disable_repo() {
+  line=$(grep -n "\[archlinuxdroid\]" /etc/pacman.conf | cut -d: -f1)
+
+  if [ "$line" != "" ]; then
+    sed -i "$((line-1)),$((line+2))d" /etc/pacman.conf
+  fi
+}
+
+post_install() {
+  enable_repo
+}
+
+post_upgrade() {
+  disable_repo
+  enable_repo
+}
+
+post_remove() {
+  disable_repo
+}

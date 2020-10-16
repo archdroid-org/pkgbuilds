@@ -1,0 +1,11 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=archlinuxdroid-repo
+pkgver=1.0
+pkgrel=1
+pkgdesc="Repository with additional packages not in alarm."
+arch=('aarch64')
+url="http://archlinuxdroid.tk/"
+license=('MIT')
+depends=('pacman' 'grep' 'sed')
+install=INSTALL
