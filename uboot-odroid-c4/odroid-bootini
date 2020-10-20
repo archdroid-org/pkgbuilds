@@ -1,0 +1,51 @@
+#!/bin/bash
+
+PATH="/sbin:/usr/sbin:/bin:/usr/bin:$PATH"
+
+board=odroid-c4
+
+kernel_version=$(pacman -Qi linux | grep Version | cut -d: -f2 | xargs)
+kernel_major=$(echo ${kernel_version} | cut -d. -f1)
+kernel_minor=$(echo ${kernel_version} | cut -d. -f2)
+
+boot_ini=""
+boot_ini_version=""
+if [ $kernel_major -gt 4 ]; then
+    boot_ini=/usr/share/uboot-${board}/boot.mainline.ini
+    boot_ini_version="mainline"
+else
+    boot_ini=/usr/share/uboot-${board}/boot.hardkernel.ini
+    boot_ini_version="hardkernel"
+fi
+
+if [ -e /boot/boot.ini ]; then
+    if ! grep "KERNEL: ${boot_ini_version}" /boot/boot.ini > /dev/null ; then
+        mv /boot/boot.ini "/boot/boot.ini.$(date +"%s")"
+        cp $boot_ini /boot/boot.ini
+    fi
+else
+    cp $boot_ini /boot/boot.ini
+fi
+
+if [ -e /boot/dtbs/amlogic/meson64_odroidc4.dtb ]; then
+    sed -i "s/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/g" \
+        /boot/boot.ini
+elif [ -e /boot/dtbs/amlogic/meson-sm1-odroid-c4.dtb ]; then
+    sed -i "s/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/g" \
+        /boot/boot.ini
+else
+    echo "Error: The kernel you installed doesn't seems to support the ${board}'"
+fi
+
+# Handle root device of installations running on external usb drive
+major=$(mountpoint -d / | cut -f 1 -d ':')
+minor=$(mountpoint -d / | cut -f 2 -d ':')
+device=$(cat /proc/partitions | awk {'if ($1 == "'${major}'" && $2 == "'${minor}'") print $4 '})
+device="\/dev\/${device}"
+
+if ! (echo "$device" | grep "mmcblk") ; then
+    if ! (echo "$device" | grep "loop") ; then
+        sed -i "s/root=\/dev\/mmcblk\${devno}p2/root=${device}/g" \
+            /boot/boot.ini
+    fi
+fi

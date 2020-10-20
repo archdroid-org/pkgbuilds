@@ -5,7 +5,7 @@
 buildarch=8
 
 pkgname=uboot-odroid-c4
-_revision=141
+_revision=150
 pkgver=2015.01.${_revision}
 pkgrel=1
 pkgdesc="U-Boot for ODROID-C4"
@@ -16,15 +16,20 @@ install=$pkgname.install
 depends=('uboot-tools')
 conflicts=('uboot-odroid-n2')
 makedepends=('git' 'bc')
-backup=('boot/boot.ini')
 source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidc4-${_revision}/u-boot-odroidc4-${_revision}.tar.gz"
-        'boot.ini'
         '0001-sd_fusing-tweaks.patch'
-        '91-uboot-uimg.hook')
-md5sums=('6025f8ff8d28effcd84dcd4c41b6dd3c'
-         'eacdaa891869f3548d3844283590d3e2'
+        '91-uboot-uimg.hook'
+        '92-uboot-bootini.hook'
+        'boot.mainline.ini'
+        'boot.hardkernel.ini'
+        'odroid-bootini')
+md5sums=('44d86080ce939c9ebbc8a12d560125f6'
          'cc18cda0bc75936e602341efd5a2fe93'
-         '1931c8dfde7088530f173ca59fdb8989')
+         '1931c8dfde7088530f173ca59fdb8989'
+         'e1a78b20ea7fe68ed3bb6fe24ff54110'
+         'f02106510d036abbfa1f7d3e2f8c3266'
+         'ba520a96ffa108876bf04d19aa7bc534'
+         '0c7b37925d80eec9f7af17cd472c964a')
 
 prepare() {
   patch -p1 < 0001-sd_fusing-tweaks.patch
@@ -35,6 +40,12 @@ package() {
 
   mkdir -p "${pkgdir}"/boot
   cp sd_fusing.sh u-boot.bin "${pkgdir}"/boot
-  cp "${srcdir}"/boot.ini "${pkgdir}"/boot
+
   install -Dm644 "${srcdir}/91-uboot-uimg.hook" "${pkgdir}/usr/share/libalpm/hooks/91-uboot-uimg.hook"
+  install -Dm644 "${srcdir}/92-uboot-bootini.hook" "${pkgdir}/usr/share/libalpm/hooks/92-uboot-bootini.hook"
+
+  install -Dm644 "${srcdir}/boot.hardkernel.ini" "${pkgdir}/usr/share/${pkgname}/boot.hardkernel.ini"
+  install -Dm644 "${srcdir}/boot.mainline.ini" "${pkgdir}/usr/share/${pkgname}/boot.mainline.ini"
+
+  install -Dm755 "${srcdir}/odroid-bootini" "${pkgdir}/usr/bin/odroid-bootini"
 }

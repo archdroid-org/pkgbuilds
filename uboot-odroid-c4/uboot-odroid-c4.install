@@ -12,7 +12,9 @@ flash_uboot() {
   major=$(mountpoint -d / | cut -f 1 -d ':')
   minor=$(mountpoint -d / | cut -f 2 -d ':')
   device=$(cat /proc/partitions | awk {'if ($1 == "'${major}'" && $2 == "'${minor}'") print $4 '})
-  device="/dev/${device%%p*}"
+  device="${device%%[0-9]}"
+  device="${device%%p}"
+  device="/dev/${device}"
 
   echo "A new U-Boot version needs to be flashed onto ${device}."
   echo "Do you want to do this now? [y|N]"
@@ -26,6 +28,7 @@ flash_uboot() {
 }
 
 post_install() {
+  /usr/bin/odroid-bootini
   flash_uboot
 }
 
