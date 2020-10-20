@@ -7,7 +7,7 @@ buildarch=8
 pkgname=uboot-odroid-n2plus
 _revision=141
 pkgver=2015.01.${_revision}
-pkgrel=3
+pkgrel=4
 pkgdesc="U-Boot for ODROID-N2/N2+"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
@@ -29,7 +29,7 @@ md5sums=('05468f84b817ea12375a9fffd1bfd311'
          'e1a78b20ea7fe68ed3bb6fe24ff54110'
          'b3259ab6be29365ce23014ab244e4ce4'
          '3ff3f9158cab265a8457ca5a079bfe26'
-         '8e593dd4e28e9a5cb4a4ca66097018a3')
+         '214ab94f84e1715d8814f1f8239a8b42')
 
 prepare() {
   patch -p1 < 0001-sd_fusing-tweaks.patch
