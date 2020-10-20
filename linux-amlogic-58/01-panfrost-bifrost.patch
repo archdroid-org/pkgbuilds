@@ -1,0 +1,21 @@
+From fb69bc435f30fcd1ef85cc38adc6bcd2c91ae53a Mon Sep 17 00:00:00 2001
+From: Tomeu Vizoso <tomeu.vizoso@collabora.com>
+Date: Fri, 13 Mar 2020 08:22:17 +0100
+Subject: [PATCH] WIP: Add arm,mali-bifrost to panfrost
+
+---
+ drivers/gpu/drm/panfrost/panfrost_drv.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/panfrost/panfrost_drv.c b/drivers/gpu/drm/panfrost/panfrost_drv.c
+index 882fecc33fdb1..8ff8e140f91e2 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_drv.c
++++ b/drivers/gpu/drm/panfrost/panfrost_drv.c
+@@ -677,6 +677,7 @@ static const struct of_device_id dt_match[] = {
+ 	{ .compatible = "arm,mali-t830", .data = &default_data, },
+ 	{ .compatible = "arm,mali-t860", .data = &default_data, },
+ 	{ .compatible = "arm,mali-t880", .data = &default_data, },
++	{ .compatible = "arm,mali-bifrost", .data = &default_data, },
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(of, dt_match);

@@ -1,0 +1,66 @@
+From 620960442a5ebae9b7564173704f09cf8ca38b90 Mon Sep 17 00:00:00 2001
+From: Neil Armstrong <narmstrong@baylibre.com>
+Date: Thu, 23 Jul 2020 12:05:01 +0200
+Subject: [PATCH] drm/panfrost: add external reset quirk
+
+Signed-off-by: Neil Armstrong <narmstrong@baylibre.com>
+---
+ drivers/gpu/drm/panfrost/panfrost_device.c | 3 ++-
+ drivers/gpu/drm/panfrost/panfrost_device.h | 2 ++
+ drivers/gpu/drm/panfrost/panfrost_gpu.c    | 9 ++++++++-
+ 3 files changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/gpu/drm/panfrost/panfrost_device.c b/drivers/gpu/drm/panfrost/panfrost_device.c
+index 8136babd3ba99..42f0874eb0434 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_device.c
++++ b/drivers/gpu/drm/panfrost/panfrost_device.c
+@@ -20,7 +20,8 @@ static int panfrost_reset_init(struct panfrost_device *pfdev)
+ {
+ 	int err;
+ 
+-	pfdev->rstc = devm_reset_control_array_get(pfdev->dev, false, true);
++	pfdev->rstc = devm_reset_control_array_get(pfdev->dev, false,
++			!pfdev->comp->requires_external_reset);
+ 	if (IS_ERR(pfdev->rstc)) {
+ 		dev_err(pfdev->dev, "get reset failed %ld\n", PTR_ERR(pfdev->rstc));
+ 		return PTR_ERR(pfdev->rstc);
+diff --git a/drivers/gpu/drm/panfrost/panfrost_device.h b/drivers/gpu/drm/panfrost/panfrost_device.h
+index c30c719a80594..ff143218200c5 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_device.h
++++ b/drivers/gpu/drm/panfrost/panfrost_device.h
+@@ -69,6 +69,8 @@ struct panfrost_compatible {
+ 	int num_pm_domains;
+ 	/* Only required if num_pm_domains > 1. */
+ 	const char * const *pm_domain_names;
++	/* Hardware requires SoC reset instead of Mali IP soft reset */
++	bool requires_external_reset;
+ };
+ 
+ struct panfrost_device {
+diff --git a/drivers/gpu/drm/panfrost/panfrost_gpu.c b/drivers/gpu/drm/panfrost/panfrost_gpu.c
+index f2c1ddc41a9bf..819ec84f5e315 100644
+--- a/drivers/gpu/drm/panfrost/panfrost_gpu.c
++++ b/drivers/gpu/drm/panfrost/panfrost_gpu.c
+@@ -7,6 +7,7 @@
+ #include <linux/delay.h>
+ #include <linux/dma-mapping.h>
+ #include <linux/interrupt.h>
++#include <linux/reset.h>
+ #include <linux/io.h>
+ #include <linux/iopoll.h>
+ #include <linux/platform_device.h>
+@@ -59,7 +60,13 @@ int panfrost_gpu_soft_reset(struct panfrost_device *pfdev)
+ 
+ 	gpu_write(pfdev, GPU_INT_MASK, 0);
+ 	gpu_write(pfdev, GPU_INT_CLEAR, GPU_IRQ_RESET_COMPLETED);
+-	gpu_write(pfdev, GPU_CMD, GPU_CMD_SOFT_RESET);
++
++	if (pfdev->comp->requires_external_reset) {
++		reset_control_assert(pfdev->rstc);
++		udelay(10);
++		reset_control_deassert(pfdev->rstc);
++	} else
++		gpu_write(pfdev, GPU_CMD, GPU_CMD_SOFT_RESET);
+ 
+ 	ret = readl_relaxed_poll_timeout(pfdev->iomem + GPU_INT_RAWSTAT,
+ 		val, val & GPU_IRQ_RESET_COMPLETED, 100, 10000);
