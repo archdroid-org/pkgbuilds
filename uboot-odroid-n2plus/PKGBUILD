@@ -7,7 +7,7 @@ buildarch=8
 pkgname=uboot-odroid-n2plus
 _revision=141
 pkgver=2015.01.${_revision}
-pkgrel=2
+pkgrel=3
 pkgdesc="U-Boot for ODROID-N2/N2+"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
@@ -16,15 +16,20 @@ install=$pkgname.install
 depends=('uboot-tools')
 conflicts=('uboot-odroid-n2')
 makedepends=('git' 'bc')
-backup=('boot/boot.ini')
 source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidn2-${_revision}.tar.gz"
-        'boot.ini'
         '0001-sd_fusing-tweaks.patch'
-        '91-uboot-uimg.hook')
+        '91-uboot-uimg.hook'
+        '92-uboot-bootini.hook'
+        'boot.mainline.ini'
+        'boot.hardkernel.ini'
+        'odroid-bootini')
 md5sums=('05468f84b817ea12375a9fffd1bfd311'
-         'e01a6040f1f68159ea54ad7340aa2efd'
          'cc18cda0bc75936e602341efd5a2fe93'
-         '1931c8dfde7088530f173ca59fdb8989')
+         '1931c8dfde7088530f173ca59fdb8989'
+         'e1a78b20ea7fe68ed3bb6fe24ff54110'
+         'b3259ab6be29365ce23014ab244e4ce4'
+         '3ff3f9158cab265a8457ca5a079bfe26'
+         '8e593dd4e28e9a5cb4a4ca66097018a3')
 
 prepare() {
   patch -p1 < 0001-sd_fusing-tweaks.patch
@@ -35,6 +40,12 @@ package() {
 
   mkdir -p "${pkgdir}"/boot
   cp sd_fusing.sh u-boot.bin "${pkgdir}"/boot
-  cp "${srcdir}"/boot.ini "${pkgdir}"/boot
+
   install -Dm644 "${srcdir}/91-uboot-uimg.hook" "${pkgdir}/usr/share/libalpm/hooks/91-uboot-uimg.hook"
+  install -Dm644 "${srcdir}/92-uboot-bootini.hook" "${pkgdir}/usr/share/libalpm/hooks/92-uboot-bootini.hook"
+
+  install -Dm644 "${srcdir}/boot.hardkernel.ini" "${pkgdir}/usr/share/${pkgname}/boot.hardkernel.ini"
+  install -Dm644 "${srcdir}/boot.mainline.ini" "${pkgdir}/usr/share/${pkgname}/boot.mainline.ini"
+
+  install -Dm755 "${srcdir}/odroid-bootini" "${pkgdir}/usr/bin/odroid-bootini"
 }

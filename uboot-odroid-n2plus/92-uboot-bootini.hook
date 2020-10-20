@@ -1,0 +1,10 @@
+[Trigger]
+Type = File
+Operation = Install
+Operation = Upgrade
+Target = boot/Image
+
+[Action]
+Description = Updating boot.ini...
+When = PostTransaction
+Exec = /usr/bin/odroid-bootini
