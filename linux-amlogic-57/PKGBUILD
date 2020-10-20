@@ -3,13 +3,13 @@
 
 buildarch=8
 
-pkgbase=linux-odroid-n2-57
-pkgname=('linux-odroid-n2-57'
-         'linux-odroid-n2-57-headers')
+pkgbase=linux-amlogic-57
+pkgname=('linux-amlogic-57'
+         'linux-amlogic-57-headers')
 _commit=ca3708953c9916dd6c545b600cbc7b8d0b5586f8
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
-_desc="Odroid-N2"
+_desc="Amlogic"
 pkgver=5.7.18
 pkgrel=1
 arch=('aarch64')
@@ -81,7 +81,7 @@ build() {
   make ${MAKEFLAGS} DTC_FLAGS="-@" dtbs
 }
 
-package_linux-odroid-n2-57() {
+package_linux-amlogic-57() {
   pkgdesc="The Linux Kernel and modules - ${_desc}"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('crda: to set the correct wireless channels of your country')
@@ -140,7 +140,7 @@ package_linux-odroid-n2-57() {
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
 }
 
-package_linux-odroid-n2-57-headers() {
+package_linux-amlogic-57-headers() {
   pkgdesc="Header files and scripts for building modules for linux kernel - ${_desc}"
   provides=("linux-headers=${pkgver}")
   conflicts=('linux-headers')
