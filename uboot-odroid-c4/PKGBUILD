@@ -7,7 +7,7 @@ buildarch=8
 pkgname=uboot-odroid-c4
 _revision=150
 pkgver=2015.01.${_revision}
-pkgrel=1
+pkgrel=2
 pkgdesc="U-Boot for ODROID-C4"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
@@ -29,7 +29,7 @@ md5sums=('44d86080ce939c9ebbc8a12d560125f6'
          'e1a78b20ea7fe68ed3bb6fe24ff54110'
          'f02106510d036abbfa1f7d3e2f8c3266'
          'ba520a96ffa108876bf04d19aa7bc534'
-         '0c7b37925d80eec9f7af17cd472c964a')
+         '65bf4f1200c95010c9b39386b1840524')
 
 prepare() {
   patch -p1 < 0001-sd_fusing-tweaks.patch

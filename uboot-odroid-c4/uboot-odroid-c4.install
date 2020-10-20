@@ -33,5 +33,8 @@ post_install() {
 }
 
 post_upgrade() {
+  if [ ! -e "/boot/boot.ini" ]; then
+      /usr/bin/odroid-bootini
+  fi
   flash_uboot
 }

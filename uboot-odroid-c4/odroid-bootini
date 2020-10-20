@@ -43,8 +43,8 @@ minor=$(mountpoint -d / | cut -f 2 -d ':')
 device=$(cat /proc/partitions | awk {'if ($1 == "'${major}'" && $2 == "'${minor}'") print $4 '})
 device="\/dev\/${device}"
 
-if ! (echo "$device" | grep "mmcblk") ; then
-    if ! (echo "$device" | grep "loop") ; then
+if ! (echo "$device" | grep "mmcblk" > /dev/null) ; then
+    if ! (echo "$device" | grep "loop" > /dev/null) ; then
         sed -i "s/root=\/dev\/mmcblk\${devno}p2/root=${device}/g" \
             /boot/boot.ini
     fi
