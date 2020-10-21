@@ -3,8 +3,8 @@
 pkgbase=odroid-n2-libgl
 pkgname=("${pkgbase}-wl" "${pkgbase}-fb" "${pkgbase}-headers")
 pkgver=1.0
-pkgrel=5
-_commit=06306afc3b65cb7e8a50e6006d9fda2dd647d8a0
+pkgrel=6
+_commit=5963003d4d86d9820a606f7301b3b76ac718b8fb
 _srcdir=buildroot_linux_amlogic_meson_mali-${_commit}
 arch=('aarch64')
 url="https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali"
@@ -22,7 +22,7 @@ conflicts=(
 source=(
   "license"
   "gbm_compat.c"
-  "mali.zip::https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/archive/${_commit}.zip"
+  "https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/archive/${_commit}.zip"
   "http://ppa.linuxfactory.or.kr/pool/main/libg/libgbm-compat/libgbm1_0.1.0+202004101002~focal_arm64.deb"
   "odroid-mali-wl.sh"
   "odroid-mali-fb.sh"
@@ -32,7 +32,7 @@ source=(
 md5sums=(
   '3da6d34563163f132815d9b8c5387a76'
   'ce97bdcfcb275e613a0c6c917af13e34'
-  'e0f952ff6586a034a454233d58dbdb9e'
+  '270395c3de1c7b531ab20bf104a3a285'
   '50346762ed55a9c38de263d5a981d513'
   '73048d756b07d9b6350e7ee3f7d3b83a'
   '7278c961ccacede3e61b2f65a9215fc0'
