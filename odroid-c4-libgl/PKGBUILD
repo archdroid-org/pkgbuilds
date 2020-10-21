@@ -3,8 +3,8 @@
 pkgbase=odroid-c4-libgl
 pkgname=("${pkgbase}-wl" "${pkgbase}-fb" "${pkgbase}-headers")
 pkgver=1.0
-pkgrel=1
-_commit=06306afc3b65cb7e8a50e6006d9fda2dd647d8a0
+pkgrel=2
+_commit=5963003d4d86d9820a606f7301b3b76ac718b8fb
 _srcdir=buildroot_linux_amlogic_meson_mali-${_commit}
 arch=('aarch64')
 url="https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali"
@@ -20,7 +20,7 @@ conflicts=(
 )
 source=(
   "license"
-  "mali.zip::https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/archive/${_commit}.zip"
+  "https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/archive/${_commit}.zip"
   "odroid-mali-wl.sh"
   "odroid-mali-fb.sh"
   "mali-wl.pc"
@@ -28,11 +28,11 @@ source=(
 )
 md5sums=(
   '3da6d34563163f132815d9b8c5387a76'
-  'e0f952ff6586a034a454233d58dbdb9e'
+  '270395c3de1c7b531ab20bf104a3a285'
   '4a82344afecef798cd6f66d38a5acf5a'
   '7278c961ccacede3e61b2f65a9215fc0'
-  '6dc44eed56cc166907601dc3bf04df00'
-  'bf61b83f0980c497f7b6b70727e1d805'
+  '485b088798399c496d1ba5e843986ae4'
+  'd998e32a73dea315db09fe20cbf804fc'
 )
 
 prepare() {
@@ -56,7 +56,7 @@ package_odroid-c4-libgl-wl() {
   cp odroid-mali-wl.sh $pkgdir/usr/bin/odroid-mali-wl
   chmod 0755 $pkgdir/usr/bin/odroid-mali-wl
 
-  cp $srcdir/$_srcdir/lib/arm64/dvalin/r16p0/gbm/libMali.so \
+  cp $srcdir/$_srcdir/lib/arm64/dvalin/r16p0/wayland/drm/libMali.so \
     $pkgdir/usr/lib/libmali-wl.so
 
   chmod 0755 $pkgdir/usr/lib/libmali-wl.so

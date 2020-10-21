@@ -23,9 +23,3 @@ post_install() {
 post_upgrade() {
   enable_malifb
 }
-
-post_remove() {
-  sed -i "/\/usr\/lib\/mali-egl-fb\/libmali.so/d" /etc/ld.so.preload
-
-  ldconfig
-}

@@ -6,7 +6,7 @@ libdir=${exec_prefix}/lib
 includedir=${prefix}/include/mali
 
 Name: mali-fb
-Description: Amlogic implementation of OpenGL ES/GLES on FBDEV for Mali G52 GPU's.
+Description: Amlogic implementation of OpenGL ES/GLES on FBDEV for Mali.
 Version: r16p0
 Libs: -L${libdir} -lmali-fb
 Cflags: -I${includedir}/
