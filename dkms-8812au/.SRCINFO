@@ -1,0 +1,21 @@
+pkgbase = dkms-8812au
+	pkgdesc = Driver for Realtek RTL8812AU chipset wireless adaptors.
+	pkgver = 5.6.4.2.g3110ad6
+	pkgrel = 1
+	url = http://www.realtek.com.tw/
+	arch = arm
+	arch = armv6h
+	arch = armv7h
+	arch = aarch64
+	license = GPL
+	depends = dkms
+	depends = linux-headers
+	options = !strip
+	source = https://github.com/gordboy/rtl8812au-5.6.4.2/archive/3110ad65d0f03532bd97b1017cae67ca86dd34f6.zip
+	source = dkms.conf
+	source = rtl8812au.conf
+	md5sums = 0932bb10351457df099a5492c5e70b97
+	md5sums = 1d9e2b78b4a2bdd48ea360550ed0aea7
+	md5sums = 6744a04569752913032ef033e1475376
+
+pkgname = dkms-8812au

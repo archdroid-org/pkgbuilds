@@ -1,0 +1,59 @@
+pkgbase = linux-amlogic-58
+	pkgver = 5.8.16
+	pkgrel = 1
+	url = https://github.com/tobetter/linux
+	arch = aarch64
+	license = GPL2
+	makedepends = xmlto
+	makedepends = docbook-xsl
+	makedepends = kmod
+	makedepends = inetutils
+	makedepends = bc
+	makedepends = git
+	makedepends = uboot-tools
+	makedepends = vboot-utils
+	makedepends = dtc
+	options = !strip
+	source = https://github.com/tobetter/linux/archive/d2ccaca028235652f576bf85ed7418b3ce0ad493.zip
+	source = config
+	source = linux.preset
+	source = 60-linux.hook
+	source = 90-linux.hook
+	source = 01-panfrost-bifrost.patch
+	source = 02-panfrost-bifrost.patch
+	source = 03-panfrost-bifrost.patch
+	source = 04-panfrost-bifrost.patch
+	source = 05-panfrost-bifrost.patch
+	source = 06-panfrost-bifrost.patch
+	source = 01-aegis-crypto.patch
+	md5sums = SKIP
+	md5sums = SKIP
+	md5sums = 13f7d22e7f0ff81a742fb4c7b02098f5
+	md5sums = ce6c81ad1ad1f8b333fd6077d47abdaf
+	md5sums = 3dc88030a8f2f5a5f97266d99b149f77
+	md5sums = 000ba3cedb4e5d633f040398e3674b2b
+	md5sums = a93bce8fba0815e8bd91e3efa50f65a7
+	md5sums = 80e8d47b10f93ff92acdfafd9ab49ad5
+	md5sums = 0d7501fc9ade6eef47e5b7b3f7774019
+	md5sums = 88a11711b834fbe6e8267acc40eeaeb2
+	md5sums = 45477d42c6bd305d980d7b23ed3e3a76
+	md5sums = a4f45dd491148536f89046344a62eeff
+
+pkgname = linux-amlogic-58
+	pkgdesc = The Linux Kernel and modules - Amlogic
+	install = linux-amlogic-58.install
+	depends = coreutils
+	depends = linux-firmware
+	depends = kmod
+	depends = mkinitcpio>=0.7
+	optdepends = crda: to set the correct wireless channels of your country
+	provides = kernel26
+	provides = linux=5.8.16
+	conflicts = linux
+	replaces = linux-armv8
+	backup = etc/mkinitcpio.d/linux-amlogic-58.preset
+
+pkgname = linux-amlogic-58-headers
+	pkgdesc = Header files and scripts for building modules for linux kernel - Amlogic
+	provides = linux-headers=5.8.16
+	conflicts = linux-headers

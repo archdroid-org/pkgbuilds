@@ -1,0 +1,13 @@
+pkgbase = odroid-c4-dtb
+	pkgdesc = ODROID-C4 DTB file for mainline kernel
+	pkgver = 1.0
+	pkgrel = 1
+	url = https://github.com/hardkernel/linux
+	arch = aarch64
+	license = GPL
+	makedepends = dtc
+	options = !strip
+	source = meson-sm1-odroid-c4.dts
+	md5sums = 83d2d228e0658fc36ce6ae83f842819c
+
+pkgname = odroid-c4-dtb

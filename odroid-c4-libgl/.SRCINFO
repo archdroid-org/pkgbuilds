@@ -1,0 +1,38 @@
+pkgbase = odroid-c4-libgl
+	pkgver = 1.0
+	pkgrel = 2
+	url = https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali
+	arch = aarch64
+	license = Proprietary
+	conflicts = mali-utgard-meson-libgl-fb
+	conflicts = mali-utgard-meson-libgl-x11
+	conflicts = odroid-c2-libgl-fb
+	conflicts = odroid-c2-libgl-x11
+	conflicts = odroid-n2-libgl-fb
+	conflicts = odroid-n2-libgl-wl
+	options = !strip
+	source = license
+	source = https://github.com/hardkernel/buildroot_linux_amlogic_meson_mali/archive/5963003d4d86d9820a606f7301b3b76ac718b8fb.zip
+	source = odroid-mali-wl.sh
+	source = odroid-mali-fb.sh
+	source = mali-wl.pc
+	source = mali-fb.pc
+	md5sums = 3da6d34563163f132815d9b8c5387a76
+	md5sums = 270395c3de1c7b531ab20bf104a3a285
+	md5sums = 4a82344afecef798cd6f66d38a5acf5a
+	md5sums = 7278c961ccacede3e61b2f65a9215fc0
+	md5sums = 485b088798399c496d1ba5e843986ae4
+	md5sums = d998e32a73dea315db09fe20cbf804fc
+
+pkgname = odroid-c4-libgl-wl
+	pkgdesc = ODROID-C4 Mali driver (Wayland)
+	install = odroid-c4-libgl-wl.install
+
+pkgname = odroid-c4-libgl-fb
+	pkgdesc = ODROID-C4 Mali driver (framebuffer)
+	install = odroid-c4-libgl-fb.install
+	depends = mesa
+	depends = xf86-video-fbdev
+
+pkgname = odroid-c4-libgl-headers
+	pkgdesc = ODROID-C4 Mali driver headers

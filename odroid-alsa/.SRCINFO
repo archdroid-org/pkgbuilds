@@ -1,0 +1,16 @@
+pkgbase = odroid-alsa
+	pkgdesc = Alsa audio enablement for Odroid N2/N2+/C4.
+	pkgver = 1
+	pkgrel = 3
+	url = https://github.com/tobetter/odroid-alsa
+	install = odroid-alsa.install
+	arch = aarch64
+	license = MIT
+	depends = alsa-utils
+	options = !strip
+	source = https://github.com/tobetter/odroid-alsa/archive/beea8de0b0765dcfa7fc9b455902e52824d4017b.zip
+	source = odroid-alsa-enable
+	md5sums = SKIP
+	md5sums = 21e2e92a34edde9aed997da8cb0165ee
+
+pkgname = odroid-alsa

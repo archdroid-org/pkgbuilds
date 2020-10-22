@@ -1,0 +1,31 @@
+pkgbase = linux-odroid-c4
+	pkgver = 4.9.230
+	pkgrel = 1
+	url = https://github.com/hardkernel/linux/tree/odroidg12-4.9.y
+	arch = aarch64
+	license = GPL2
+	makedepends = xmlto
+	makedepends = docbook-xsl
+	makedepends = kmod
+	makedepends = inetutils
+	makedepends = bc
+	makedepends = git
+	makedepends = uboot-tools
+	makedepends = vboot-utils
+	makedepends = dtc
+	options = !strip
+	source = https://github.com/hardkernel/linux/archive/9f68d81199bfef0941a6e5ddfff02d85f5d8f8c0.tar.gz
+	source = config
+	source = linux.preset
+	source = 60-linux.hook
+	source = 90-linux.hook
+	md5sums = SKIP
+	md5sums = SKIP
+	md5sums = 86d4a35722b5410e3b29fc92dae15d4b
+	md5sums = ce6c81ad1ad1f8b333fd6077d47abdaf
+	md5sums = 3dc88030a8f2f5a5f97266d99b149f77
+
+pkgname = linux-odroid-c4
+
+pkgname = linux-odroid-c4-headers
+

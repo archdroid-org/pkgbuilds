@@ -1,0 +1,13 @@
+pkgbase = archlinuxdroid-repo
+	pkgdesc = Repository with additional packages not in alarm.
+	pkgver = 1.0
+	pkgrel = 1
+	url = http://archlinuxdroid.tk/
+	install = INSTALL
+	arch = aarch64
+	license = MIT
+	depends = pacman
+	depends = grep
+	depends = sed
+
+pkgname = archlinuxdroid-repo

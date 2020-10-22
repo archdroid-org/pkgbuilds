@@ -1,0 +1,30 @@
+pkgbase = openarena
+	pkgdesc = A violent, sexy, multiplayer first person shooter based on the ioquake3 engine.
+	pkgver = 0.8.8
+	pkgrel = 3
+	url = http://openarena.ws/
+	arch = aarch64
+	license = GPL
+	depends = sdl
+	depends = libvorbis
+	depends = openal
+	depends = curl
+	depends = libxmp
+	optdepends = odroid-gl4es: for accelerated graphics
+	source = git+https://github.com/OpenArena/engine
+	source = http://download.tuxfamily.org/openarena/rel/088/openarena-0.8.8.zip
+	source = openarena-runner.sh
+	source = openarena.png
+	source = openarena-server.png
+	source = openarena.desktop
+	source = openarena-server.desktop
+	md5sums = SKIP
+	md5sums = 9f353d96d7889c377349d692c3905e5b
+	md5sums = 4a0160db68da16501a2fa980548df86e
+	md5sums = c69f824dc500d436fc631b78b6a62dc8
+	md5sums = 17e2f4fa060ed97ff6fe1eaff647bcfb
+	md5sums = 229c87648c10e48b523c25d24aba8372
+	md5sums = 00649517a4dd08cd9c6e99d6703f01f1
+
+pkgname = openarena
+
