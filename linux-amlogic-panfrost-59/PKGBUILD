@@ -1,15 +1,15 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
-pkgbase=linux-odroid-n2-panfrost-59
-pkgname=('linux-odroid-n2-panfrost-59'
-         'linux-odroid-n2-panfrost-59-headers')
+pkgbase=linux-amlogic-panfrost-59
+pkgname=('linux-amlogic-panfrost-59'
+         'linux-amlogic-panfrost-59-headers')
 _commit=4c22796fcba36e302b8598f251ab4eb9ee7dd4f8
 _branch=odroid-5.9.chewitt
 _srcname=linux-${_branch}
 _kernelname=${pkgbase#linux}
-_desc="Odroid-N2"
+_desc="Amlogic"
 pkgver=5.9.0
-pkgrel=2
+pkgrel=1
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
@@ -64,7 +64,7 @@ build() {
   make ${MAKEFLAGS} DTC_FLAGS="-@" dtbs
 }
 
-package_linux-odroid-n2-panfrost-59() {
+package_linux-amlogic-panfrost-59() {
   pkgdesc="The Linux Kernel and modules - ${_desc}"
   depends=('coreutils' 'linux-firmware' 'kmod' 'mkinitcpio>=0.7')
   optdepends=('crda: to set the correct wireless channels of your country')
@@ -123,7 +123,7 @@ package_linux-odroid-n2-panfrost-59() {
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
 }
 
-package_linux-odroid-n2-panfrost-59-headers() {
+package_linux-amlogic-panfrost-59-headers() {
   pkgdesc="Header files and scripts for building modules for linux kernel - ${_desc}"
   provides=("linux-headers=${pkgver}")
   conflicts=('linux-headers')
