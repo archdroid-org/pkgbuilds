@@ -1,13 +1,13 @@
 # U-Boot: ODROID-N2/N2+
 #
-# Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
 buildarch=8
 
 pkgname=uboot-odroid-n2plus
 _revision=141
 pkgver=2015.01.${_revision}
-pkgrel=4
+pkgrel=5
 pkgdesc="U-Boot for ODROID-N2/N2+"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
@@ -16,20 +16,24 @@ install=$pkgname.install
 depends=('uboot-tools')
 conflicts=('uboot-odroid-n2')
 makedepends=('git' 'bc')
-source=("https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidn2-${_revision}.tar.gz"
-        '0001-sd_fusing-tweaks.patch'
-        '91-uboot-uimg.hook'
-        '92-uboot-bootini.hook'
-        'boot.mainline.ini'
-        'boot.hardkernel.ini'
-        'odroid-bootini')
-md5sums=('05468f84b817ea12375a9fffd1bfd311'
-         'cc18cda0bc75936e602341efd5a2fe93'
-         '1931c8dfde7088530f173ca59fdb8989'
-         'e1a78b20ea7fe68ed3bb6fe24ff54110'
-         'b3259ab6be29365ce23014ab244e4ce4'
-         '3ff3f9158cab265a8457ca5a079bfe26'
-         '214ab94f84e1715d8814f1f8239a8b42')
+source=(
+  "https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidn2-${_revision}.tar.gz"
+  '0001-sd_fusing-tweaks.patch'
+  '91-uboot-uimg.hook'
+  '92-uboot-bootini.hook'
+  'boot.mainline.ini'
+  'boot.hardkernel.ini'
+  'odroid-bootini'
+)
+md5sums=(
+  '05468f84b817ea12375a9fffd1bfd311'
+  'cc18cda0bc75936e602341efd5a2fe93'
+  '1931c8dfde7088530f173ca59fdb8989'
+  'e1a78b20ea7fe68ed3bb6fe24ff54110'
+  'b3259ab6be29365ce23014ab244e4ce4'
+  'bb254cd5e389396939ce48164857e4e3'
+  '214ab94f84e1715d8814f1f8239a8b42'
+  )
 
 prepare() {
   patch -p1 < 0001-sd_fusing-tweaks.patch
