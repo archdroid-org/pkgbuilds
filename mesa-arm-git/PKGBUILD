@@ -48,7 +48,7 @@ build() {
     -D optimization=3 \
     -D strip=true \
     -D zstd=true \
-    -D b_lto=false \
+    -D b_lto=true \
     -D b_ndebug=true \
     -D debug=false \
     -D platforms=x11,wayland,drm \
