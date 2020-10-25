@@ -3,19 +3,19 @@
 pkgbase=mesa-arm-git
 pkgname=('mesa-arm-git')
 pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=20.3.0_devel.129981.0d9216a7cbd
+pkgver=20.3.0_devel.130362.fb56fb02a1e
 pkgrel=1
 arch=('aarch64')
 makedepends=(
   'python-mako' 'libxml2' 'libx11' 'libdrm'
   'libxshmfence' 'libxxf86vm' 'libxdamage' 'libvdpau' 'libva'
-  'wayland' 'wayland-protocols' 'elfutils' 'llvm' 'libomxil-bellagio'
+  'wayland' 'wayland-protocols' 'elfutils' 'libomxil-bellagio'
   'clang' 'libglvnd' 'lm_sensors' 'libxrandr' 'meson'
 )
 depends=(
   'libdrm' 'libxxf86vm' 'libxdamage' 'libxshmfence' 'libelf'
-  'libomxil-bellagio' 'libunwind' 'libglvnd' 'wayland' 'lm_sensors'
-  'libclc' 'glslang' 'vulkan-icd-loader' 'zstd'
+  'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm' 'lm_sensors'
+  'libclc' 'glslang' 'vulkan-icd-loader' 'wayland' 'zstd'
 )
 optdepends=(
   'opengl-man-pages: for the OpenGL API man pages'
