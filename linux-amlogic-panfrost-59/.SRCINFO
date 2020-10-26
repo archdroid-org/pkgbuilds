@@ -1,5 +1,5 @@
 pkgbase = linux-amlogic-panfrost-59
-	pkgver = 5.9.0
+	pkgver = 5.9.1
 	pkgrel = 1
 	url = https://github.com/jgmdev/linux/tree/odroid-5.9.chewitt
 	arch = aarch64
@@ -14,7 +14,7 @@ pkgbase = linux-amlogic-panfrost-59
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/jgmdev/linux/archive/odroid-5.9.chewitt.zip
+	source = https://github.com/jgmdev/linux/archive/3963e6d634ed8c476731effa94a3de9a21273ad7.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
@@ -36,12 +36,13 @@ pkgname = linux-amlogic-panfrost-59
 	depends = mkinitcpio>=0.7
 	optdepends = crda: to set the correct wireless channels of your country
 	provides = kernel26
-	provides = linux=5.9.0
+	provides = linux=5.9.1
 	conflicts = linux
 	replaces = linux-armv8
 	backup = etc/mkinitcpio.d/linux-amlogic-panfrost-59.preset
 
 pkgname = linux-amlogic-panfrost-59-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - Amlogic
-	provides = linux-headers=5.9.0
+	provides = linux-headers=5.9.1
 	conflicts = linux-headers
+
