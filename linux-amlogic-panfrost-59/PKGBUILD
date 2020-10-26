@@ -3,12 +3,12 @@
 pkgbase=linux-amlogic-panfrost-59
 pkgname=('linux-amlogic-panfrost-59'
          'linux-amlogic-panfrost-59-headers')
-_commit=4c22796fcba36e302b8598f251ab4eb9ee7dd4f8
+_commit=3963e6d634ed8c476731effa94a3de9a21273ad7
 _branch=odroid-5.9.chewitt
-_srcname=linux-${_branch}
+_srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
-pkgver=5.9.0
+pkgver=5.9.1
 pkgrel=1
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
@@ -19,7 +19,7 @@ makedepends=(
 )
 options=('!strip')
 source=(
-  "https://github.com/jgmdev/linux/archive/${_branch}.zip"
+  "https://github.com/jgmdev/linux/archive/${_commit}.tar.gz"
   'config'
   'linux.preset'
   '60-linux.hook'
