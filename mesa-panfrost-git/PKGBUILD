@@ -1,0 +1,97 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgbase=mesa-panfrost-git
+pkgname=('mesa-panfrost-git')
+pkgdesc="An open-source implementation of the OpenGL specification"
+pkgver=20.3.0_devel.130447.362ad864d6f
+pkgrel=1
+arch=('aarch64')
+makedepends=(
+  'python-mako' 'libxml2' 'libx11' 'libdrm'
+  'libxshmfence' 'libxxf86vm' 'libxdamage' 'libvdpau' 'libva'
+  'wayland' 'wayland-protocols' 'elfutils' 'libomxil-bellagio'
+  'clang' 'libglvnd' 'lm_sensors' 'libxrandr' 'meson'
+)
+depends=(
+  'libdrm' 'libxxf86vm' 'libxdamage' 'libxshmfence' 'libelf'
+  'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm' 'lm_sensors'
+  'libclc' 'glslang' 'vulkan-icd-loader' 'wayland' 'zstd'
+)
+optdepends=(
+  'opengl-man-pages: for the OpenGL API man pages'
+  'mesa-vdpau: for accelerated video playback'
+  'libva-mesa-driver: for accelerated video playback'
+)
+provides=('mesa' 'mesa-dri' 'mesa-libgl' 'opengl-driver')
+conflicts=('mesa' 'mesa-dri' 'mesa-libgl')
+replaces=('mesa-dri' 'mesa-libgl')
+url="https://www.mesa3d.org/"
+license=('custom')
+source=(
+  'mesa::git+https://gitlab.freedesktop.org/alyssa/mesa.git'
+  'LICENSE'
+)
+md5sums=(
+  'SKIP'
+  '1eff81373cde4b3d7b0ea7590431c962'
+)
+
+prepare(){
+  cd mesa
+  git checkout $(git branch -r --list "origin/z*" | tail -n1 | cut -d/ -f2)
+}
+
+pkgver() {
+  cd mesa
+  read -r _ver <VERSION
+  echo ${_ver/-/_}.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+  arch-meson mesa build \
+    --buildtype=release \
+    -D optimization=3 \
+    -D strip=true \
+    -D zstd=enabled \
+    -D b_lto=true \
+    -D b_ndebug=true \
+    -D debug=false \
+    -D platforms=x11,wayland,drm \
+    -D dri-drivers= \
+    -D gallium-drivers=panfrost,kmsro,swrast,virgl \
+    -D vulkan-drivers= \
+    -D dri3=enabled \
+    -D egl=enabled \
+    -D gallium-extra-hud=true \
+    -D gallium-nine=false \
+    -D gallium-omx=disabled \
+    -D gallium-va=disabled \
+    -D gallium-vdpau=disabled \
+    -D gallium-xa=disabled \
+    -D gallium-xvmc=disabled \
+    -D gbm=enabled \
+    -D gles1=disabled \
+    -D gles2=enabled \
+    -D glvnd=true \
+    -D glx=dri \
+    -D libunwind=disabled \
+    -D llvm=enabled \
+    -D lmsensors=enabled \
+    -D osmesa=gallium \
+    -D shared-glapi=enabled \
+    -D valgrind=disabled
+
+  # Print config
+  meson configure build
+
+  ninja $NINJAFLAGS -C build
+}
+
+package() {
+  DESTDIR="$pkgdir" ninja $NINJAFLAGS -C build install
+
+  # indirect rendering
+  ln -s /usr/lib/libGLX_mesa.so.0 ${pkgdir}/usr/lib/libGLX_indirect.so.0
+
+  install -Dt "$pkgdir"/usr/share/licenses/$pkgname "$srcdir"/LICENSE
+}
