@@ -1,7 +1,7 @@
 pkgbase = uboot-odroid-c4
 	pkgdesc = U-Boot for ODROID-C4
-	pkgver = 2015.01.150
-	pkgrel = 2
+	pkgver = 2015.01.158
+	pkgrel = 1
 	url = https://github.com/hardkernel/u-boot
 	install = uboot-odroid-c4.install
 	arch = aarch64
@@ -10,15 +10,15 @@ pkgbase = uboot-odroid-c4
 	makedepends = bc
 	depends = uboot-tools
 	conflicts = uboot-odroid-n2
-	source = https://github.com/hardkernel/u-boot/releases/download/travis/odroidc4-150/u-boot-odroidc4-150.tar.gz
-	source = 0001-sd_fusing-tweaks.patch
+	source = https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-158/u-boot-odroidc4-158.tar.gz
+	source = sd_fusing.sh
 	source = 91-uboot-uimg.hook
 	source = 92-uboot-bootini.hook
 	source = boot.mainline.ini
 	source = boot.hardkernel.ini
 	source = odroid-bootini
-	md5sums = 44d86080ce939c9ebbc8a12d560125f6
-	md5sums = cc18cda0bc75936e602341efd5a2fe93
+	md5sums = 10eeb8d73ab78b3d2334408d56c6efab
+	md5sums = 3bd43e59c5f88a7544505288627fe2dd
 	md5sums = 1931c8dfde7088530f173ca59fdb8989
 	md5sums = e1a78b20ea7fe68ed3bb6fe24ff54110
 	md5sums = f02106510d036abbfa1f7d3e2f8c3266
@@ -26,3 +26,4 @@ pkgbase = uboot-odroid-c4
 	md5sums = 65bf4f1200c95010c9b39386b1840524
 
 pkgname = uboot-odroid-c4
+
