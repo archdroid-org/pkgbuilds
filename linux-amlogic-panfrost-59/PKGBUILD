@@ -3,13 +3,13 @@
 pkgbase=linux-amlogic-panfrost-59
 pkgname=('linux-amlogic-panfrost-59'
          'linux-amlogic-panfrost-59-headers')
-_commit=14676b783e898b947e3c0933b0e2f8cc40b17afc
+_commit=0c8ac86be7aa58f61ca71c1b0596e7266c2e68ee
 _branch=odroid-5.9.chewitt
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
-pkgver=5.9.1
-pkgrel=2
+pkgver=5.9.3
+pkgrel=1
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
