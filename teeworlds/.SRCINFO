@@ -1,0 +1,25 @@
+pkgbase = teeworlds
+	pkgdesc = Fast-paced multiplayer 2D shooter game
+	pkgver = 0.7.5
+	pkgrel = 1
+	url = https://www.teeworlds.com
+	arch = x86_64
+	arch = aarch64
+	license = custom
+	makedepends = cmake
+	makedepends = ninja
+	makedepends = python
+	makedepends = mesa
+	makedepends = imagemagick
+	makedepends = gendesk
+	makedepends = git
+	depends = alsa-lib
+	depends = glu
+	depends = sdl2
+	depends = freetype2
+	depends = wavpack
+	source = git+git://github.com/teeworlds/teeworlds.git#tag=0.7.5
+	sha512sums = SKIP
+
+pkgname = teeworlds
+
