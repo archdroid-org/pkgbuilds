@@ -3,7 +3,7 @@
 pkgbase=mesa-panfrost-git
 pkgname=('mesa-panfrost-git')
 pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=20.3.0_devel.130447.362ad864d6f
+pkgver=21.0.0_devel.131153.f4c2d200a6f
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -38,7 +38,7 @@ md5sums=(
 
 prepare(){
   cd mesa
-  git checkout $(git branch -r --list "origin/z*" | tail -n1 | cut -d/ -f2)
+  git checkout $(git branch -r --sort=committerdate --list "origin/*" | tail -n1 | cut -d/ -f2)
 }
 
 pkgver() {
