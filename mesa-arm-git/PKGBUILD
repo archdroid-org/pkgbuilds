@@ -3,7 +3,7 @@
 pkgbase=mesa-arm-git
 pkgname=('mesa-arm-git')
 pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=20.3.0_devel.130362.fb56fb02a1e
+pkgver=21.0.0_devel.131612.4cce4d22a72
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -43,7 +43,7 @@ pkgver() {
 }
 
 build() {
-  arch-meson mesa build \
+  meson setup mesa build \
     --buildtype=release \
     -D optimization=3 \
     -D strip=true \
