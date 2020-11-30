@@ -6,27 +6,31 @@
 pkgname=mpv-sdl
 _pkgname=mpv
 epoch=1
-pkgver=0.32.0
-pkgrel=4
+pkgver=0.33.0
+pkgrel=1
 pkgdesc='a free, open source, and cross-platform media player'
 arch=('x86_64' 'aarch64')
-# We link against libraries that are licensed GPLv3 explicitly, libsmbclient
-# being one of these. So our package is GPLv3 only as well.
 license=('GPL3')
 url='https://mpv.io/'
-depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'libjack.so' 'lcms2'
-         'libarchive' 'libcaca' 'libcdio-paranoia' 'libdvdnav' 'libgl' 'libva'
-         'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
-         'librubberband.so' 'smbclient' 'uchardet' 'vulkan-icd-loader' 'wayland'
-         'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so' 'sdl2')
-makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
+depends=('alsa-lib' 'libasound.so' 'desktop-file-utils' 'ffmpeg' 'libavcodec.so' 'libavdevice.so'
+         'libavfilter.so' 'libavformat.so' 'libavutil.so' 'libswresample.so' 'libswscale.so'
+         'glibc' 'hicolor-icon-theme' 'jack' 'libjack.so' 'lcms2' 'liblcms2.so' 'libarchive'
+         'libarchive.so' 'libass' 'libass.so' 'libbluray' 'libbluray.so' 'libcaca' 'libcdio'
+         'libcdio-paranoia' 'libdrm' 'libdvdnav' 'libdvdread' 'libegl' 'libgl' 'libglvnd'
+         'libjpeg' 'libjpeg.so' 'libplacebo' 'libplacebo.so' 'libpulse' 'libpulse.so'
+         'libva' 'libva.so' 'libva-drm.so' 'libva-wayland.so' 'libva-x11.so' 'libvdpau' 'libx11'
+         'libxext' 'libxinerama' 'libxkbcommon' 'libxkbcommon.so' 'libxrandr' 'libxss'
+         'libxv' 'lua52' 'mesa' 'mujs' 'rubberband' 'librubberband.so' 'shaderc'
+         'libshaderc_shared.so' 'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
+         'zlib' 'sdl2')
+makedepends=('git' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers' 'waf')
 optdepends=('youtube-dl: for video-sharing websites playback')
 provides=('libmpv.so' 'mpv')
 conflicts=('mpv')
 options=('!emptydirs')
 source=("$_pkgname-$pkgver.tar.gz::https://github.com/mpv-player/$_pkgname/archive/v$pkgver.tar.gz")
-sha256sums=('9163f64832226d22e24bbc4874ebd6ac02372cd717bef15c28a0aa858c5fe592')
+md5sums=('b08d25d3a44c3362984636e5dfa78ecc')
 
 build() {
   cd ${_pkgname}-${pkgver}
@@ -38,7 +42,6 @@ build() {
     --enable-dvdnav \
     --enable-libarchive \
     --enable-libmpv-shared \
-    --enable-libsmbclient \
     --enable-sdl2 \
     --enable-sdl2-video \
     --disable-build-date
