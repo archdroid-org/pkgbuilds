@@ -3,7 +3,7 @@
 pkgbase=mesa-arm-git
 pkgname=('mesa-arm-git')
 pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=21.0.0_devel.131612.4cce4d22a72
+pkgver=21.0.0_devel.132250.fd49ba59a38
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -74,7 +74,7 @@ build() {
     -D libunwind=disabled \
     -D llvm=true \
     -D lmsensors=true \
-    -D osmesa=gallium \
+    -D osmesa=false \
     -D shared-glapi=true \
     -D valgrind=false
 

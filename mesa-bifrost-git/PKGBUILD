@@ -79,7 +79,7 @@ build() {
     -D libunwind=disabled \
     -D llvm=true \
     -D lmsensors=true \
-    -D osmesa=gallium \
+    -D osmesa=false \
     -D shared-glapi=true \
     -D valgrind=false
 
