@@ -3,7 +3,7 @@
 pkgbase=mesa-arm-git
 pkgname=('mesa-arm-git')
 pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=21.0.0_devel.132250.fd49ba59a38
+pkgver=21.0.0_devel.132254.84c8a35aa2c
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -48,7 +48,7 @@ build() {
     -D optimization=3 \
     -D strip=true \
     -D zstd=true \
-    -D b_lto=true \
+    -D b_lto=false \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \

@@ -53,7 +53,7 @@ build() {
     -D optimization=3 \
     -D strip=true \
     -D zstd=true \
-    -D b_lto=true \
+    -D b_lto=false \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \
