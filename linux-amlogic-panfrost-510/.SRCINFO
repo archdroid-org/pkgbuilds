@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-panfrost-510
 	pkgver = 5.10
-	pkgrel = 6
+	pkgrel = 7
 	url = https://github.com/jgmdev/linux/tree/panfrost-5.10.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-amlogic-panfrost-510
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/jgmdev/linux/archive/d39640b80db0e2c89884a22a3431b44824997a3d.tar.gz
+	source = https://github.com/jgmdev/linux/archive/20d964f18c58b6b846903e6bba75c9f503b735f1.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
