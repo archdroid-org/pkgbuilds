@@ -3,13 +3,13 @@
 pkgbase=linux-amlogic-panfrost-510
 pkgname=('linux-amlogic-panfrost-510'
          'linux-amlogic-panfrost-510-headers')
-_commit=d39640b80db0e2c89884a22a3431b44824997a3d
+_commit=20d964f18c58b6b846903e6bba75c9f503b735f1
 _branch=panfrost-5.10.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
 pkgver=5.10
-pkgrel=6
+pkgrel=7
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
