@@ -27,14 +27,45 @@ else
     cp $boot_ini /boot/boot.ini
 fi
 
-if [ -e /boot/dtbs/amlogic/meson64_odroidc4.dtb ]; then
-    sed -i "s/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/g" \
-        /boot/boot.ini
-elif [ -e /boot/dtbs/amlogic/meson-sm1-odroid-c4.dtb ]; then
-    sed -i "s/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/g" \
-        /boot/boot.ini
+model=""
+if [ -e /sys/devices/soc0/machine ]; then
+  model="$(cat /sys/devices/soc0/machine | sed "s/Hardkernel //g")"
+elif [ -e /sys/firmware/devicetree/base/model ]; then
+  model="$(cat /sys/firmware/devicetree/base/model | sed "s/Hardkernel //g")"
+fi
+
+if [ "$model" = "ODROID-HC4" ]; then
+    if [ -e /boot/dtbs/amlogic/meson64_odroidhc4.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson-sm1-odroid-hc4\.dtb/\/dtbs\/amlogic\/meson64_odroidhc4\.dtb/g" \
+            /boot/boot.ini
+    elif [ -e /boot/dtbs/amlogic/meson-sm1-odroid-hc4.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidhc4\.dtb/\/dtbs\/amlogic\/meson-sm1-odroid-hc4\.dtb/g" \
+            /boot/boot.ini
+    elif [ -e /boot/dtbs/amlogic/meson64_odroidc4.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson-sm1-odroid-hc4\.dtb/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/g" \
+            /boot/boot.ini
+        sed -i "s/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/g" \
+            /boot/boot.ini
+        echo "Warning: Using odroidc4 dtb on odroidhc4"
+    elif [ -e /boot/dtbs/amlogic/meson-sm1-odroid-c4.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidhc4\.dtb/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/g" \
+            /boot/boot.ini
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/g" \
+            /boot/boot.ini
+        echo "Warning: Using odroidc4 dtb on odroidhc4"
+    else
+        echo "Error: The kernel you installed doesn't seems to support the odroidhc4"
+    fi
 else
-    echo "Error: The kernel you installed doesn't seems to support the ${board}'"
+    if [ -e /boot/dtbs/amlogic/meson64_odroidc4.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/g" \
+            /boot/boot.ini
+    elif [ -e /boot/dtbs/amlogic/meson-sm1-odroid-c4.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidc4\.dtb/\/dtbs\/amlogic\/meson-sm1-odroid-c4\.dtb/g" \
+            /boot/boot.ini
+    else
+        echo "Error: The kernel you installed doesn't seems to support the odroidc4"
+    fi
 fi
 
 # Handle root device of installations running on external usb drive

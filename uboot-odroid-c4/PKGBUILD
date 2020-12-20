@@ -1,4 +1,4 @@
-# U-Boot: ODROID-C4
+# U-Boot: ODROID-C4/HC4
 #
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
@@ -7,8 +7,8 @@ buildarch=8
 pkgname=uboot-odroid-c4
 _revision=158
 pkgver=2015.01.${_revision}
-pkgrel=1
-pkgdesc="U-Boot for ODROID-C4"
+pkgrel=2
+pkgdesc="U-Boot for ODROID-C4/HC4"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
 license=('GPL')
@@ -30,9 +30,9 @@ md5sums=(
   '3bd43e59c5f88a7544505288627fe2dd'
   '1931c8dfde7088530f173ca59fdb8989'
   'e1a78b20ea7fe68ed3bb6fe24ff54110'
-  'f02106510d036abbfa1f7d3e2f8c3266'
-  'ba520a96ffa108876bf04d19aa7bc534'
-  '65bf4f1200c95010c9b39386b1840524'
+  '22b7a204878962eb2bdc9b509ca5d871'
+  '0c436689f5a6c85a2f569322d182a928'
+  '23ecb7e8e09507db7a1bddaa162c1507'
 )
 
 package() {
