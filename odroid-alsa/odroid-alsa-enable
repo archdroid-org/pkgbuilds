@@ -44,7 +44,7 @@ case "$model" in
     alsactl store
   ;;
 
-  "ODROID-C4")
+  "ODROID-C4" | "ODROID-HC4")
     echo "Setting up alsa for OdroidC4..."
     amixer sset 'FRDDR_A SINK 1 SEL' 'OUT 1' || true
     amixer sset 'FRDDR_A SRC 1 EN' 'on' || true
