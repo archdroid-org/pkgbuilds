@@ -1,14 +1,15 @@
 pkgbase = uboot-odroid-n2plus
 	pkgdesc = U-Boot for ODROID-N2/N2+
 	pkgver = 2015.01.158
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/hardkernel/u-boot
 	install = uboot-odroid-n2plus.install
 	arch = aarch64
 	license = GPL
-	makedepends = git
-	makedepends = bc
 	depends = uboot-tools
+	depends = util-linux
+	depends = gawk
+	depends = sed
 	conflicts = uboot-odroid-n2
 	source = https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-158/u-boot-odroidn2-158.tar.gz
 	source = sd_fusing.sh
@@ -23,7 +24,7 @@ pkgbase = uboot-odroid-n2plus
 	md5sums = e1a78b20ea7fe68ed3bb6fe24ff54110
 	md5sums = b3259ab6be29365ce23014ab244e4ce4
 	md5sums = bb254cd5e389396939ce48164857e4e3
-	md5sums = 214ab94f84e1715d8814f1f8239a8b42
+	md5sums = b6d3cb8e235d889b29ea07f92ffe4946
 
 pkgname = uboot-odroid-n2plus
 
