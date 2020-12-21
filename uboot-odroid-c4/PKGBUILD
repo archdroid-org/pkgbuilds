@@ -7,15 +7,14 @@ buildarch=8
 pkgname=uboot-odroid-c4
 _revision=158
 pkgver=2015.01.${_revision}
-pkgrel=2
+pkgrel=3
 pkgdesc="U-Boot for ODROID-C4/HC4"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
 license=('GPL')
 install=$pkgname.install
-depends=('uboot-tools')
+depends=('uboot-tools' 'util-linux' 'gawk' 'sed')
 conflicts=('uboot-odroid-n2')
-makedepends=('git' 'bc')
 source=(
   "https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidc4-${_revision}.tar.gz"
   'sd_fusing.sh'
@@ -32,7 +31,7 @@ md5sums=(
   'e1a78b20ea7fe68ed3bb6fe24ff54110'
   '22b7a204878962eb2bdc9b509ca5d871'
   '0c436689f5a6c85a2f569322d182a928'
-  '23ecb7e8e09507db7a1bddaa162c1507'
+  'a454262534c21d5b263bca6ec0141ae5'
 )
 
 package() {

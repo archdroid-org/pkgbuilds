@@ -68,15 +68,11 @@ else
     fi
 fi
 
-# Handle root device of installations running on external usb drive
+# Add proper UUID to boot.ini
 major=$(mountpoint -d / | cut -f 1 -d ':')
 minor=$(mountpoint -d / | cut -f 2 -d ':')
 device=$(cat /proc/partitions | awk {'if ($1 == "'${major}'" && $2 == "'${minor}'") print $4 '})
-device="\/dev\/${device}"
+device_uuid=$(lsblk -o uuid,name | grep ${device} | awk "{print \$1}")
 
-if ! (echo "$device" | grep "mmcblk" > /dev/null) ; then
-    if ! (echo "$device" | grep "loop" > /dev/null) ; then
-        sed -i "s/root=\/dev\/mmcblk\${devno}p2/root=${device}/g" \
-            /boot/boot.ini
-    fi
-fi
+sed -i "s/root=\/dev\/mmcblk\${devno}p2/root=UUID=${device_uuid}/g" \
+    /boot/boot.ini
