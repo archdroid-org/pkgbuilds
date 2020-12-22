@@ -3,12 +3,12 @@
 pkgbase=linux-odroid-panfrost
 pkgname=('linux-odroid-panfrost'
          'linux-odroid-panfrost-headers')
-_commit=14b16f9ca3395f8b473c5378618fe8c0ea5aaea6
+_commit=0bb1ce659131e1722e4d349f6c1cfa89162f8b65
 _branch=odroid-5.10.y-panfrost
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
-pkgver=5.10.1
+pkgver=5.10.2
 pkgrel=1
 arch=('aarch64')
 url="https://github.com/tobetter/linux/tree/${_branch}"
