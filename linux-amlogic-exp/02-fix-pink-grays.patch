@@ -1,0 +1,33 @@
+diff --git a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
+index 0c79a9ba48bb..81db694eacc9 100644
+--- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
++++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
+@@ -63,9 +63,15 @@ enum hdmi_datamap {
+ };
+ 
+ static const u16 csc_coeff_default[3][4] = {
++#if 0
+	{ 0x2000, 0x0000, 0x0000, 0x0000 },
+	{ 0x0000, 0x2000, 0x0000, 0x0000 },
+	{ 0x0000, 0x0000, 0x2000, 0x0000 }
++#else
++	{ 0x2000, 0x6926, 0x74fd, 0x010e },
++	{ 0x2000, 0x2cdd, 0x0000, 0x7e9a },
++	{ 0x2000, 0x0000, 0x38b4, 0x7e3b }
++#endif
+ };
+ 
+ static const u16 csc_coeff_rgb_out_eitu601[3][4] = {
+diff --git a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h
+index 1999db05bc3b..4965cc0d13d2 100644
+--- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h
++++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h
+@@ -1013,7 +1013,7 @@ enum {
+ 
+ /* CSC_SCALE field values */
+	HDMI_CSC_SCALE_CSC_COLORDE_PTH_MASK = 0xF0,
+-	HDMI_CSC_SCALE_CSC_COLORDE_PTH_24BPP = 0x00,
++	HDMI_CSC_SCALE_CSC_COLORDE_PTH_24BPP = 0x40,
+	HDMI_CSC_SCALE_CSC_COLORDE_PTH_30BPP = 0x50,
+	HDMI_CSC_SCALE_CSC_COLORDE_PTH_36BPP = 0x60,
+	HDMI_CSC_SCALE_CSC_COLORDE_PTH_48BPP = 0x70,
