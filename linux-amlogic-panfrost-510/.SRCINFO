@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-panfrost-510
 	pkgver = 5.10.2
-	pkgrel = 4
+	pkgrel = 5
 	url = https://github.com/jgmdev/linux/tree/panfrost-5.10.y
 	arch = aarch64
 	license = GPL2
