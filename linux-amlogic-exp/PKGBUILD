@@ -9,7 +9,7 @@ _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic (Experimental)"
 pkgver=5.10.2
-pkgrel=2
+pkgrel=3
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
@@ -54,7 +54,7 @@ prepare() {
   patch -p1 -i ../01-aegis-crypto.patch
 
   # Try to fix pink gray colors.
-  patch -p1 -i ../02-fix-pink-grays.patch
+  #patch -p1 -i ../02-fix-pink-grays.patch
   patch -p1 -i ../02-fix-pink-grays-try-2.patch
 }
 
