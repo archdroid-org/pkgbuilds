@@ -9,7 +9,7 @@ _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic (Experimental)"
 pkgver=5.10.2
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
@@ -26,6 +26,7 @@ source=(
   '90-linux.hook'
   '01-aegis-crypto.patch'
   '02-fix-pink-grays.patch'
+  '02-fix-pink-grays-try-2.patch'
 )
 md5sums=(
   'SKIP'
@@ -35,6 +36,7 @@ md5sums=(
   '3dc88030a8f2f5a5f97266d99b149f77'
   'a4f45dd491148536f89046344a62eeff'
   '4375c1808ef48cc22773493f7e1ab427'
+  'a0683df00b13784e555bb2015bfeb43d'
 )
 
 prepare() {
@@ -51,8 +53,9 @@ prepare() {
   # Fix latest gcc compiling errors with the aegis crypto module.
   patch -p1 -i ../01-aegis-crypto.patch
 
-  # Fix for pink gray colors.
+  # Try to fix pink gray colors.
   patch -p1 -i ../02-fix-pink-grays.patch
+  patch -p1 -i ../02-fix-pink-grays-try-2.patch
 }
 
 build() {
