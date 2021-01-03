@@ -23,7 +23,7 @@ pkgname=(
 )
 pkgver=r56865.af8aded66c1
 pkgrel=2
-arch=('x86_64')
+arch=('x86_64' 'aarch64')
 url="https://kodi.tv"
 license=('GPL2')
 makedepends=(
