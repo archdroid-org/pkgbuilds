@@ -1,0 +1,48 @@
+pkgbase = linux-amlogic-panfrost-511
+	pkgver = 5.11
+	pkgrel = 2
+	url = https://github.com/chewitt/linux/tree/amlogic-5.11.y
+	arch = aarch64
+	license = GPL2
+	makedepends = xmlto
+	makedepends = docbook-xsl
+	makedepends = kmod
+	makedepends = inetutils
+	makedepends = bc
+	makedepends = git
+	makedepends = uboot-tools
+	makedepends = vboot-utils
+	makedepends = dtc
+	options = !strip
+	source = https://github.com/chewitt/linux/archive/98a23da2086099e3ee6a87ccd1a8b97f7b3b3d40.tar.gz
+	source = config
+	source = linux.preset
+	source = 60-linux.hook
+	source = 90-linux.hook
+	source = 01-aegis-crypto.patch
+	md5sums = SKIP
+	md5sums = SKIP
+	md5sums = 13f7d22e7f0ff81a742fb4c7b02098f5
+	md5sums = ce6c81ad1ad1f8b333fd6077d47abdaf
+	md5sums = 3dc88030a8f2f5a5f97266d99b149f77
+	md5sums = a4f45dd491148536f89046344a62eeff
+
+pkgname = linux-amlogic-panfrost-511
+	pkgdesc = The Linux Kernel and modules - Amlogic
+	install = linux-amlogic-panfrost-511.install
+	depends = coreutils
+	depends = linux-firmware
+	depends = kmod
+	depends = mkinitcpio>=0.7
+	optdepends = crda: to set the correct wireless channels of your country
+	provides = kernel26
+	provides = linux=5.11
+	conflicts = linux
+	replaces = linux-armv8
+	backup = etc/mkinitcpio.d/linux-amlogic-panfrost-511.preset
+
+pkgname = linux-amlogic-panfrost-511-headers
+	pkgdesc = Header files and scripts for building modules for linux kernel - Amlogic
+	provides = linux-headers=5.11
+	conflicts = linux-headers
+
