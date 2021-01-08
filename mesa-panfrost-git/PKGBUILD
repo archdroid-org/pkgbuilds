@@ -3,7 +3,7 @@
 pkgbase=mesa-panfrost-git
 pkgname=('mesa-panfrost-git')
 pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=21.0.0_devel.131153.f4c2d200a6f
+pkgver=21.0.0_devel.133249.6f426928871
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -17,13 +17,27 @@ depends=(
   'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm' 'lm_sensors'
   'libclc' 'glslang' 'vulkan-icd-loader' 'wayland' 'zstd'
 )
-optdepends=(
-  'opengl-man-pages: for the OpenGL API man pages'
-  'mesa-vdpau: for accelerated video playback'
-  'libva-mesa-driver: for accelerated video playback'
+provides=(
+  'vulkan-mesa-layers'
+  'opencl-mesa'
+  'vulkan-swrast'
+  'libva-mesa-driver'
+  'mesa-vdpau'
+  'mesa'
+  'mesa-dri'
+  'mesa-libgl'
+  'opengl-driver'
 )
-provides=('mesa' 'mesa-dri' 'mesa-libgl' 'opengl-driver')
-conflicts=('mesa' 'mesa-dri' 'mesa-libgl')
+conflicts=(
+  'vulkan-mesa-layers'
+  'opencl-mesa'
+  'vulkan-swrast'
+  'libva-mesa-driver'
+  'mesa-vdpau'
+  'mesa'
+  'mesa-dri'
+  'mesa-libgl'
+)
 replaces=('mesa-dri' 'mesa-libgl')
 url="https://www.mesa3d.org/"
 license=('custom')
@@ -48,25 +62,29 @@ pkgver() {
 }
 
 build() {
-  arch-meson mesa build \
+  MESON_OPT="-D asm=false"
+
+  meson setup mesa build \
     --buildtype=release \
-    -D optimization=3 \
-    -D strip=true \
-    -D zstd=enabled \
-    -D b_lto=true \
+    -D zstd=true \
+    -D b_lto=false \
+    -D prefix=/usr \
+    -D sysconfdir=/etc \
     -D b_ndebug=true \
-    -D debug=false \
-    -D platforms=x11,wayland,drm \
-    -D dri-drivers= \
-    -D gallium-drivers=panfrost,kmsro,swrast,virgl \
-    -D vulkan-drivers= \
+    -D platforms=x11,wayland \
+    -D dri-drivers=r100,r200,nouveau \
+    -D gallium-drivers=r300,r600,panfrost,kmsro,swrast,virgl,zink \
+    -D vulkan-drivers=swrast \
+    -D vulkan-overlay-layer=true \
+    -D vulkan-device-select-layer=true \
     -D dri3=enabled \
     -D egl=enabled \
     -D gallium-extra-hud=true \
-    -D gallium-nine=false \
-    -D gallium-omx=disabled \
-    -D gallium-va=disabled \
-    -D gallium-vdpau=disabled \
+    -D gallium-nine=true \
+    -D gallium-omx=bellagio \
+    -D gallium-opencl=icd \
+    -D gallium-va=enabled \
+    -D gallium-vdpau=enabled \
     -D gallium-xa=disabled \
     -D gallium-xvmc=disabled \
     -D gbm=enabled \
@@ -77,9 +95,9 @@ build() {
     -D libunwind=disabled \
     -D llvm=enabled \
     -D lmsensors=enabled \
-    -D osmesa=gallium \
+    -D osmesa=true \
     -D shared-glapi=enabled \
-    -D valgrind=disabled
+    -D valgrind=disabled $MESON_OPT
 
   # Print config
   meson configure build
