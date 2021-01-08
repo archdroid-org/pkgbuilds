@@ -3,13 +3,13 @@
 pkgbase=linux-amlogic-panfrost-510
 pkgname=('linux-amlogic-panfrost-510'
          'linux-amlogic-panfrost-510-headers')
-_commit=9569ea0c6b65dcda32099b3793404fe3b7363b16
+_commit=ec944c81bb4605148bde6ffaa698ef39439555a8
 _branch=panfrost-5.10.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
-pkgver=5.10.2
-pkgrel=7
+pkgver=5.10.5
+pkgrel=1
 arch=('aarch64')
 url="https://github.com/jgmdev/linux/tree/${_branch}"
 license=('GPL2')
@@ -51,8 +51,8 @@ prepare() {
   # Fix latest gcc compiling errors with the aegis crypto module.
   patch -p1 -i ../01-aegis-crypto.patch
 
-  # Fix pink gray colors.
-  patch -p1 -i ../02-fix-pink-grays.patch
+  # Fix pink gray colors (already included on repo).
+  # patch -p1 -i ../02-fix-pink-grays.patch
 }
 
 build() {
