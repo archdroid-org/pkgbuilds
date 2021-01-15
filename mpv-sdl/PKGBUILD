@@ -6,8 +6,9 @@
 pkgname=mpv-sdl
 _pkgname=mpv
 epoch=1
+_tag='d5ae9f70ea1f21c1d3794df5345a6a9366188660' # git rev-parse v${pkgver}
 pkgver=0.33.0
-pkgrel=1
+pkgrel=2
 pkgdesc='a free, open source, and cross-platform media player'
 arch=('x86_64' 'aarch64')
 license=('GPL3')
@@ -29,11 +30,18 @@ optdepends=('youtube-dl: for video-sharing websites playback')
 provides=('libmpv.so' 'mpv')
 conflicts=('mpv')
 options=('!emptydirs')
-source=("$_pkgname-$pkgver.tar.gz::https://github.com/mpv-player/$_pkgname/archive/v$pkgver.tar.gz")
-md5sums=('b08d25d3a44c3362984636e5dfa78ecc')
+source=("git+https://github.com/mpv-player/mpv.git#tag=${_tag}")
+md5sums=('SKIP')
+
+prepare() {
+  cd ${_pkgname}
+
+  # vo_gpu: placebo: update for upstream API changes
+  git cherry-pick -n 7c4465cefb27d4e0d07535d368febdf77b579566
+}
 
 build() {
-  cd ${_pkgname}-${pkgver}
+  cd ${_pkgname}
 
   waf configure --prefix=/usr \
     --confdir=/etc/mpv \
@@ -50,7 +58,7 @@ build() {
 }
 
 package() {
-  cd ${_pkgname}-${pkgver}
+  cd ${_pkgname}
 
   waf install --destdir="$pkgdir"
 

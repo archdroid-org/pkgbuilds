@@ -1,7 +1,7 @@
 pkgbase = mpv-sdl
 	pkgdesc = a free, open source, and cross-platform media player
 	pkgver = 0.33.0
-	pkgrel = 1
+	pkgrel = 2
 	epoch = 1
 	url = https://mpv.io/
 	arch = x86_64
@@ -84,8 +84,8 @@ pkgbase = mpv-sdl
 	provides = mpv
 	conflicts = mpv
 	options = !emptydirs
-	source = mpv-0.33.0.tar.gz::https://github.com/mpv-player/mpv/archive/v0.33.0.tar.gz
-	md5sums = b08d25d3a44c3362984636e5dfa78ecc
+	source = git+https://github.com/mpv-player/mpv.git#tag=d5ae9f70ea1f21c1d3794df5345a6a9366188660
+	md5sums = SKIP
 
 pkgname = mpv-sdl
 
