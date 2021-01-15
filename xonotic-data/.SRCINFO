@@ -1,0 +1,15 @@
+pkgbase = xonotic-data
+	pkgdesc = A free, fast-paced crossplatform first-person shooter (data files)
+	pkgver = 0.8.2
+	pkgrel = 3
+	url = http://xonotic.org
+	arch = any
+	license = GPL
+	makedepends = unzip
+	depends = bash
+	depends = perl
+	source = https://dl.xonotic.org/xonotic-0.8.2.zip
+	sha512sums = 0787fcf326827ae0292e5917c7ff2c7fd79947209d4b62e7f83b8b828bec15b575da304e0631f9f163c9b0bd93bed13616e142398ff08cbdaaea890a939dfca5
+
+pkgname = xonotic-data
+
