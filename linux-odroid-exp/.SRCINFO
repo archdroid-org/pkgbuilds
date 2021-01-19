@@ -1,7 +1,7 @@
 pkgbase = linux-odroid-exp
-	pkgver = 5.10.5
-	pkgrel = 1
-	url = https://github.com/tobetter/linux/tree/odroid-5.10.y-panfrost
+	pkgver = 5.11
+	pkgrel = 4
+	url = https://github.com/tobetter/linux/tree/odroid-5.11.y
 	arch = aarch64
 	license = GPL2
 	makedepends = xmlto
@@ -14,7 +14,7 @@ pkgbase = linux-odroid-exp
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/tobetter/linux/archive/909153b8e063f97ad010f792268f946d6da23c4e.tar.gz
+	source = https://github.com/tobetter/linux/archive/d2c04436f6ad19cb72c6f255583fc20a9b7a4f59.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
@@ -36,13 +36,13 @@ pkgname = linux-odroid-exp
 	depends = mkinitcpio>=0.7
 	optdepends = crda: to set the correct wireless channels of your country
 	provides = kernel26
-	provides = linux=5.10.5
+	provides = linux=5.11
 	conflicts = linux
 	replaces = linux-armv8
 	backup = etc/mkinitcpio.d/linux-odroid-exp.preset
 
 pkgname = linux-odroid-exp-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - Amlogic
-	provides = linux-headers=5.10.5
+	provides = linux-headers=5.11
 	conflicts = linux-headers
 
