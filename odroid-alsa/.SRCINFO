@@ -1,7 +1,7 @@
 pkgbase = odroid-alsa
 	pkgdesc = Alsa audio enablement for Odroid N2/N2+/C4.
 	pkgver = 1
-	pkgrel = 4
+	pkgrel = 5
 	url = https://github.com/tobetter/odroid-alsa
 	install = odroid-alsa.install
 	arch = aarch64
@@ -10,8 +10,12 @@ pkgbase = odroid-alsa
 	options = !strip
 	source = https://github.com/tobetter/odroid-alsa/archive/beea8de0b0765dcfa7fc9b455902e52824d4017b.zip
 	source = odroid-alsa-enable
+	source = AMLOGIC-HDMI.conf
+	source = AMLOGIC-HDMI-SPDIF.conf
 	md5sums = SKIP
 	md5sums = d3584e7be2434c2f9ad3361c12c3d5fc
+	md5sums = 4c3869fde64214dd03da6e163881b582
+	md5sums = 3e84849839cc3f2cf7098c7f689ff015
 
 pkgname = odroid-alsa
 

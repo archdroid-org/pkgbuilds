@@ -5,7 +5,7 @@ _pkgdate=202004270349
 _commit=beea8de0b0765dcfa7fc9b455902e52824d4017b
 _srcname=${pkgname}-${_commit}
 pkgver=1
-pkgrel=4
+pkgrel=5
 pkgdesc="Alsa audio enablement for Odroid N2/N2+/C4."
 arch=('aarch64')
 url="https://github.com/tobetter/odroid-alsa"
@@ -16,10 +16,14 @@ install=${pkgname}.install
 source=(
   "https://github.com/tobetter/odroid-alsa/archive/${_commit}.zip"
   'odroid-alsa-enable'
+  'AMLOGIC-HDMI.conf'
+  'AMLOGIC-HDMI-SPDIF.conf'
 )
 md5sums=(
   'SKIP'
   'd3584e7be2434c2f9ad3361c12c3d5fc'
+  '4c3869fde64214dd03da6e163881b582'
+  '3e84849839cc3f2cf7098c7f689ff015'
 )
 
 package() {
@@ -30,6 +34,10 @@ package() {
   install -d ${pkgdir}/usr/bin
 
   cp etc/asound.conf ${pkgdir}/etc/alsa/conf.d/100-odroid.conf
+
   cp usr/share/alsa/cards/* ${pkgdir}/usr/share/alsa/cards/
+  cp ${srcdir}/AMLOGIC-HDMI.conf ${pkgdir}/usr/share/alsa/cards/
+  cp ${srcdir}/AMLOGIC-HDMI-SPDIF.conf ${pkgdir}/usr/share/alsa/cards/
+
   cp ${srcdir}/odroid-alsa-enable ${pkgdir}/usr/bin/
 }
