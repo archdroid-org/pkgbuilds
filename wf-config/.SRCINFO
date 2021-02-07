@@ -4,6 +4,7 @@ pkgbase = wf-config
 	pkgrel = 1
 	url = https://wayfire.org
 	arch = x86_64
+	arch = aarch64
 	license = custom:MIT
 	makedepends = meson
 	makedepends = ninja
