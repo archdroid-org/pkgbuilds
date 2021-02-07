@@ -1,0 +1,20 @@
+pkgbase = wf-config
+	pkgdesc = A library for managing configuration files, written for wayfire
+	pkgver = 0.7.0
+	pkgrel = 1
+	url = https://wayfire.org
+	arch = x86_64
+	license = custom:MIT
+	makedepends = meson
+	makedepends = ninja
+	makedepends = pkg-config
+	makedepends = wayland-protocols
+	makedepends = glm
+	depends = libevdev
+	depends = libxml2
+	conflicts = wf-config-git
+	source = https://github.com/WayfireWM/wf-config/releases/download/v0.7.0/wf-config-0.7.0.tar.xz
+	sha256sums = c7fb0b388afdd46add4b209ff7262bd3a30f9948a9a4d6e7ec1239bbf42b5aad
+
+pkgname = wf-config
+
