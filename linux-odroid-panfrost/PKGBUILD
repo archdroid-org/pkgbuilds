@@ -3,11 +3,11 @@
 pkgbase=linux-odroid-panfrost
 pkgname=('linux-odroid-panfrost'
          'linux-odroid-panfrost-headers')
-_commit=909153b8e063f97ad010f792268f946d6da23c4e
+_commit=bfca2936ac87ffa3d898f61be88e802b29f5f72e
 _branch=odroid-5.10.y-panfrost
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
-_desc="Amlogic"
+_desc="Tobetter Panfrost"
 pkgver=5.10.5
 pkgrel=1
 arch=('aarch64')

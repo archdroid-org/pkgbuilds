@@ -14,7 +14,7 @@ pkgbase = linux-odroid-panfrost
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/tobetter/linux/archive/909153b8e063f97ad010f792268f946d6da23c4e.tar.gz
+	source = https://github.com/tobetter/linux/archive/bfca2936ac87ffa3d898f61be88e802b29f5f72e.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
@@ -28,7 +28,7 @@ pkgbase = linux-odroid-panfrost
 	md5sums = a4f45dd491148536f89046344a62eeff
 
 pkgname = linux-odroid-panfrost
-	pkgdesc = The Linux Kernel and modules - Amlogic
+	pkgdesc = The Linux Kernel and modules - Tobetter Panfrost
 	install = linux-odroid-panfrost.install
 	depends = coreutils
 	depends = linux-firmware
@@ -42,7 +42,7 @@ pkgname = linux-odroid-panfrost
 	backup = etc/mkinitcpio.d/linux-odroid-panfrost.preset
 
 pkgname = linux-odroid-panfrost-headers
-	pkgdesc = Header files and scripts for building modules for linux kernel - Amlogic
+	pkgdesc = Header files and scripts for building modules for linux kernel - Tobetter Panfrost
 	provides = linux-headers=5.10.5
 	conflicts = linux-headers
 
