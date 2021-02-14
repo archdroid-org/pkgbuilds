@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-exp
 	pkgver = 5.11
-	pkgrel = 4
+	pkgrel = 7
 	url = https://github.com/tobetter/linux/tree/odroid-5.11.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-odroid-exp
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/tobetter/linux/archive/d2c04436f6ad19cb72c6f255583fc20a9b7a4f59.tar.gz
+	source = https://github.com/tobetter/linux/archive/157df6d6590d85491bb6cef517c5399de1080ec1.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook

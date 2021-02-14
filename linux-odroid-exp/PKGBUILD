@@ -3,13 +3,13 @@
 pkgbase=linux-odroid-exp
 pkgname=('linux-odroid-exp'
          'linux-odroid-exp-headers')
-_commit=7cf205caf573f88a0b9ad3e867f7ff8a27c944a4
+_commit=157df6d6590d85491bb6cef517c5399de1080ec1
 _branch=odroid-5.11.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
 pkgver=5.11
-pkgrel=6
+pkgrel=7
 arch=('aarch64')
 url="https://github.com/tobetter/linux/tree/${_branch}"
 license=('GPL2')
