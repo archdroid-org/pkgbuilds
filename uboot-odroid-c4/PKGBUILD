@@ -5,9 +5,10 @@
 buildarch=8
 
 pkgname=uboot-odroid-c4
-_revision=158
+_revision=171
 pkgver=2015.01.${_revision}
-pkgrel=3
+pkgrel=1
+_edid_generator_commit=31a6f80784d289d2faa8c4ca4788409c83b3ea14
 pkgdesc="U-Boot for ODROID-C4/HC4"
 arch=('aarch64')
 url="https://github.com/hardkernel/u-boot"
@@ -17,6 +18,8 @@ depends=('uboot-tools' 'util-linux' 'gawk' 'sed')
 conflicts=('uboot-odroid-n2')
 source=(
   "https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidc4-${_revision}.tar.gz"
+  "https://github.com/akatrevorjay/edid-generator/archive/${_edid_generator_commit}.tar.gz"
+  "edid.md"
   'sd_fusing.sh'
   '91-uboot-uimg.hook'
   '92-uboot-bootini.hook'
@@ -25,11 +28,13 @@ source=(
   'odroid-bootini'
 )
 md5sums=(
-  '10eeb8d73ab78b3d2334408d56c6efab'
+  '43cf3f6140b41f05e3ab9c5e5af4dae2'
+  '4be5fae86f996be8540a4344a8b8c120'
+  '01aedffd498933b92c2573f779d6562b'
   '3bd43e59c5f88a7544505288627fe2dd'
   '1931c8dfde7088530f173ca59fdb8989'
   'e1a78b20ea7fe68ed3bb6fe24ff54110'
-  '22b7a204878962eb2bdc9b509ca5d871'
+  'a0925c3da4b399528a07502852d48b5d'
   '0c436689f5a6c85a2f569322d182a928'
   'a454262534c21d5b263bca6ec0141ae5'
 )
@@ -48,4 +53,8 @@ package() {
   install -Dm644 "${srcdir}/boot.mainline.ini" "${pkgdir}/usr/share/${pkgname}/boot.mainline.ini"
 
   install -Dm755 "${srcdir}/odroid-bootini" "${pkgdir}/usr/bin/odroid-bootini"
+
+  mkdir -p "${pkgdir}"/usr/lib/firmware/edid
+  cp "${srcdir}/edid-generator-${_edid_generator_commit}/"*.bin "${pkgdir}"/usr/lib/firmware/edid/
+  cp "${srcdir}/edid.md" "${pkgdir}"/usr/lib/firmware/edid/README.md
 }
