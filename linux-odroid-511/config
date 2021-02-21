@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 5.11.0-rc7-7 Kernel Configuration
+# Linux/arm64 5.11.0-1 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (GCC) 10.2.0"
 CONFIG_CC_IS_GCC=y
@@ -5424,6 +5424,7 @@ CONFIG_DRM_MESON_DW_HDMI=m
 # CONFIG_TINYDRM_ILI9225 is not set
 # CONFIG_TINYDRM_ILI9341 is not set
 # CONFIG_TINYDRM_ILI9486 is not set
+# CONFIG_TINYDRM_ILI9488_PIO is not set
 # CONFIG_TINYDRM_MI0283QT is not set
 # CONFIG_TINYDRM_REPAPER is not set
 # CONFIG_TINYDRM_ST7586 is not set
