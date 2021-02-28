@@ -1,7 +1,7 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
 pkgname=archlinuxdroid-repo
-pkgver=1.0
+pkgver=1.1
 pkgrel=1
 pkgdesc="Repository with additional packages not in alarm."
 arch=('aarch64')
@@ -9,3 +9,11 @@ url="http://archlinuxdroid.tk/"
 license=('MIT')
 depends=('pacman' 'grep' 'sed')
 install=INSTALL
+source=("archdroid-mirrorlist")
+md5sums=('c20c875b76ee99e759ee2143e0d14b90')
+
+package(){
+    install -d ${pkgdir}/etc/pacman.d
+
+    cp ${srcdir}/archdroid-mirrorlist ${pkgdir}/etc/pacman.d/
+}

@@ -5,7 +5,7 @@ enable_repo() {
     echo "" >> /etc/pacman.conf
     echo "[archlinuxdroid]" >> /etc/pacman.conf
     echo "SigLevel = Optional TrustedOnly" >> /etc/pacman.conf
-    echo "Server = http://104.131.53.77/\$repo/\$arch" >> /etc/pacman.conf
+    echo "Include = /etc/pacman.d/archdroid-mirrorlist" >> /etc/pacman.conf
   fi
 }
 

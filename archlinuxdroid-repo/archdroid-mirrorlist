@@ -1,0 +1,13 @@
+#######################################################################
+## Usage on /etc/pacman.conf
+# [archlinuxdroid]
+# SigLevel = Optional TrustedOnly
+# Include = /etc/pacman.d/archdroid-mirrorlist
+#######################################################################
+
+### United States
+## New York
+Server = http://104.131.53.77/$repo/$arch
+
+### Github
+Server = https://github.com/archdroid-org/repo/releases/download/$arch
