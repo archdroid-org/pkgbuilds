@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/arm64 5.10.2-1 Kernel Configuration
+# Linux/arm64 5.10.18-1 Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (GCC) 10.2.0"
 CONFIG_CC_IS_GCC=y
@@ -4165,7 +4165,6 @@ CONFIG_MFD_RK808=y
 # CONFIG_MFD_RN5T618 is not set
 CONFIG_MFD_SEC_CORE=y
 # CONFIG_MFD_SI476X_CORE is not set
-# CONFIG_MFD_SL28CPLD is not set
 # CONFIG_MFD_SM501 is not set
 # CONFIG_MFD_SKY81452 is not set
 # CONFIG_ABX500_CORE is not set
@@ -5200,6 +5199,7 @@ CONFIG_DRM_MESON_DW_HDMI=m
 # CONFIG_TINYDRM_ILI9225 is not set
 # CONFIG_TINYDRM_ILI9341 is not set
 # CONFIG_TINYDRM_ILI9486 is not set
+# CONFIG_TINYDRM_ILI9488_PIO is not set
 # CONFIG_TINYDRM_MI0283QT is not set
 # CONFIG_TINYDRM_REPAPER is not set
 # CONFIG_TINYDRM_ST7586 is not set
@@ -5422,7 +5422,6 @@ CONFIG_SND_SOC=y
 
 # CONFIG_SND_I2S_HI6210_I2S is not set
 # CONFIG_SND_SOC_IMG is not set
-# CONFIG_SND_SOC_INTEL_KEEMBAY is not set
 # CONFIG_SND_SOC_MTK_BTCVSD is not set
 
 #
@@ -6038,7 +6037,6 @@ CONFIG_USB_BDC_UDC=y
 #
 # Platform Support
 #
-CONFIG_USB_BDC_PCI=y
 # CONFIG_USB_AMD5536UDC is not set
 # CONFIG_USB_NET2272 is not set
 # CONFIG_USB_NET2280 is not set

@@ -3,12 +3,12 @@
 pkgbase=linux-odroid
 pkgname=('linux-odroid'
          'linux-odroid-headers')
-_commit=f21d23fb4670e0a3953cee4c44acefb1aa458d50
+_commit=27f1fa7e971bced8205c05d12e531cf447f5e324
 _branch=odroid-5.10.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Amlogic"
-pkgver=5.10.2
+pkgver=5.10.18
 pkgrel=1
 arch=('aarch64')
 url="https://github.com/tobetter/linux/tree/${_branch}"
