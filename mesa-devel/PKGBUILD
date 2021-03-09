@@ -1,9 +1,9 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
-pkgbase=mesa-bifrost-git
-pkgname=('mesa-bifrost-git')
-pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=21.0.0_devel.131153.f4c2d200a6f
+pkgbase=mesa-devel
+pkgname=('mesa-devel')
+pkgdesc="Open-source implementation of the OpenGL specification (Development version pinned to a stable and tested commit)"
+pkgver=21.1.0_devel.134821.c7725ad4aa2
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -17,29 +17,38 @@ depends=(
   'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm' 'lm_sensors'
   'libclc' 'glslang' 'vulkan-icd-loader' 'wayland' 'zstd'
 )
-optdepends=(
-  'opengl-man-pages: for the OpenGL API man pages'
-  'mesa-vdpau: for accelerated video playback'
-  'libva-mesa-driver: for accelerated video playback'
+provides=(
+  'vulkan-mesa-layers'
+  'opencl-mesa'
+  'vulkan-swrast'
+  'libva-mesa-driver'
+  'mesa-vdpau'
+  'mesa'
+  'mesa-dri'
+  'mesa-libgl'
+  'opengl-driver'
 )
-provides=('mesa' 'mesa-dri' 'mesa-libgl' 'opengl-driver')
-conflicts=('mesa' 'mesa-dri' 'mesa-libgl')
-replaces=('mesa-dri' 'mesa-libgl')
+conflicts=(
+  'vulkan-mesa-layers'
+  'opencl-mesa'
+  'vulkan-swrast'
+  'libva-mesa-driver'
+  'mesa-vdpau'
+  'mesa'
+  'mesa-dri'
+  'mesa-libgl'
+)
+replaces=('mesa-dri' 'mesa-libgl' 'mesa-arm')
 url="https://www.mesa3d.org/"
 license=('custom')
 source=(
-  'mesa::git+https://gitlab.freedesktop.org/bbrezillon/mesa.git'
+  'mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git#commit=c7725ad4aa2'
   'LICENSE'
 )
 md5sums=(
   'SKIP'
   '1eff81373cde4b3d7b0ea7590431c962'
 )
-
-prepare(){
-  cd mesa
-  git checkout wip
-}
 
 pkgver() {
   cd mesa
@@ -48,40 +57,42 @@ pkgver() {
 }
 
 build() {
+  MESON_OPT="-D asm=false"
+
   meson setup mesa build \
     --buildtype=release \
-    -D optimization=3 \
-    -D strip=true \
     -D zstd=true \
-    -D b_lto=false \
+    -D b_lto=true \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \
-    -D debug=false \
     -D platforms=x11,wayland \
-    -D dri-drivers= \
-    -D gallium-drivers=panfrost,kmsro,swrast,virgl \
-    -D vulkan-drivers= \
-    -D dri3=true \
-    -D egl=true \
+    -D dri-drivers=r100,r200,nouveau \
+    -D gallium-drivers=r300,r600,panfrost,kmsro,swrast,virgl,zink \
+    -D vulkan-drivers=swrast \
+    -D vulkan-overlay-layer=true \
+    -D vulkan-device-select-layer=true \
+    -D dri3=enabled \
+    -D egl=enabled \
     -D gallium-extra-hud=true \
-    -D gallium-nine=false \
-    -D gallium-omx=disabled \
-    -D gallium-va=disabled \
-    -D gallium-vdpau=disabled \
-    -D gallium-xa=false \
-    -D gallium-xvmc=false \
-    -D gbm=true \
-    -D gles1=false \
-    -D gles2=true \
+    -D gallium-nine=true \
+    -D gallium-omx=bellagio \
+    -D gallium-opencl=icd \
+    -D gallium-va=enabled \
+    -D gallium-vdpau=enabled \
+    -D gallium-xa=disabled \
+    -D gallium-xvmc=disabled \
+    -D gbm=enabled \
+    -D gles1=disabled \
+    -D gles2=enabled \
     -D glvnd=true \
     -D glx=dri \
     -D libunwind=disabled \
-    -D llvm=true \
-    -D lmsensors=true \
-    -D osmesa=false \
-    -D shared-glapi=true \
-    -D valgrind=false
+    -D llvm=enabled \
+    -D lmsensors=enabled \
+    -D osmesa=true \
+    -D shared-glapi=enabled \
+    -D valgrind=disabled $MESON_OPT
 
   # Print config
   meson configure build

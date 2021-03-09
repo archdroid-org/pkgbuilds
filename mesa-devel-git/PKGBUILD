@@ -1,9 +1,9 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 
-pkgbase=mesa-panfrost-git
-pkgname=('mesa-panfrost-git')
-pkgdesc="An open-source implementation of the OpenGL specification"
-pkgver=21.0.0_devel.133249.6f426928871
+pkgbase=mesa-devel-git
+pkgname=('mesa-devel-git')
+pkgdesc="Open-source implementation of the OpenGL specification (development version)"
+pkgver=21.1.0_devel.136095.e30994a4713
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -38,22 +38,17 @@ conflicts=(
   'mesa-dri'
   'mesa-libgl'
 )
-replaces=('mesa-dri' 'mesa-libgl')
+replaces=('mesa-dri' 'mesa-libgl' 'mesa-arm-git')
 url="https://www.mesa3d.org/"
 license=('custom')
 source=(
-  'mesa::git+https://gitlab.freedesktop.org/alyssa/mesa.git'
+  'mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git'
   'LICENSE'
 )
 md5sums=(
   'SKIP'
   '1eff81373cde4b3d7b0ea7590431c962'
 )
-
-prepare(){
-  cd mesa
-  git checkout $(git branch -r --sort=committerdate --list "origin/*" | tail -n1 | cut -d/ -f2)
-}
 
 pkgver() {
   cd mesa
@@ -67,7 +62,7 @@ build() {
   meson setup mesa build \
     --buildtype=release \
     -D zstd=true \
-    -D b_lto=false \
+    -D b_lto=true \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \

@@ -2,7 +2,7 @@
 
 pkgbase=mesa-icecream95-git
 pkgname=('mesa-icecream95-git')
-pkgdesc="An open-source implementation of the OpenGL specification (icrecream95 WIP)"
+pkgdesc="Open-source implementation of the OpenGL specification (latest icrecream95 branch)"
 pkgver=21.1.0_devel.133870.8d08e4db211
 pkgrel=1
 arch=('aarch64')
@@ -67,7 +67,7 @@ build() {
   meson setup mesa build \
     --buildtype=release \
     -D zstd=true \
-    -D b_lto=true \
+    -D b_lto=false \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \
