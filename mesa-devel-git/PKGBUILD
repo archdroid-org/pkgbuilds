@@ -3,7 +3,7 @@
 pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
-pkgver=21.1.0_devel.136095.e30994a4713
+pkgver=21.1.0_devel.136204.5d8fa880d6c
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -62,7 +62,7 @@ build() {
   meson setup mesa build \
     --buildtype=release \
     -D zstd=true \
-    -D b_lto=true \
+    -D b_lto=false \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \
