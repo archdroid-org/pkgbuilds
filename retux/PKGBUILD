@@ -3,7 +3,8 @@
 
 pkgname=retux
 pkgver=1.4.1
-pkgrel=1
+pkgrel=2
+_commit=d4ae49e96663c3166261f3678b6268976c356103
 pkgdesc='Action platformer loosely inspired by the Mario games, utilizing the art assets from the SuperTux project.'
 arch=('x86_64' 'aarch64')
 url='https://retux-game.github.io/'
@@ -16,20 +17,21 @@ depends=(
 )
 makedepends=(
   'python-pip'
+  'python-wheel'
 )
 source=(
-  "https://github.com/retux-game/retux/releases/download/v${pkgver}-1/retux-${pkgver}-src.tar.gz"
+  "https://github.com/retux-game/retux/archive/${_commit}.tar.gz"
   "${pkgname}.desktop"
-	"${pkgname}.sh"
+  "${pkgname}.sh"
 )
 md5sums=(
-  '0b409cc06fd4c641e2d0433267a5e50f'
+  '7967edeaaef0318f2ea83b0ffc2b28b9'
   '4ea890841ed39987403ca2180813c4bb'
-  '42ae51ccfea7bf89577d72ac4334cf52'
+  '16052d86b52e582e1a26ab62143bc50f'
 )
 
 build() {
-  cd "$srcdir"/${pkgname}-${pkgver}-src
+  cd "$srcdir"/${pkgname}-${_commit}
 
   mkdir libs
 
@@ -44,7 +46,7 @@ package() {
   mkdir -p ${pkgdir}/usr/share/applications
   mkdir -p ${pkgdir}/usr/share/icons
 
-  cp -a ${srcdir}/${pkgname}-${pkgver}-src ${pkgdir}/usr/share/${pkgname}
+  cp -a ${srcdir}/${pkgname}-${_commit} ${pkgdir}/usr/share/${pkgname}
 
   cp ${srcdir}/${pkgname}.sh ${pkgdir}/usr/bin/${pkgname}
   chmod +x ${pkgdir}/usr/bin/${pkgname}
