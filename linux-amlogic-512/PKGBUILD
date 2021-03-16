@@ -3,13 +3,13 @@
 pkgbase=linux-amlogic-512
 pkgname=('linux-amlogic-512'
          'linux-amlogic-512-headers')
-_commit=b7a3260479da902b11b1ce7738b2f5a86aa39834
+_commit=d64764adf45b9f6a376d4c78784f37d87a081a4f
 _branch=amlogic-5.12.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Chewitt Amlogic Branch"
 pkgver=5.12
-pkgrel=2
+pkgrel=3
 arch=('aarch64')
 url="https://github.com/chewitt/linux/tree/${_branch}"
 license=('GPL2')
@@ -126,6 +126,9 @@ package_linux-amlogic-512() {
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/60-${pkgbase}.hook"
   sed "${_subst}" ../90-linux.hook |
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
+
+  # copy additional dtb files
+  cp "${pkgdir}"/../../dtbs/* "${pkgdir}/boot/dtbs/amlogic/"
 }
 
 package_linux-amlogic-512-headers() {
