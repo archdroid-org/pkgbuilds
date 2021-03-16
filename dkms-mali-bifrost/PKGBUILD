@@ -4,17 +4,17 @@ buildarch=8
 
 pkgname=dkms-mali-bifrost
 _pkgbase=mali-bifrost
-_pkgdate=202005011205
+_pkgdate=202102241825
 _pkgver=24.0
 pkgver=${_pkgver}
-pkgrel=1
+pkgrel=3
 pkgdesc="Mali kernel driver for bifrost hardware in DKMS format."
 arch=('aarch64')
 url="http://ppa.linuxfactory.or.kr"
 license=('GPL')
 depends=(
-  'linux>=5.6' 'linux<5.8'
-  'linux-headers>=5.6' 'linux-headers<5.8'
+  'linux>=5.6' 'linux<=5.12'
+  'linux-headers>=5.6' 'linux-headers<=5.12'
   'dkms'
 )
 options=('!strip')
@@ -25,7 +25,7 @@ source=(
   "dkms.conf"
 )
 md5sums=(
-  '9660bfc2ee9017e857dcf1bca2524548'
+  'f71961f7d1c0c221fe44202d8a5ff81e'
   '5d925319c2135f5b0ceb0b047ee3e0b9'
   '8d1e7076afe329c9dd631c653f8c98ba'
   'b6e8f93a4c3004a6a15ae271a7464eff'
