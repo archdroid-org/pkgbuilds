@@ -1,0 +1,26 @@
+pkgbase = odroid-oled
+	pkgdesc = Odroid Oled Package for N2, C4 & C4
+	pkgver = 1
+	pkgrel = 1
+	url = https://github.com/tobetter/odroid-homecloud
+	install = odroid-oled.install
+	arch = any
+	license = GPL
+	depends = python
+	depends = python-setuptools
+	depends = python-pip
+	depends = ttf-dseg
+	depends = gcc
+	source = setup.py
+	source = odroid-oled.service
+	source = __init__.py
+	source = clock.py
+	source = LICENSE
+	md5sums = ee1ae88298b7c4a06d9d51999b8d243f
+	md5sums = 0baf95dd2973ba504d79394cb568ba8f
+	md5sums = d41d8cd98f00b204e9800998ecf8427e
+	md5sums = dec7f04ea884fb9067bf8a97f0870281
+	md5sums = 1ebbd3e34237af26da5dc08a4e440464
+
+pkgname = odroid-oled
+

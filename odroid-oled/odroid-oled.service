@@ -1,0 +1,9 @@
+[Unit]
+Description=Display daemon for ODROID Homecloud
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/odroid_homecloud_display
+
+[Install]
+WantedBy=multi-user.target

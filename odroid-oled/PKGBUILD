@@ -1,0 +1,34 @@
+#
+#PKG Maintainer: F.Kardame <f.kardame@manjaro.org>
+#PKGBUILD URL: https://gitlab.manjaro.org/manjaro-arm/packages/community/odroid-oled
+#
+
+pkgname=odroid-oled
+pkgver=1
+pkgrel=1
+pkgdesc="Odroid Oled Package for N2, C4 & C4"
+arch=('any')
+url="https://github.com/tobetter/odroid-homecloud"
+license=('GPL')
+install=$pkgname.install
+depends=('python' 'python-setuptools' 'python-pip' 'ttf-dseg' 'gcc')
+source=("setup.py"
+        "odroid-oled.service"
+        "__init__.py"
+	"clock.py"
+	"LICENSE")
+md5sums=('ee1ae88298b7c4a06d9d51999b8d243f'
+         '0baf95dd2973ba504d79394cb568ba8f'
+         'd41d8cd98f00b204e9800998ecf8427e'
+         'dec7f04ea884fb9067bf8a97f0870281'
+         '1ebbd3e34237af26da5dc08a4e440464')
+
+package() {
+
+	mkdir -p "${pkgdir}"/usr/share/odroid-oled/odroid_homecloud_display/
+   	install -Dm644 "${srcdir}/setup.py" -t "${pkgdir}/usr/share/odroid-oled/"
+	install -Dm644 "${srcdir}/LICENSE" -t "${pkgdir}/usr/share/odroid-oled/"
+install -Dm644 "${srcdir}/odroid-oled.service" -t "${pkgdir}/usr/lib/systemd/system/"
+   	install -Dm644 "${srcdir}/__init__.py" -t "${pkgdir}/usr/share/odroid-oled/odroid_homecloud_display/"
+	install -Dm644 "${srcdir}/clock.py" -t "${pkgdir}/usr/share/odroid-oled/odroid_homecloud_display/"
+}

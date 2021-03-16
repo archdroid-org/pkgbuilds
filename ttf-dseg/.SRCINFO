@@ -1,0 +1,13 @@
+pkgbase = ttf-dseg
+	pkgdesc = Font family that imitates seven and fourteen segment displays
+	pkgver = 0.45
+	pkgrel = 1
+	epoch = 1
+	url = http://www.keshikan.net/fonts-e.html
+	arch = any
+	license = OFL
+	source = https://github.com/keshikan/DSEG/releases/download/v0.45/fonts-DSEG_v045.zip
+	sha256sums = e2745d06e358474a25271fc58881f3f7806f3f39715fe4943348d04d207c1a6d
+
+pkgname = ttf-dseg
+

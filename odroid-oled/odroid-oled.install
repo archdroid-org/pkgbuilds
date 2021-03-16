@@ -1,0 +1,24 @@
+post_install() {
+    # Installing Pip Dependencies
+     echo "Installing Pip Dependencies"
+    pip3 install RPi.GPIO==0.7.1a2 > /tmp/pip-RPi.log
+    pip3 install luma.core luma.oled luma.lcd > /tmp/pip-luma.log
+    
+    # Setup Python
+    echo "Installing Odroid Oled Python"
+    cd /usr/share/odroid-oled/
+    python setup.py install > /tmp/oled-setup.log
+   
+    # Complete Message   
+    echo "Installing Odroid Oled Completed"
+    echo "Enable Odroid Oled Service Using:"
+    echo "sudo systemctl enable odroid-oled.service --now"
+ }
+post_upgrade() {
+	echo "Nothing to Update" 
+}
+
+ post_remove() {
+	rm /usr/bin/odroid_homecloud_display
+
+}
