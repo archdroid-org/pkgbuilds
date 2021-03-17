@@ -127,7 +127,7 @@ package_linux-amlogic-512() {
   sed "${_subst}" ../90-linux.hook |
     install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
 
-  # copy additional dtb files
+  # Copy additional dtb files for higher clock rates
   cp "${pkgdir}"/../../dtbs/* "${pkgdir}/boot/dtbs/amlogic/"
 }
 
