@@ -3,13 +3,13 @@
 pkgbase=linux-amlogic-512
 pkgname=('linux-amlogic-512'
          'linux-amlogic-512-headers')
-_commit=d64764adf45b9f6a376d4c78784f37d87a081a4f
+_commit=c81c97ebd87f7f7c0db8e1493c9a17b23e01b13f
 _branch=amlogic-5.12.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Chewitt Amlogic Branch"
 pkgver=5.12
-pkgrel=3
+pkgrel=5
 arch=('aarch64')
 url="https://github.com/chewitt/linux/tree/${_branch}"
 license=('GPL2')
