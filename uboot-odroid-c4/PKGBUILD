@@ -5,7 +5,7 @@
 buildarch=8
 
 pkgname=uboot-odroid-c4
-_revision=171
+_revision=189
 pkgver=2015.01.${_revision}
 pkgrel=1
 _edid_generator_commit=31a6f80784d289d2faa8c4ca4788409c83b3ea14
@@ -17,7 +17,7 @@ install=$pkgname.install
 depends=('uboot-tools' 'util-linux' 'gawk' 'sed')
 conflicts=('uboot-odroid-n2')
 source=(
-  "https://github.com/hardkernel/u-boot/releases/download/travis/odroidn2-${_revision}/u-boot-odroidc4-${_revision}.tar.gz"
+  "https://github.com/hardkernel/u-boot/releases/download/travis/odroidc4-${_revision}/u-boot-odroidc4-${_revision}.tar.gz"
   "https://github.com/akatrevorjay/edid-generator/archive/${_edid_generator_commit}.tar.gz"
   "edid.md"
   'sd_fusing.sh'
@@ -28,7 +28,7 @@ source=(
   'odroid-bootini'
 )
 md5sums=(
-  '43cf3f6140b41f05e3ab9c5e5af4dae2'
+  'f4e88cfd709ca73203de00c0b28f8f82'
   '4be5fae86f996be8540a4344a8b8c120'
   '01aedffd498933b92c2573f779d6562b'
   '3bd43e59c5f88a7544505288627fe2dd'
