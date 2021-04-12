@@ -1,6 +1,6 @@
 pkgbase = mesa-devel
 	pkgdesc = Open-source implementation of the OpenGL specification (Development version pinned to a stable and tested commit)
-	pkgver = 21.1.0_devel.134821.c7725ad4aa2
+	pkgver = 21.1.0_devel.137845.0dfc5b51967
 	pkgrel = 1
 	url = https://www.mesa3d.org/
 	arch = aarch64
@@ -58,7 +58,7 @@ pkgbase = mesa-devel
 	replaces = mesa-dri
 	replaces = mesa-libgl
 	replaces = mesa-arm
-	source = mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git#commit=c7725ad4aa2
+	source = mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git#commit=0dfc5b51967
 	source = LICENSE
 	md5sums = SKIP
 	md5sums = 1eff81373cde4b3d7b0ea7590431c962

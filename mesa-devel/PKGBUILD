@@ -3,7 +3,7 @@
 pkgbase=mesa-devel
 pkgname=('mesa-devel')
 pkgdesc="Open-source implementation of the OpenGL specification (Development version pinned to a stable and tested commit)"
-pkgver=21.1.0_devel.134821.c7725ad4aa2
+pkgver=21.1.0_devel.137845.0dfc5b51967
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -42,7 +42,7 @@ replaces=('mesa-dri' 'mesa-libgl' 'mesa-arm')
 url="https://www.mesa3d.org/"
 license=('custom')
 source=(
-  'mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git#commit=c7725ad4aa2'
+  'mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git#commit=0dfc5b51967'
   'LICENSE'
 )
 md5sums=(
