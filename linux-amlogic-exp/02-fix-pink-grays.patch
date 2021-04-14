@@ -1,33 +1,18 @@
-diff --git a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
-index 0c79a9ba48bb..81db694eacc9 100644
---- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
-+++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.c
-@@ -63,9 +63,15 @@ enum hdmi_datamap {
- };
- 
- static const u16 csc_coeff_default[3][4] = {
+diff --git a/drivers/gpu/drm/meson/meson_viu.c b/drivers/gpu/drm/meson/meson_viu.c
+index aede0c67a57f..da6456b35b31 100644
+--- a/drivers/gpu/drm/meson/meson_viu.c
++++ b/drivers/gpu/drm/meson/meson_viu.c
+@@ -425,9 +425,12 @@ void meson_viu_init(struct meson_drm *priv)
+	if (meson_vpu_is_compatible(priv, VPU_COMPATIBLE_GXM) ||
+	    meson_vpu_is_compatible(priv, VPU_COMPATIBLE_GXL))
+		meson_viu_load_matrix(priv);
+-	else if (meson_vpu_is_compatible(priv, VPU_COMPATIBLE_G12A))
++	else if (meson_vpu_is_compatible(priv, VPU_COMPATIBLE_G12A)) {
 +#if 0
-	{ 0x2000, 0x0000, 0x0000, 0x0000 },
-	{ 0x0000, 0x2000, 0x0000, 0x0000 },
-	{ 0x0000, 0x0000, 0x2000, 0x0000 }
-+#else
-+	{ 0x2000, 0x6926, 0x74fd, 0x010e },
-+	{ 0x2000, 0x2cdd, 0x0000, 0x7e9a },
-+	{ 0x2000, 0x0000, 0x38b4, 0x7e3b }
+		meson_viu_set_g12a_osd1_matrix(priv, RGB709_to_YUV709l_coeff,
+					       true);
 +#endif
- };
- 
- static const u16 csc_coeff_rgb_out_eitu601[3][4] = {
-diff --git a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h
-index 1999db05bc3b..4965cc0d13d2 100644
---- a/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h
-+++ b/drivers/gpu/drm/bridge/synopsys/dw-hdmi.h
-@@ -1013,7 +1013,7 @@ enum {
- 
- /* CSC_SCALE field values */
-	HDMI_CSC_SCALE_CSC_COLORDE_PTH_MASK = 0xF0,
--	HDMI_CSC_SCALE_CSC_COLORDE_PTH_24BPP = 0x00,
-+	HDMI_CSC_SCALE_CSC_COLORDE_PTH_24BPP = 0x40,
-	HDMI_CSC_SCALE_CSC_COLORDE_PTH_30BPP = 0x50,
-	HDMI_CSC_SCALE_CSC_COLORDE_PTH_36BPP = 0x60,
-	HDMI_CSC_SCALE_CSC_COLORDE_PTH_48BPP = 0x70,
++	}
+
+	/* Initialize OSD1 fifo control register */
+	reg = VIU_OSD_DDR_PRIORITY_URGENT |
