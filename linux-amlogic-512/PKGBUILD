@@ -9,7 +9,7 @@ _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Chewitt Amlogic Branch"
 pkgver=5.12
-pkgrel=7
+pkgrel=8
 arch=('aarch64')
 url="https://github.com/chewitt/linux/tree/${_branch}"
 license=('GPL2')
@@ -26,6 +26,7 @@ source=(
   '90-linux.hook'
   '01-aegis-crypto.patch'
   '02-fix-pink-grays.patch'
+  '03-reboot-shutdown-fix.patch'
 )
 md5sums=(
   'SKIP'
@@ -35,6 +36,7 @@ md5sums=(
   '3dc88030a8f2f5a5f97266d99b149f77'
   'a4f45dd491148536f89046344a62eeff'
   '3e10e549b1e6a3ad6de9a7d5f4b1ff48'
+  '8bbb6822219ba12fa61596bba3f3a03f'
 )
 
 prepare() {
@@ -53,6 +55,9 @@ prepare() {
 
   # Fix pink gray colors (already included on repo).
   patch -p1 -i ../02-fix-pink-grays.patch
+
+  # Fix reboot/shutdown
+  patch -p1 -i ../03-reboot-shutdown-fix.patch
 }
 
 build() {

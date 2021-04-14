@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-512
 	pkgver = 5.12
-	pkgrel = 7
+	pkgrel = 8
 	url = https://github.com/chewitt/linux/tree/amlogic-5.12.y
 	arch = aarch64
 	license = GPL2
@@ -21,6 +21,7 @@ pkgbase = linux-amlogic-512
 	source = 90-linux.hook
 	source = 01-aegis-crypto.patch
 	source = 02-fix-pink-grays.patch
+	source = 03-reboot-shutdown-fix.patch
 	md5sums = SKIP
 	md5sums = SKIP
 	md5sums = 13f7d22e7f0ff81a742fb4c7b02098f5
@@ -28,6 +29,7 @@ pkgbase = linux-amlogic-512
 	md5sums = 3dc88030a8f2f5a5f97266d99b149f77
 	md5sums = a4f45dd491148536f89046344a62eeff
 	md5sums = 3e10e549b1e6a3ad6de9a7d5f4b1ff48
+	md5sums = 8bbb6822219ba12fa61596bba3f3a03f
 
 pkgname = linux-amlogic-512
 	pkgdesc = The Linux Kernel and modules - Chewitt Amlogic Branch
