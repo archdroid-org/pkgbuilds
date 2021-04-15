@@ -3,7 +3,7 @@
 pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
-pkgver=21.1.0_devel.136204.5d8fa880d6c
+pkgver=21.2.0_devel.138179.9b71154353d
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -75,7 +75,7 @@ build() {
     -D dri3=enabled \
     -D egl=enabled \
     -D gallium-extra-hud=true \
-    -D gallium-nine=true \
+    -D gallium-nine=false \
     -D gallium-omx=bellagio \
     -D gallium-opencl=icd \
     -D gallium-va=enabled \
