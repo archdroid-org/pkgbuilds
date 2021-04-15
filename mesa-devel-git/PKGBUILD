@@ -3,7 +3,7 @@
 pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
-pkgver=21.2.0_devel.138179.9b71154353d
+pkgver=21.2.0_devel.138185.376c878c162
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -67,9 +67,9 @@ build() {
     -D sysconfdir=/etc \
     -D b_ndebug=true \
     -D platforms=x11,wayland \
-    -D dri-drivers=r100,r200,nouveau \
-    -D gallium-drivers=r300,r600,panfrost,kmsro,swrast,virgl,zink \
-    -D vulkan-drivers=swrast \
+    -D dri-drivers=nouveau \
+    -D gallium-drivers=nouveau,panfrost,kmsro,swrast,virgl,zink,etnaviv,lima,v3d,vc4,tegra,freedreno \
+    -D vulkan-drivers=swrast,broadcom,freedreno \
     -D vulkan-overlay-layer=true \
     -D vulkan-device-select-layer=true \
     -D dri3=enabled \
