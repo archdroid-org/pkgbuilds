@@ -1,0 +1,29 @@
+pkgbase = wayfire-wlroots
+	pkgdesc = Modular Wayland compositor library
+	pkgver = 0.12.0
+	pkgrel = 1
+	url = https://github.com/swaywm/wlroots
+	install = wayfire-wlroots.install
+	arch = x86_64
+	arch = aarch64
+	license = MIT
+	makedepends = meson
+	makedepends = ninja
+	makedepends = wayland-protocols
+	makedepends = xorg-xwayland
+	depends = libinput
+	depends = libxkbcommon
+	depends = opengl-driver
+	depends = pixman
+	depends = xcb-util-errors
+	depends = xcb-util-renderutil
+	depends = xcb-util-wm
+	optdepends = xorg-xwayland: Xwayland support
+	provides = libwlroots.so
+	source = wlroots-0.12.0.tar.gz::https://github.com/swaywm/wlroots/archive/0.12.0.tar.gz
+	source = wayfire-wlroots.conf
+	md5sums = bc9dbfef37385dbe0f4fe129d2329be5
+	md5sums = 9192c7952487002c82628432c900d765
+
+pkgname = wayfire-wlroots
+
