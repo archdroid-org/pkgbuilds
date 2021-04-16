@@ -27,6 +27,7 @@ md5sums=(
   'e5735e888d18ef7f644b1a2421ea1511'
 )
 
+
 prepare() {
   if [ "$CARCH" == "aarch64" ]; then
     sed -i 's/pentium/native/g' "$srcdir"/Kart-Public/src/Makefile
