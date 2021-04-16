@@ -27,3 +27,4 @@ pkgname = openmpt123
 	depends = libsndfile
 	depends = flac
 	depends = libpulse
+
