@@ -1,0 +1,69 @@
+# Maintainer: carstene1ns <arch carsten-teibes de> - http://git.io/ctPKG
+# Contributor: DeedleFake <yisszev at beckforce dot com>
+# Contributor: JJK
+
+pkgname=srb2
+pkgver=2.2.8
+_dataver=2.2.8
+_instver=2.2.7
+pkgrel=1
+pkgdesc='A 3D Sonic fan game based off of Doom Legacy (aka "Sonic Robo Blast 2")'
+arch=('i686' 'x86_64' 'aarch64')
+license=('GPL')
+url='http://www.srb2.org'
+depends=('sdl2_mixer' 'libpng' 'libgme' 'libopenmpt')
+makedepends=('mesa' 'glu')
+makedepends_i686=('nasm')
+conflicts=("srb2-data")
+source=(
+  "https://github.com/STJr/SRB2/archive/SRB2_release_${pkgver}.zip"
+  "https://github.com/STJr/SRB2/releases/download/SRB2_release_${_instver}/SRB2-${_instver}-Full.zip"
+  "https://github.com/STJr/SRB2/releases/download/SRB2_release_${pkgver}/SRB2-v${pkgver}-Patch.zip"
+  "srb2.desktop"
+  "srb2-opengl.desktop"
+)
+md5sums=(
+  'ec7fff5c700230f4141c82a52d1450c2'
+  'd167d121a2a7f008e78f6b135f608869'
+  '69521c43dd32afff2dafe718fd098218'
+  '41040e7cb9fbe4c9cc6b5a63aaa1ab34'
+  '54abffc62f661197d81091c6ead95563'
+)
+
+prepare() {
+  cd SRB2-SRB2_release_$pkgver/src
+
+  # Fix compilation issue with gcc 10
+  sed '1iCFLAGS=-fcommon' -i Makefile
+
+  if [ "$CARCH" == "aarch64" ]; then
+    sed -i 's/pentium/native/g' Makefile
+  fi
+}
+
+build() {
+  cd SRB2-SRB2_release_$pkgver/src
+
+  [ "$CARCH" == "x86_64" ] && IS64BIT="64" || IS64BIT=""
+
+  [ "$CARCH" == "aarch64" ] && MOREOPTS="NORUSEASM=1 NONX86=1" || MOREOPTS=""
+
+  # do not upx binary, do not use version script (optional: show warnings, be verbose)
+  make LINUX$IS64BIT=1 NOUPX=1 NOVERSION=1 WARNINGMODE=1 ECHO=1 $MOREOPTS
+}
+
+package() {
+  [ "$CARCH" == "x86_64" ] && IS64BIT="64" || IS64BIT=""
+  install -Dm755 SRB2-SRB2_release_$pkgver/bin/Linux$IS64BIT/Release/lsdl2srb2 \
+    "$pkgdir"/usr/bin/srb2
+
+  # icon + .desktop
+  install -Dm644 SRB2-SRB2_release_$pkgver/src/sdl/SDL_icon.xpm \
+    "$pkgdir"/usr/share/pixmaps/srb2.xpm
+  install -Dm644 srb2.desktop "$pkgdir"/usr/share/applications/srb2.desktop
+  install -m644 srb2-opengl.desktop "$pkgdir"/usr/share/applications
+
+  # game data
+  install -d "$pkgdir"/usr/share/games/SRB2
+  install -m644 {player,music}.dta {srb2,zones,patch_music,patch}.pk3 "$pkgdir"/usr/share/games/SRB2
+}
