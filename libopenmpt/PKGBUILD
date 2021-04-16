@@ -6,7 +6,7 @@ _pkgver=0.5.8+release.autotools
 pkgver=${_pkgver%+*}
 pkgrel=1
 pkgdesc='A cross-platform C++ and C library to decode tracked music files (modules) into a raw PCM audio stream.'
-arch=('i686' 'x86_64')
+arch=('i686' 'x86_64' 'aarch64')
 url='http://lib.openmpt.org/'
 license=('BSD')
 depends=('zlib' 'gcc-libs' 'libvorbis' 'mpg123')
@@ -41,7 +41,7 @@ package_openmpt123() {
   depends=("libopenmpt=$pkgver" 'portaudio' 'libsndfile' 'flac' 'libpulse')
 
   make -C $pkgbase-$_pkgver DESTDIR="$pkgdir" install
-  
+
   # separate libopenmpt
   rm -r "$pkgdir"/usr/{lib,include,share/doc}
 
