@@ -1,0 +1,66 @@
+# Maintainer: steeltitanium <steeltitanium1 at gmail dot com>
+# Contributor: steeltitanium <steeltitanium1 at gmail dot com>
+
+pkgname=srb2kart
+pkgver=1.3
+_dataver=1.3
+pkgrel=1
+pkgdesc='A kart racing mod based on the 3D Sonic the Hedgehog fangame Sonic Robo Blast 2, based on a modified version of Doom Legacy.'
+arch=('i686' 'x86_64' 'aarch64')
+license=('GPL2')
+url='https://mb.srb2.org/showthread.php?t=43708'
+depends=('sdl2' 'sdl2_mixer' 'libpng' 'libgme')
+conflicts=('srb2kart-data')
+makedepends=('sdl2' 'sdl2_mixer' 'libpng' 'libgme' 'mesa' 'glu' 'git')
+makedepends_i686=('nasm')
+options=(!buildflags)
+source=(
+  "git+https://github.com/STJr/Kart-Public.git#tag=v$pkgver"
+  "https://github.com/STJr/Kart-Public/releases/download/v$pkgver/srb2kart-v${pkgver//./}-Installer.exe"
+  "srb2kart.desktop"
+  "srb2kart-opengl.desktop"
+)
+md5sums=(
+  'SKIP'
+  'd73b7c297a0626d6101b54fe684c78b7'
+  'aedc2ad6142db8de5cfc94b826b5fd4a'
+  'e5735e888d18ef7f644b1a2421ea1511'
+)
+
+prepare() {
+  if [ "$CARCH" == "aarch64" ]; then
+    sed -i 's/pentium/native/g' "$srcdir"/Kart-Public/src/Makefile
+  fi
+
+  # Workaround: fix broken permissions on game data
+  find "$srcdir"/mdls -type d -exec chmod 755 {} \;
+}
+
+build() {
+  cd "$srcdir"/Kart-Public/src
+
+  [ "$CARCH" == "x86_64" ] && IS64BIT="64" || IS64BIT=""
+
+  [ "$CARCH" == "aarch64" ] && MOREOPTS="NORUSEASM=1 NONX86=1" || MOREOPTS=""
+
+  # do not upx binary, do not use version script (optional: show warnings, be verbose)
+  make LINUX$IS64BIT=1 NOUPX=1 NOVERSION=1 WARNINGMODE=1 ECHO=1 $MOREOPTS
+}
+
+package() {
+  [ "$CARCH" == "x86_64" ] && IS64BIT="64" || IS64BIT=""
+  install -Dm755 "$srcdir"/Kart-Public/bin/Linux$IS64BIT/Release/lsdl2srb2kart \
+    "$pkgdir"/usr/bin/srb2kart
+
+  # icon + .desktop
+  install -Dm644 "$srcdir"/Kart-Public/src/sdl/SDL_icon.xpm \
+    "$pkgdir"/usr/share/pixmaps/srb2kart.xpm
+  install -Dm644 srb2kart.desktop "$pkgdir"/usr/share/applications/srb2kart.desktop
+  install -m644 srb2kart-opengl.desktop "$pkgdir"/usr/share/applications
+
+  # game data
+  install -d "$pkgdir"/usr/share/games/SRB2Kart
+  install -d "$pkgdir"/usr/share/games/SRB2Kart/mdls
+  install -m644 {music,textures,gfx,maps,sounds,chars,bonuschars,patch}.kart srb2.srb mdls.dat "$pkgdir"/usr/share/games/SRB2Kart
+  cp -dpr --no-preserve=ownership mdls "$pkgdir"/usr/share/games/SRB2Kart
+}
