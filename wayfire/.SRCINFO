@@ -1,7 +1,7 @@
 pkgbase = wayfire
 	pkgdesc = 3D wayland compositor
 	pkgver = 0.7.0
-	pkgrel = 2
+	pkgrel = 3
 	url = https://wayfire.org
 	arch = x86_64
 	arch = aarch64
@@ -10,12 +10,12 @@ pkgbase = wayfire
 	makedepends = ninja
 	makedepends = wayland-protocols
 	makedepends = glm
+	makedepends = wayfire-wlroots
 	depends = cairo
 	depends = wf-config>=0.5
 	depends = libjpeg
 	depends = libinput
-	depends = wlroots>=0.12
-	depends = wlroots<0.13
+	depends = wayfire-wlroots
 	conflicts = wayfire-git
 	source = https://github.com/WayfireWM/wayfire/releases/download/v0.7.0/wayfire-0.7.0.tar.xz
 	source = cube-plugin-fix.patch

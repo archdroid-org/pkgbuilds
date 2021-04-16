@@ -1,13 +1,14 @@
-# Maintainer: Adrian Perez de Castro <aperez@igalia.com>
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+# Contributor: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wayfire
 pkgver=0.7.0
-pkgrel=2
+pkgrel=3
 pkgdesc="3D wayland compositor"
 arch=(x86_64 'aarch64')
 url=https://wayfire.org
 license=(custom:MIT)
-depends=(cairo 'wf-config>=0.5' libjpeg libinput 'wlroots>=0.12' 'wlroots<0.13')
-makedepends=(meson ninja wayland-protocols glm)
+depends=(cairo 'wf-config>=0.5' libjpeg libinput wayfire-wlroots)
+makedepends=(meson ninja wayland-protocols glm wayfire-wlroots)
 conflicts=("${pkgname}-git")
 source=(
 	"https://github.com/WayfireWM/${pkgname}/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.xz"
@@ -22,7 +23,14 @@ prepare() {
 
 build() {
 	rm -rf build
-	arch-meson "${pkgname}-${pkgver}" build -Duse_system_wfconfig=enabled -Duse_system_wlroots=enabled
+	export LIBRARY_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$LIBRARY_PATH"
+	export LD_LIBRARY_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$LD_LIBRARY_PATH"
+	export PKG_CONFIG_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$PKG_CONFIG_PATH"
+	arch-meson "${pkgname}-${pkgver}" build \
+		-Duse_system_wfconfig=enabled \
+		-Duse_system_wlroots=enabled \
+		-Dwlroots:logind-provider=systemd \
+		-Dwlroots:libseat=disabled
 	ninja -C build
 }
 
