@@ -6,12 +6,12 @@ pkgname=(
   'linux-odroid-g12'
   'linux-odroid-g12-headers'
 )
-_commit=20d79ab6a52a20842a18dfb63d67cb66004fe0ea
+_commit=662cd6d8e3e1517d50a56caf6ce19f8d0ef47a0b
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="ODROID-N2/N2+/C4"
 pkgver=4.9.241
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://github.com/hardkernel/linux/tree/odroidg12-4.9.y"
 license=('GPL2')

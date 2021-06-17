@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-g12
 	pkgver = 4.9.241
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/hardkernel/linux/tree/odroidg12-4.9.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-odroid-g12
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/hardkernel/linux/archive/20d79ab6a52a20842a18dfb63d67cb66004fe0ea.tar.gz
+	source = https://github.com/hardkernel/linux/archive/662cd6d8e3e1517d50a56caf6ce19f8d0ef47a0b.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
@@ -42,4 +42,3 @@ pkgname = linux-odroid-g12-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - ODROID-N2/N2+/C4
 	provides = linux-headers=4.9.241
 	conflicts = linux-headers
-
