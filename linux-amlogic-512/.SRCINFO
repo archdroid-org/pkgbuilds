@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-512
 	pkgver = 5.12.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/chewitt/linux/tree/amlogic-5.12.y
 	arch = aarch64
 	license = GPL2
@@ -49,4 +49,3 @@ pkgname = linux-amlogic-512-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - Chewitt Amlogic Branch
 	provides = linux-headers=5.12.0
 	conflicts = linux-headers
-
