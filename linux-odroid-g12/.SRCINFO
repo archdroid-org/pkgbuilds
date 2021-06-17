@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-g12
 	pkgver = 4.9.241
-	pkgrel = 2
+	pkgrel = 3
 	url = https://github.com/hardkernel/linux/tree/odroidg12-4.9.y
 	arch = aarch64
 	license = GPL2
