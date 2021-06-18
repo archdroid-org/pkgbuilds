@@ -2,12 +2,12 @@
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wayfire
 pkgver=0.7.1
-pkgrel=3
+pkgrel=4
 pkgdesc="3D wayland compositor"
 arch=(x86_64 'aarch64')
 url=https://wayfire.org
 license=(custom:MIT)
-depends=(cairo 'wf-config>=0.5' libjpeg libinput)
+depends=(cairo 'wf-config>=0.5' libjpeg libinput xorg-xwayland)
 makedepends=(meson ninja wayland-protocols glm)
 #depends=(cairo 'wf-config>=0.5' libjpeg libinput wayfire-wlroots)
 #makedepends=(meson ninja wayland-protocols glm wayfire-wlroots)
