@@ -1,36 +1,33 @@
 # Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
 # Contributor: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wayfire
-pkgver=0.7.0
+pkgver=0.7.1
 pkgrel=3
 pkgdesc="3D wayland compositor"
 arch=(x86_64 'aarch64')
 url=https://wayfire.org
 license=(custom:MIT)
-depends=(cairo 'wf-config>=0.5' libjpeg libinput wayfire-wlroots)
-makedepends=(meson ninja wayland-protocols glm wayfire-wlroots)
+depends=(cairo 'wf-config>=0.5' libjpeg libinput)
+makedepends=(meson ninja wayland-protocols glm)
+#depends=(cairo 'wf-config>=0.5' libjpeg libinput wayfire-wlroots)
+#makedepends=(meson ninja wayland-protocols glm wayfire-wlroots)
 conflicts=("${pkgname}-git")
 source=(
 	"https://github.com/WayfireWM/${pkgname}/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.xz"
-	'cube-plugin-fix.patch'
 )
-md5sums=('SKIP' 'SKIP')
-
-prepare() {
-	cd "${pkgname}-${pkgver}"
-	patch -p1 -i ../cube-plugin-fix.patch
-}
+md5sums=('SKIP')
 
 build() {
 	rm -rf build
-	export LIBRARY_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$LIBRARY_PATH"
-	export LD_LIBRARY_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$LD_LIBRARY_PATH"
-	export PKG_CONFIG_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$PKG_CONFIG_PATH"
+	#export LIBRARY_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$LIBRARY_PATH"
+	#export LD_LIBRARY_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$LD_LIBRARY_PATH"
+	#export PKG_CONFIG_PATH="/opt/wayfire-wlroots/lib/pkgconfig:$PKG_CONFIG_PATH"
 	arch-meson "${pkgname}-${pkgver}" build \
 		-Duse_system_wfconfig=enabled \
 		-Duse_system_wlroots=enabled \
 		-Dwlroots:logind-provider=systemd \
-		-Dwlroots:libseat=disabled
+		-Dwlroots:libseat=disabled \
+		-Dwf-touch:tests=disabled
 	ninja -C build
 }
 
