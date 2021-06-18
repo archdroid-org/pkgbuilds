@@ -1,29 +1,34 @@
 # Maintainer: Adrian Perez de Castro <aperez@igalia.com>
-pkgdesc='Wayfire Configuration Manager'
 pkgname=wcm
-pkgver=0.7.0
+pkgver=0.7.0.r6.g33772f0
 pkgrel=1
-arch=(x86_64 'aarch64')
+pkgdesc='Wayfire Configuration Manager'
 url=https://wayfire.org
+arch=(x86_64 aarch64)
 license=(custom:MIT)
-depends=('wayfire>=0.7' 'wf-shell>=0.7' gtk3)
-makedepends=(wayland-protocols meson ninja)
-source=("https://github.com/WayfireWM/${pkgname}/releases/download/v${pkgver}/${pkgname}-${pkgver}.tar.xz")
-sha256sums=(924a9682dc2f632bad8b6914a8927ad5dcee4b6698f75e89251f1647ad0beaa7)
+provides=("wdisplays")
+conflicts=("wdisplays")
+depends=(gtkmm3 wayfire wf-shell)
+makedepends=(wayland-protocols meson ninja git extra-cmake-modules)
+optdepends=("wayfire-plugins-extra: configuration for extra Wayfire plugins")
+_commit=33772f07eec298b65b41fbb0d412c7d06c403e33
+source=("${pkgname}::git+https://github.com/WayfireWM/wcm#commit=${_commit}")
+md5sums=('SKIP')
 
-build ()
-{
-	rm -rf build
-	arch-meson "${pkgname}-${pkgver}" build -Dwf_shell=enabled
-	ninja -C build
+pkgver() {
+  cd "${pkgname}"
+  ( set -o pipefail
+    git describe --long --tag 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//'
+  )
 }
 
-check () {
-	meson test -C build
+build () {
+  rm -rf build
+  arch-meson "${pkgname}" build
+  ninja -C build
 }
 
-package ()
-{
-	DESTDIR="${pkgdir}" ninja -C build install
-	install -Dm644 -t "${pkgdir}/usr/share/licenses/${pkgname}" "${pkgname}-${pkgver}/LICENSE"
+package () {
+  DESTDIR="${pkgdir}" ninja -C build install
 }
+
