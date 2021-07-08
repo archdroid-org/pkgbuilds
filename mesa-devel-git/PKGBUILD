@@ -3,7 +3,7 @@
 pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
-pkgver=21.2.0_devel.141732.d01e7b50b88
+pkgver=21.2.0_devel.142259.c6d677ce3dc
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -70,8 +70,7 @@ build() {
     -D dri-drivers=nouveau \
     -D gallium-drivers=nouveau,panfrost,kmsro,swrast,virgl,zink,etnaviv,lima,v3d,vc4,tegra,freedreno \
     -D vulkan-drivers=swrast,broadcom,freedreno,panfrost \
-    -D vulkan-overlay-layer=true \
-    -D vulkan-device-select-layer=true \
+    -D vulkan-layers=device-select,overlay \
     -D dri3=enabled \
     -D egl=enabled \
     -D gallium-extra-hud=true \
@@ -92,6 +91,7 @@ build() {
     -D lmsensors=enabled \
     -D osmesa=true \
     -D shared-glapi=enabled \
+    -D microsoft-clc=disabled \
     -D valgrind=disabled $MESON_OPT
 
   # Print config
