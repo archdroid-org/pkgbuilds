@@ -3,12 +3,12 @@
 pkgbase=linux-odroid-513
 pkgname=('linux-odroid-513'
          'linux-odroid-513-headers')
-_commit=03d89f7c3f72bf5f032cba81c34e907e2020f287
+_commit=d5647f6bb8507eca831688e29b22a4bd7ca00d20
 _branch=odroid-5.13.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Tobetter Odroid Branch"
-pkgver=5.13.11
+pkgver=5.13.12
 pkgrel=1
 arch=('aarch64')
 url="https://github.com/tobetter/linux/tree/${_branch}"
