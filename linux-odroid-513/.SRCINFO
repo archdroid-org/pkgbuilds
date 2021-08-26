@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-513
 	pkgver = 5.13.12
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/tobetter/linux/tree/odroid-5.13.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-odroid-513
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/tobetter/linux/archive/d5647f6bb8507eca831688e29b22a4bd7ca00d20.tar.gz
+	source = https://github.com/tobetter/linux/archive/088fed0830e7f858c4ecef5665845d931c43970e.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
