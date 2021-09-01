@@ -1,0 +1,21 @@
+pkgbase = astromenace
+	pkgdesc = Hardcore 3D space shooter with spaceship upgrade possibilities
+	pkgver = 1.4.1
+	pkgrel = 2
+	url = http://www.viewizard.com/astromenace/index_linux.php
+	arch = x86_64
+	arch = aarch64
+	license = GPL3
+	makedepends = cmake
+	makedepends = mesa
+	depends = sdl2
+	depends = freealut
+	depends = libjpeg
+	depends = libvorbis
+	depends = glu
+	depends = freetype2
+	depends = libxinerama
+	source = astromenace-1.4.1.tar.gz::https://github.com/viewizard/astromenace/archive/v1.4.1.tar.gz
+	sha512sums = 408fd8a9fcc51d0cdfd31d77bc1c05b079b3248622a252e73e1145db9715b3a331eef5fde295c3390143fb7bb2f88460d374eddea719b6452577bf5e83bd14c1
+
+pkgname = astromenace
