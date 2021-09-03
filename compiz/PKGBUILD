@@ -6,7 +6,7 @@
 
 pkgname=compiz
 pkgver=0.9.14.1
-pkgrel=5
+pkgrel=6
 pkgdesc="Composite manager for Aiglx and Xgl, with plugins and CCSM"
 arch=('i686' 'x86_64' 'aarch64')
 url="https://launchpad.net/compiz"
