@@ -1,7 +1,7 @@
 # Maintainer: Adrian Perez de Castro <aperez@igalia.com>
 pkgname=wayfire-plugins-extra
 pkgver=0.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Additional plugins for Wayfire'
 url=https://wayfire.org
 arch=(x86_64 'aarch64')
