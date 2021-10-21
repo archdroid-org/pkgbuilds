@@ -6,7 +6,7 @@
 pkgname=wayfire-wlroots
 _pkgname=wlroots
 pkgver=0.13.0
-pkgrel=1
+pkgrel=2
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
 url='https://github.com/swaywm/wlroots'
@@ -29,9 +29,6 @@ makedepends=(
 )
 optdepends=(
     'xorg-xwayland: Xwayland support'
-)
-provides=(
-    'libwlroots.so'
 )
 source=(
     "$_pkgname-$pkgver.tar.gz::https://github.com/swaywm/wlroots/archive/$pkgver.tar.gz"

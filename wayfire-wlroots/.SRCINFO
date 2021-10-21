@@ -1,7 +1,7 @@
 pkgbase = wayfire-wlroots
 	pkgdesc = Modular Wayland compositor library
 	pkgver = 0.13.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/swaywm/wlroots
 	install = wayfire-wlroots.install
 	arch = x86_64
@@ -19,7 +19,6 @@ pkgbase = wayfire-wlroots
 	depends = xcb-util-renderutil
 	depends = xcb-util-wm
 	optdepends = xorg-xwayland: Xwayland support
-	provides = libwlroots.so
 	source = wlroots-0.13.0.tar.gz::https://github.com/swaywm/wlroots/archive/0.13.0.tar.gz
 	source = wayfire-wlroots.conf
 	md5sums = 614bfd6dfb47e86699d0215646519ad6
