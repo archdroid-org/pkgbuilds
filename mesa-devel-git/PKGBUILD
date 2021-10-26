@@ -3,7 +3,7 @@
 pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
-pkgver=21.2.0_devel.142259.c6d677ce3dc
+pkgver=22.0.0_devel.146504.fad6a806359
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -57,8 +57,6 @@ pkgver() {
 }
 
 build() {
-  MESON_OPT="-D asm=false"
-
   meson setup mesa build \
     --buildtype=release \
     -D zstd=true \
@@ -92,7 +90,7 @@ build() {
     -D osmesa=true \
     -D shared-glapi=enabled \
     -D microsoft-clc=disabled \
-    -D valgrind=disabled $MESON_OPT
+    -D valgrind=disabled
 
   # Print config
   meson configure build
