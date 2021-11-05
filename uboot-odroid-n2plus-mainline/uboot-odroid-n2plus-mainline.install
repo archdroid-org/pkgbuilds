@@ -1,0 +1,34 @@
+flash_uboot() {
+  major=$(mountpoint -d / | cut -f 1 -d ':')
+  minor=$(mountpoint -d / | cut -f 2 -d ':')
+  device=$(cat /proc/partitions | awk {'if ($1 == "'${major}'" && $2 == "'${minor}'") print $4 '})
+  device="${device%%[0-9]}"
+  device="${device%%p}"
+  device="/dev/${device}"
+
+  echo "A new U-Boot version needs to be flashed onto ${device}."
+  echo "Do you want to do this now? [y|N]"
+  read -r shouldwe
+  if [[ $shouldwe =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    /boot/sd_fusing.sh ${device}
+  else
+    echo "You can do this later by running:"
+    echo "# /boot/sd_fusing.sh ${device}"
+  fi
+}
+
+post_install() {
+  /usr/bin/odroid-bootscr
+  /usr/bin/odroid-bootini
+  flash_uboot
+}
+
+post_upgrade() {
+  if [ ! -e "/boot/boot.txt" ]; then
+      /usr/bin/odroid-bootscr
+  fi
+  if [ ! -e "/boot/boot.ini" ]; then
+      /usr/bin/odroid-bootini
+  fi
+  flash_uboot
+}

@@ -1,0 +1,156 @@
+# U-Boot Mainline: ODROID-N2/N2+
+#
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=uboot-odroid-n2plus-mainline
+pkgver=2022.01.bc18582a
+pkgrel=1
+_commit=bc18582a1471384e3c4584dfd17f48a91c88445d
+_edid_generator_commit=31a6f80784d289d2faa8c4ca4788409c83b3ea14
+pkgdesc="Mainline U-Boot for ODROID-N2/N2+"
+arch=('aarch64')
+url="http://www.denx.de/wiki/U-Boot/WebHome"
+license=('GPL')
+install=$pkgname.install
+depends=('coreutils' 'uboot-tools' 'util-linux' 'gawk' 'sed')
+makedepends=('bc' 'dtc' 'binfmt-qemu-static-all-arch' 'qemu-user-static-bin')
+conflicts=('uboot-odroid-n2' 'uboot-odroid-n2plus')
+source=(
+  "https://source.denx.de/u-boot/u-boot/-/archive/${_commit}/u-boot-${_commit}.tar.gz"
+  "https://github.com/akatrevorjay/edid-generator/archive/${_edid_generator_commit}.tar.gz"
+  "https://github.com/hardkernel/u-boot/raw/odroidg12-v2015.01/fip/g12b/aml_encrypt_g12b"
+  "edid.md"
+  'sd_fusing.sh'
+  'mkscr.sh'
+  '91-uboot-uimg.hook'
+  '92-uboot-bootscr.hook'
+  '92-uboot-bootini.hook'
+  'boot.mainline.txt'
+  'boot.hardkernel.txt'
+  'boot.mainline.ini'
+  'boot.hardkernel.ini'
+  'odroid-bootscr'
+  'odroid-bootini'
+)
+md5sums=(
+  '98c5379024d95838688d58a0db9b995c'
+  '4be5fae86f996be8540a4344a8b8c120'
+  '2c524ff9435316e1e3f137b9dd0d1802'
+  'ae53c5bea429b893f9724527e47cd6ca'
+  '3cf3e2e3b856b4c2d46bec622142bd07'
+  '67ff5e5f68d86d216f4ed6de2db0f497'
+  '1931c8dfde7088530f173ca59fdb8989'
+  '8c35293129fe04b8f08521923f9c31db'
+  'e1a78b20ea7fe68ed3bb6fe24ff54110'
+  'SKIP'
+  'SKIP'
+  'SKIP'
+  'SKIP'
+  'SKIP'
+  'SKIP'
+)
+
+pkgver() {
+  echo "2022.01.${_commit:0:8}"
+}
+
+build() {
+  cd u-boot-${_commit}
+
+  unset CFLAGS
+  unset CXXFLAGS
+  unset CPPFLAGS
+
+  make distclean
+  make odroid-n2_defconfig
+  echo 'CONFIG_IDENT_STRING=" Arch Linux ARM"' >> .config
+  make EXTRAVERSION=-${pkgrel}
+
+  # Generate working u-boot.bin with amlogic firmware
+  cp -a ../../fip .
+  cp ../aml_encrypt_g12b fip/
+  chmod 0755 fip/blx_fix.sh
+  chmod 0755 fip/aml_encrypt_g12b
+  cp u-boot.bin fip/bl33.bin
+
+  fip/blx_fix.sh \
+    fip/bl30.bin \
+    fip/zero_tmp \
+    fip/bl30_zero.bin \
+    fip/bl301.bin \
+    fip/bl301_zero.bin \
+    fip/bl30_new.bin \
+    bl30
+
+  fip/blx_fix.sh \
+    fip/bl2.bin \
+    fip/zero_tmp \
+    fip/bl2_zero.bin \
+    fip/acs.bin \
+    fip/bl21_zero.bin \
+    fip/bl2_new.bin \
+    bl2
+
+  fip/aml_encrypt_g12b --bl30sig --input fip/bl30_new.bin \
+    --output fip/bl30_new.bin.g12a.enc \
+    --level v3
+
+  fip/aml_encrypt_g12b --bl3sig --input fip/bl30_new.bin.g12a.enc \
+    --output fip/bl30_new.bin.enc \
+    --level v3 --type bl30
+
+  fip/aml_encrypt_g12b --bl3sig --input fip/bl31.img \
+    --output fip/bl31.img.enc \
+    --level v3 --type bl31
+
+  fip/aml_encrypt_g12b --bl3sig --input fip/bl33.bin --compress lz4 \
+    --output fip/bl33.bin.enc \
+    --level v3 --type bl33 --compress lz4
+
+  fip/aml_encrypt_g12b --bl2sig --input fip/bl2_new.bin \
+    --output fip/bl2.n.bin.sig
+
+  fip/aml_encrypt_g12b --bootmk \
+    --output fip/u-boot.bin \
+    --bl2 fip/bl2.n.bin.sig \
+    --bl30 fip/bl30_new.bin.enc \
+    --bl31 fip/bl31.img.enc \
+    --bl33 fip/bl33.bin.enc \
+    --ddrfw1 fip/ddr4_1d.fw \
+    --ddrfw2 fip/ddr4_2d.fw \
+    --ddrfw3 fip/ddr3_1d.fw \
+    --ddrfw4 fip/piei.fw \
+    --ddrfw5 fip/lpddr4_1d.fw \
+    --ddrfw6 fip/lpddr4_2d.fw \
+    --ddrfw7 fip/diag_lpddr4.fw \
+    --ddrfw8 fip/aml_ddr.fw \
+    --level v3
+}
+
+package() {
+  cd u-boot-${_commit}
+
+  mkdir -p "${pkgdir}"/boot
+
+  cp fip/u-boot.bin.sd.bin "${pkgdir}"/boot/
+  cp fip/u-boot.bin "${pkgdir}"/boot/u-boot.bin.emmc.bin
+  cp "${srcdir}/mkscr.sh" "${pkgdir}"/boot/
+  cp "${srcdir}/sd_fusing.sh" "${pkgdir}"/boot
+
+  install -Dm644 "${srcdir}/92-uboot-bootscr.hook" "${pkgdir}/usr/share/libalpm/hooks/92-uboot-bootscr.hook"
+  install -Dm644 "${srcdir}/boot.hardkernel.txt" "${pkgdir}/usr/share/${pkgname}/boot.hardkernel.txt"
+  install -Dm644 "${srcdir}/boot.mainline.txt" "${pkgdir}/usr/share/${pkgname}/boot.mainline.txt"
+  install -Dm755 "${srcdir}/odroid-bootscr" "${pkgdir}/usr/bin/odroid-bootscr"
+
+  # For compatibility with hardkernel petitboot
+  install -Dm644 "${srcdir}/91-uboot-uimg.hook" "${pkgdir}/usr/share/libalpm/hooks/91-uboot-uimg.hook"
+  install -Dm644 "${srcdir}/92-uboot-bootini.hook" "${pkgdir}/usr/share/libalpm/hooks/92-uboot-bootini.hook"
+  install -Dm644 "${srcdir}/boot.hardkernel.ini" "${pkgdir}/usr/share/${pkgname}/boot.hardkernel.ini"
+  install -Dm644 "${srcdir}/boot.mainline.ini" "${pkgdir}/usr/share/${pkgname}/boot.mainline.ini"
+  install -Dm755 "${srcdir}/odroid-bootini" "${pkgdir}/usr/bin/odroid-bootini"
+
+  # Add edid files
+  mkdir -p "${pkgdir}"/usr/lib/firmware/edid
+  cp "${srcdir}/edid-generator-${_edid_generator_commit}/"*.bin "${pkgdir}"/usr/lib/firmware/edid/
+  cp "${srcdir}/edid.md" "${pkgdir}"/usr/lib/firmware/edid/README.md
+}

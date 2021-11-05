@@ -1,0 +1,67 @@
+#
+# Uboot Boot Script
+# Do Not Edit this line: KERNEL: mainline
+#
+# After modifying this file run ./mkscr.sh to
+# generate the boot.scr file which is read
+# by u-boot.
+#
+
+# Default Console Device Setting
+setenv condev "console=ttyAML0,115200 console=tty1"
+
+# Set to 1 to blank console after inactivity
+setenv consoleblank "0"
+
+# Video Output
+## preferred_resolution
+## set to your preferred resolution using the format:
+##    {width}x{heigth}@{hertz}
+##    example: 1920x1080@60
+## or
+##    Set to an empty string to let the kernel automatically
+##    choose a resolution for you.
+setenv preferred_resolution ""
+
+## force_edid
+## if you experience issues of display not working properly
+## or displaying incorrect colors you can use this setting
+## to overwrite the default display edid information.
+##
+## A valid value for this option can be:
+##    800x600, 1024x768, 1280x720, 1280x1024, 1600x1200,
+##    1680x1050, 1920x1080, 2560x1440, 2880x1800, 3840x2160
+## or
+##    Set to an empty string to use the display provided
+##    edid information.
+setenv force_edid ""
+
+# Read uboot and root partuuid for reference on /proc/cmdline
+if test "${devtype}" = "mmc"; then part uuid mmc ${devnum}:1 ubootpart; fi
+if test "${devtype}" = "mmc"; then part uuid mmc ${devnum}:2 rootpart; fi
+
+# Set voutput depending on the user perference
+if test "${force_edid}" != ""; then
+    setenv voutput "drm_kms_helper.edid_firmware=HDMI-A-1:edid/${force_edid}.bin"
+elif test "${preferred_resolution}" != ""; then
+    setenv voutput "video=HDMI-A-1:${preferred_resolution}"
+fi
+
+# Boot Args
+setenv bootargs "root=/dev/mmcblk${devnum}p2 rw rootwait"
+setenv bootargs "${bootargs} mitigations=off ${condev}"
+setenv bootargs "${bootargs} consoleblank=${consoleblank} ${voutput}"
+setenv bootargs "${bootargs} rootpart=${rootpart} ubootpart=${ubootpart}"
+setenv bootargs "${bootargs} coherent_pool=2M cma=800M fsck.repair=yes"
+setenv bootargs "${bootargs} no_console_suspend clk_ignore_unused"
+
+# Boot
+if load ${devtype} ${devnum}:${bootpart} ${kernel_addr_r} /Image; then
+  if load ${devtype} ${devnum}:${bootpart} ${fdt_addr_r} /dtbs/${fdtfile}; then
+    if load ${devtype} ${devnum}:${bootpart} ${ramdisk_addr_r} /initramfs-linux.img; then
+      booti ${kernel_addr_r} ${ramdisk_addr_r}:${filesize} ${fdt_addr_r};
+    else
+      booti ${kernel_addr_r} - ${fdt_addr_r};
+    fi;
+  fi;
+fi

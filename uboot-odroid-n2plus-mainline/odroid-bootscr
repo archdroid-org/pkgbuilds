@@ -1,0 +1,86 @@
+#!/bin/bash
+
+PATH="/sbin:/usr/sbin:/bin:/usr/bin:$PATH"
+
+board=odroid-n2plus
+
+kernel_version=$(pacman -Qi linux | grep Version | cut -d: -f2 | xargs)
+kernel_major=$(echo ${kernel_version} | cut -d. -f1)
+kernel_minor=$(echo ${kernel_version} | cut -d. -f2)
+
+boot_txt=""
+boot_txt_version=""
+if [ $kernel_major -gt 4 ]; then
+    boot_txt=/usr/share/uboot-${board}-mainline/boot.mainline.txt
+    boot_txt_version="mainline"
+else
+    boot_txt=/usr/share/uboot-${board}-mainline/boot.hardkernel.txt
+    boot_txt_version="hardkernel"
+fi
+
+if [ -e /boot/boot.txt ]; then
+    if ! grep "KERNEL: ${boot_txt_version}" /boot/boot.txt > /dev/null ; then
+        mv /boot/boot.txt "/boot/boot.txt.$(date +"%s")"
+        cp $boot_txt /boot/boot.txt
+    fi
+else
+    cp $boot_txt /boot/boot.txt
+fi
+
+model=""
+if [ -e /sys/devices/soc0/machine ]; then
+  model="$(cat /sys/devices/soc0/machine | sed "s/Hardkernel //g")"
+elif [ -e /sys/firmware/devicetree/base/model ]; then
+  model="$(cat /sys/firmware/devicetree/base/model | sed "s/Hardkernel //g")"
+fi
+
+if [ "$model" = "ODROID-N2Plus" ]; then
+    sed -i "s/\/dtbs\/\${fdtfile}/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/g" \
+        /boot/boot.txt
+
+    if [ -e /boot/dtbs/amlogic/meson64_odroidn2_plus.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/\/dtbs\/amlogic\/meson64_odroidn2_plus\.dtb/g" \
+            /boot/boot.txt
+    elif [ -e /boot/dtbs/amlogic/meson-g12b-odroid-n2-plus.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2_plus\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/g" \
+            /boot/boot.txt
+    elif [ -e /boot/dtbs/amlogic/meson64_odroidn2.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/g" \
+            /boot/boot.txt
+        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/g" \
+            /boot/boot.txt
+        echo "Warning: Using odroidn2 dtb on odroidn2+ will provide lower clock speeds'"
+    elif [ -e /boot/dtbs/amlogic/meson-g12b-odroid-n2.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2_plus\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
+            /boot/boot.txt
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
+            /boot/boot.txt
+        echo "Warning: Using odroidn2 dtb on odroidn2+ will provide lower clock speeds'"
+    else
+        echo "Error: The kernel you installed doesn't seems to support the odroidn2+'"
+    fi
+else
+    sed -i "s/\/dtbs\/\${fdtfile}/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
+        /boot/boot.txt
+
+    if [ -e /boot/dtbs/amlogic/meson64_odroidn2.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/g" \
+            /boot/boot.txt
+    elif [ -e /boot/dtbs/amlogic/meson-g12b-odroid-n2.dtb ]; then
+        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
+            /boot/boot.txt
+    else
+        echo "Error: The kernel you installed doesn't seems to support the odroidn2'"
+    fi
+fi
+
+# Add proper root PARTUUID to boot.txt
+major=$(mountpoint -d / | cut -f 1 -d ':')
+minor=$(mountpoint -d / | cut -f 2 -d ':')
+device=$(cat /proc/partitions | awk {'if ($1 == "'${major}'" && $2 == "'${minor}'") print $4 '})
+device_partuuid=$(lsblk -o partuuid,name | grep ${device} | awk "{print \$1}")
+
+sed -i "s/root=\/dev\/mmcblk\${devnum}p2/root=PARTUUID=${device_partuuid}/g" \
+    /boot/boot.txt
+
+/boot/mkscr.sh

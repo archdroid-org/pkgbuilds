@@ -1,0 +1,10 @@
+[Trigger]
+Type = File
+Operation = Install
+Operation = Upgrade
+Target = boot/Image
+
+[Action]
+Description = Updating boot.scr...
+When = PostTransaction
+Exec = /usr/bin/odroid-bootscr
