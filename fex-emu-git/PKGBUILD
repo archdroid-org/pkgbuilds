@@ -1,0 +1,53 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+
+pkgname=fex-emu-git
+pkgver=r3351.d3cd354c
+pkgrel=1
+pkgdesc="A fast usermode x86 and x86-64 emulator for Arm64"
+arch=('aarch64')
+url="https://fex-emu.org/"
+license=('MIT')
+depends=('sdl2' 'libepoxy')
+makedepends=('cmake' 'ninja' 'clang' 'sdl2' 'libepoxy')
+optdepends=(
+  "squashfs-tools: For squashfs rootfs support"
+  "fex-emu-thunks-git: guest to host libraries for speed and compatibility"
+)
+conflicts=('fex-emu')
+provides=('fex-emu')
+source=("$pkgname::git+https://github.com/FEX-Emu/FEX.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd $pkgname
+  git submodule update --init --recursive
+
+  if [ -e "../$pkgname-build" ]; then
+    rm -rf "../$pkgname-build"
+  fi
+
+  cd ../ && mkdir $pkgname-build
+}
+
+build() {
+  cd $pkgname-build
+
+  CC=clang CXX=clang++ cmake -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release -DENABLE_LTO=False \
+    -DENABLE_STATIC_PIE=False -DBUILD_TESTS=False \
+    -DENABLE_ASSERTIONS=False -DBUILD_THUNKS=False \
+    -G Ninja ../$pkgname
+
+  ninja
+}
+
+package() {
+   cd $pkgname-build
+
+   DESTDIR="$pkgdir" ninja install
+}
