@@ -1,0 +1,23 @@
+pkgbase = x86_64-gcc-bootstrap
+	pkgdesc = The GNU Compiler Collection - cross compiler for x86_64 target - bootstrap compiler
+	pkgver = 11.2.0
+	pkgrel = 1
+	url = https://gcc.gnu.org/
+	arch = aarch64
+	license = GPL
+	license = LGPL
+	license = FDL
+	makedepends = x86_64-binutils
+	depends = libmpc
+	depends = zstd
+	provides = x86_64-gcc
+	conflicts = x86_64-gcc
+	options = !emptydirs
+	options = !strip
+	options = staticlibs
+	source = https://ftp.gnu.org/gnu/gcc/gcc-11.2.0/gcc-11.2.0.tar.xz
+	source = https://sourceforge.net/projects/libisl/files/isl-0.24.tar.bz2
+	sha256sums = d08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b
+	sha256sums = fcf78dd9656c10eb8cf9fbd5f59a0b6b01386205fe1934b3b287a0a1898145c0
+
+pkgname = x86_64-gcc-bootstrap

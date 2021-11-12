@@ -1,0 +1,87 @@
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+# Contributor: Anatol Pomozov <anatol.pomozov@gmail.com>
+# Contributor: Eli Schwartz <eschwartz@archlinux.org>
+# Contributor: Christer Solskogen <christer.solskogen@gmail.com>
+#
+# Build and install order:
+#   x86_64-binutils
+#   x86_64-linux-api-headers
+#   x86_64-gcc-bootstrap
+#   x86_64-glibc
+#   x86_64-gcc
+#   x86_64-glibc
+
+_arch=x86_64
+_target=$_arch-linux-gnu
+pkgname=$_arch-gcc
+pkgver=11.2.0
+_islver=0.24
+pkgrel=1
+pkgdesc="The GNU Compiler Collection - cross compiler for $_arch target"
+arch=(aarch64)
+url='https://gcc.gnu.org/'
+license=(GPL LGPL FDL)
+depends=(libmpc zstd )
+makedepends=($_arch-binutils $_arch-glibc)
+replaces=($_arch-gcc-bootstrap)
+options=(!emptydirs !strip staticlibs)
+source=(
+  https://ftp.gnu.org/gnu/gcc/gcc-$pkgver/gcc-$pkgver.tar.xz
+  https://sourceforge.net/projects/libisl/files/isl-0.24.tar.bz2
+)
+sha256sums=(
+  'd08edc536b54c372a1010ff6619dd274c0f1603aa49212ba20f7aa2cda36fa8b'
+  'fcf78dd9656c10eb8cf9fbd5f59a0b6b01386205fe1934b3b287a0a1898145c0'
+)
+_basedir=gcc-$pkgver
+
+prepare() {
+  cd $_basedir
+
+  # link isl for in-tree builds
+  ln -sf ../isl-$_islver isl
+
+  rm -rf "$srcdir"/gcc-build
+  mkdir "$srcdir"/gcc-build
+}
+
+build() {
+  cd gcc-build
+
+  # gcc has lots of format-security "issues"
+  CFLAGS=${CFLAGS/-Werror=format-security/}
+  CXXFLAGS=${CXXFLAGS/-Werror=format-security/}
+
+  "$srcdir"/$_basedir/configure \
+    --prefix=/usr \
+    --with-sysroot=/usr/$_target/sys-root \
+    --libexecdir=/usr/lib \
+    --target=$_target \
+    --with-system-zlib \
+    --with-linker-hash-style=gnu \
+    --disable-nls \
+    --disable-multilib \
+    --disable-werror \
+    --disable-static \
+    --disable-libssp \
+    --disable-libstdcxx-pch \
+    --enable-default-pie \
+    --enable-languages=c,c++,fortran \
+    --enable-__cxa_atexit \
+    --enable-linker-build-id \
+    --enable-plugin \
+    --enable-gnu-indirect-function \
+    --enable-checking=release \
+    --enable-host-shared
+
+  make
+}
+
+package() {
+  cd gcc-build
+
+  make install-strip DESTDIR="$pkgdir"
+  ln -s $_target-gcc "$pkgdir"/usr/bin/$_target-cc
+  # Remove files that conflict with host gcc package
+  rm -r "$pkgdir"/usr/{include,lib/libcc*,share}
+}
