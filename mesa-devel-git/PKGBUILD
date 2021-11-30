@@ -20,6 +20,7 @@ depends=(
 provides=(
   'vulkan-mesa-layers'
   'opencl-mesa'
+  'opencl-driver'
   'vulkan-swrast'
   'libva-mesa-driver'
   'mesa-vdpau'
