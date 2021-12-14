@@ -1,0 +1,61 @@
+From d858b7215c5506fc0b91e96226c353b0c8e8f201 Mon Sep 17 00:00:00 2001
+From: Dongjin Kim <tobetter@gmail.com>
+Date: Fri, 22 Jan 2021 11:38:06 +0900
+Subject: [PATCH] ODROID-N2: arm64/dts: add new clock 1GHz for GPU
+
+Signed-off-by: Dongjin Kim <tobetter@gmail.com>
+Change-Id: Ic1f4bb11a13ec003f35700d03c44f5b3e4f19a13
+---
+ arch/arm64/boot/dts/amlogic/meson64_odroidc4.dts  | 7 +++++++
+ arch/arm64/boot/dts/amlogic/meson64_odroidhc4.dts | 7 +++++++
+ arch/arm64/boot/dts/amlogic/meson64_odroidn2.dts  | 7 +++++++
+ 3 files changed, 21 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/amlogic/meson64_odroidc4.dts b/arch/arm64/boot/dts/amlogic/meson64_odroidc4.dts
+index 8242a82c947fe..bc278cdc7dc41 100644
+--- a/arch/arm64/boot/dts/amlogic/meson64_odroidc4.dts
++++ b/arch/arm64/boot/dts/amlogic/meson64_odroidc4.dts
+@@ -41,3 +41,10 @@
+ 	/delete-property/	resets;
+ 	/delete-property/	reset-names;
+ };
++
++&gpu_opp_table {
++	opp-999999984 {
++		opp-hz = /bits/ 64 <999999984>;
++		opp-microvolt = <800000>;
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson64_odroidhc4.dts b/arch/arm64/boot/dts/amlogic/meson64_odroidhc4.dts
+index 8787f96c2a2a2..6672e792af3b6 100644
+--- a/arch/arm64/boot/dts/amlogic/meson64_odroidhc4.dts
++++ b/arch/arm64/boot/dts/amlogic/meson64_odroidhc4.dts
+@@ -56,3 +56,10 @@
+ 	/delete-property/	resets;
+ 	/delete-property/	reset-names;
+ };
++
++&gpu_opp_table {
++	opp-999999984 {
++		opp-hz = /bits/ 64 <999999984>;
++		opp-microvolt = <800000>;
++	};
++};
+diff --git a/arch/arm64/boot/dts/amlogic/meson64_odroidn2.dts b/arch/arm64/boot/dts/amlogic/meson64_odroidn2.dts
+index 1d880b2752bb1..da1a0eb1eb325 100644
+--- a/arch/arm64/boot/dts/amlogic/meson64_odroidn2.dts
++++ b/arch/arm64/boot/dts/amlogic/meson64_odroidn2.dts
+@@ -179,6 +179,13 @@
+ 	/delete-property/	reset-names;
+ };
+ 
++&gpu_opp_table {
++	opp-999999984 {
++		opp-hz = /bits/ 64 <999999984>;
++		opp-microvolt = <800000>;
++	};
++};
++
+ &spdifout {
+ 	pinctrl-0 = <&spdif_out_a13_pins>;
+ 	pinctrl-names = "default";
