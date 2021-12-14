@@ -3,7 +3,7 @@
 pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
-pkgver=22.0.0_devel.146504.fad6a806359
+pkgver=22.0.0_devel.148059.b05d228695b
 pkgrel=1
 arch=('aarch64')
 makedepends=(
@@ -43,7 +43,7 @@ replaces=('mesa-dri' 'mesa-libgl' 'mesa-arm-git')
 url="https://www.mesa3d.org/"
 license=('custom')
 source=(
-  'mesa::git+https://gitlab.freedesktop.org/mesa/mesa.git'
+  'mesa::git+https://github.com/mesa3d/mesa.git'
   'LICENSE'
 )
 md5sums=(
@@ -60,13 +60,12 @@ pkgver() {
 build() {
   meson setup mesa build \
     --buildtype=release \
-    -D zstd=true \
+    -D zstd=enabled \
     -D b_lto=false \
     -D prefix=/usr \
     -D sysconfdir=/etc \
     -D b_ndebug=true \
     -D platforms=x11,wayland \
-    -D dri-drivers=nouveau \
     -D gallium-drivers=nouveau,panfrost,kmsro,swrast,virgl,zink,etnaviv,lima,v3d,vc4,tegra,freedreno \
     -D vulkan-drivers=swrast,broadcom,freedreno,panfrost \
     -D vulkan-layers=device-select,overlay \
