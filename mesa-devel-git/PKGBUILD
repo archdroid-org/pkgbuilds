@@ -17,6 +17,7 @@ depends=(
   'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm' 'lm_sensors'
   'libclc' 'glslang' 'vulkan-icd-loader' 'wayland' 'zstd'
 )
+optdepends=('clang: opencl' 'compiler-rt: opencl')
 provides=(
   'vulkan-mesa-layers'
   'opencl-mesa'
