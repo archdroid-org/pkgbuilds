@@ -1,6 +1,6 @@
 pkgbase = kodi-addon-inputstream-adaptive
 	pkgdesc = InputStream client for adaptive streams for Kodi 18+
-	pkgver = 2.6.7
+	pkgver = 19.0.1
 	pkgrel = 1
 	url = https://github.com/peak3d/inputstream.adaptive
 	arch = x86_64
@@ -10,10 +10,10 @@ pkgbase = kodi-addon-inputstream-adaptive
 	license = GPL2
 	makedepends = cmake
 	makedepends = kodi-dev
-	source = kodi-addon-inputstream-adaptive-2.6.7.tar.gz::https://github.com/peak3d/inputstream.adaptive/archive/2.6.7-Matrix.tar.gz
-	sha512sums = 60c1f051d50fef21697e6f1e1570bebbaaf3b8f5d4fd207bfdfbd553f1eafb26305af1138c224b2ddfb4ea9c88931991cf46fcbde39b35992ea93884705760c8
+	makedepends = gtest
+	source = kodi-addon-inputstream-adaptive-19.0.1.tar.gz::https://github.com/peak3d/inputstream.adaptive/archive/19.0.1-Matrix.tar.gz
+	sha512sums = 69aaab21dc1f5c383a23f3faa237dea40241ae177b35410537a5af55d9833883e02ce23a7b9a263485ba20230a8900f1151fe4e52eee5f2496d9485bbfc62ca3
 
 pkgname = kodi-addon-inputstream-adaptive
 	depends = kodi
 	depends = kodi-platform
-
