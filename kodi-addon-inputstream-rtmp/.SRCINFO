@@ -1,5 +1,5 @@
 pkgbase = kodi-addon-inputstream-rtmp
-	pkgdesc = RTMP input stream add-on for Kodi
+	pkgdesc = RTMP input stream add-on for Kodi.
 	pkgver = 19.0.1
 	pkgrel = 1
 	url = https://github.com/xbmc/inputstream.rtmp
