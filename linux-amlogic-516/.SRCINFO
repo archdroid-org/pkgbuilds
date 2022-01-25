@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-516
 	pkgver = 5.16.2
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/chewitt/linux/tree/amlogic-5.16.y
 	arch = aarch64
 	license = GPL2
@@ -23,6 +23,7 @@ pkgbase = linux-amlogic-516
 	source = 02-drm-meson-add-yuv422-output-support.patch
 	source = 03-drm-meson-fix-colour-distortion-from-hdr-set-during-vendor-uboot.patch
 	source = 04-drm-meson-not-load-rgb709-fix-reddish-colors.patch
+	source = 05-add-gpio-based-pwm-driver-enables-fan.patch
 	md5sums = SKIP
 	md5sums = SKIP
 	md5sums = 13f7d22e7f0ff81a742fb4c7b02098f5
@@ -32,6 +33,7 @@ pkgbase = linux-amlogic-516
 	md5sums = 150f4f1d53b134fa65447b01f4500ce1
 	md5sums = 89e86898147ddf53ae25c939d857e468
 	md5sums = ce6fc83f334a597e68fe32842aaff9c3
+	md5sums = becff33d2cb6bfd03db548d7c8bbd195
 
 pkgname = linux-amlogic-516
 	pkgdesc = The Linux Kernel and modules - Chewitt Amlogic Branch

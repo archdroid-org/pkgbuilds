@@ -9,7 +9,7 @@ _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Chewitt Amlogic Branch"
 pkgver=5.16.2
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 url="https://github.com/chewitt/linux/tree/${_branch}"
 license=('GPL2')
@@ -28,6 +28,7 @@ source=(
   '02-drm-meson-add-yuv422-output-support.patch'
   '03-drm-meson-fix-colour-distortion-from-hdr-set-during-vendor-uboot.patch'
   '04-drm-meson-not-load-rgb709-fix-reddish-colors.patch'
+  '05-add-gpio-based-pwm-driver-enables-fan.patch'
 )
 md5sums=(
   'SKIP'
@@ -39,6 +40,7 @@ md5sums=(
   '150f4f1d53b134fa65447b01f4500ce1'
   '89e86898147ddf53ae25c939d857e468'
   'ce6fc83f334a597e68fe32842aaff9c3'
+  'becff33d2cb6bfd03db548d7c8bbd195'
 )
 
 prepare() {
@@ -59,6 +61,7 @@ prepare() {
   patch -p1 -i ../02-drm-meson-add-yuv422-output-support.patch
   patch -p1 -i ../03-drm-meson-fix-colour-distortion-from-hdr-set-during-vendor-uboot.patch
   patch -p1 -i ../04-drm-meson-not-load-rgb709-fix-reddish-colors.patch
+  patch -p1 -i ../05-add-gpio-based-pwm-driver-enables-fan.patch
 }
 
 build() {
