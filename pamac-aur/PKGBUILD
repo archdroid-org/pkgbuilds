@@ -1,31 +1,39 @@
 # Contributor: Zeph <zeph33@gmail.com>
 # Maintainer: Zeph <zeph33@gmail.com>
 # https://gitlab.manjaro.org/packages/extra/pamac
+ENABLE_FAKE_GNOME_SOFTWARE=0
 
 pkgname=pamac-aur
-pkgver=10.1.3
-pkgrel=1
+pkgver=10.3.0
+pkgrel=4
 _pkgfixver=$pkgver
 
-_commit='b7837bb4fd517e0288e744af0ef773b325128196'
-sha256sums=('cf5304bdab2d9f2682a21ee918b44de4b148eb107c440cd382855c0d6954113e')
+_commit='5ce97e07b2285d0507eee589b146a6570514bf8c'
+sha256sums=('e779be77c19ed037083aaf8821b37182965feeec6a56a1941a02aaf8a274eade')
 
 pkgdesc="A Gtk3 frontend, Package Manager based on libalpm with AUR and Appstream support"
 arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h' 'aarch64')
-url="https://gitlab.manjaro.org/applications"
+url="https://gitlab.manjaro.org/applications/pamac"
 license=('GPL3')
-depends=('glib2>=2.42' 'json-glib' 'libsoup' 'dbus-glib' 'polkit' 'vte3>=0.38' 'gtk3>=3.22'
-         'libnotify' 'desktop-file-utils' 'libpamac-aur' 'gnutls>=3.4' 'git'
+depends=('glib2>=2.42' 'json-glib' 'libsoup' 'dbus-glib' 'polkit' 'vte3>=0.38' 'gtk3>=3.24'
+         'libnotify' 'desktop-file-utils' 'libpamac-aur>=11.2' 'gnutls>=3.4' 'git'
          'appstream-glib>=0.7.18-1' 'archlinux-appstream-data' 'libhandy' 'git')
 
 optdepends=('polkit-gnome: needed for authentification in Cinnamon, Gnome'
             'lxsession: needed for authentification in Xfce, LXDE etc.')
-makedepends=('gettext' 'itstool' 'vala>=0.46' 'gtk3>=3.22' 'asciidoc' 'meson' 'ninja' 'gobject-introspection' 'libappindicator-gtk3' 'xorgproto')
+makedepends=('gettext' 'itstool' 'vala>=0.46' 'gtk3>=3.24' 'asciidoc' 'meson' 'ninja' 'gobject-introspection' 'libappindicator-gtk3' 'xorgproto')
 conflicts=('pamac' 'pamac-tray-appindicator')
 provides=("pamac=$pkgver-$pkgrel")
 options=(!emptydirs !strip)
 install=pamac.install
-source=("pamac-$pkgver-$pkgrel.tar.gz::$url/pamac/-/archive/$_commit/pamac-$_commit.tar.gz")
+source=("pamac-$pkgver-$pkgrel.tar.gz::$url/-/archive/$_commit/pamac-$_commit.tar.gz")
+
+define_meson=''
+if [ "${ENABLE_FAKE_GNOME_SOFTWARE}" = 1 ]; then
+  conflicts+=('pamac-gnome-integration' 'pamac-gnome-integration-dev' 'gnome-software')
+  define_meson+=' -Denable-fake-gnome-software=true'
+fi
+
 
 prepare() {
   cd "$srcdir/pamac-$_commit"
@@ -39,8 +47,7 @@ build() {
   cd builddir
   meson --buildtype=release \
         --prefix=/usr \
-        -Denable-appindicator=true \
-        --sysconfdir=/etc
+        --sysconfdir=/etc $define_meson
   ninja
 }
 
