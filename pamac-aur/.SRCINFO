@@ -30,7 +30,7 @@ pkgbase = pamac-aur
 	depends = gtk3>=3.24
 	depends = libnotify
 	depends = desktop-file-utils
-	depends = libpamac-aur>=11.2
+	depends = libpamac-aur
 	depends = gnutls>=3.4
 	depends = git
 	depends = appstream-glib>=0.7.18-1
