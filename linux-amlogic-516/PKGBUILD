@@ -3,13 +3,13 @@
 pkgbase=linux-amlogic-516
 pkgname=('linux-amlogic-516'
          'linux-amlogic-516-headers')
-_commit=abdbb2b8b1a1342b0416fa206a84b216c2b67ecd
+_commit=6e06690b86b9488270b3974fc79582072d8f7b51
 _branch=amlogic-5.16.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Chewitt Amlogic Branch"
-pkgver=5.16.2
-pkgrel=2
+pkgver=5.16.7
+pkgrel=1
 arch=('aarch64')
 url="https://github.com/chewitt/linux/tree/${_branch}"
 license=('GPL2')
@@ -29,6 +29,7 @@ source=(
   '03-drm-meson-fix-colour-distortion-from-hdr-set-during-vendor-uboot.patch'
   '04-drm-meson-not-load-rgb709-fix-reddish-colors.patch'
   '05-add-gpio-based-pwm-driver-enables-fan.patch'
+  '06-btusb-csr-fake-detect.patch'
 )
 md5sums=(
   'SKIP'
@@ -41,6 +42,7 @@ md5sums=(
   '89e86898147ddf53ae25c939d857e468'
   'ce6fc83f334a597e68fe32842aaff9c3'
   'becff33d2cb6bfd03db548d7c8bbd195'
+  'adc577adf4df8e04501e317d50afbef1'
 )
 
 prepare() {
@@ -57,11 +59,19 @@ prepare() {
   # Fix latest gcc compiling errors with the aegis crypto module.
   patch -p1 -i ../01-aegis-crypto.patch
 
-  # Fix pink grays and green line issue on some displays
+  # Fix pink grays and green line issue on some displays, but can cause
+  # inversion of colors on some non default display resolutions.
   patch -p1 -i ../02-drm-meson-add-yuv422-output-support.patch
+
+  # Patches to fix pink colors
   patch -p1 -i ../03-drm-meson-fix-colour-distortion-from-hdr-set-during-vendor-uboot.patch
   patch -p1 -i ../04-drm-meson-not-load-rgb709-fix-reddish-colors.patch
+
+  # Add gpio based pwm driver to be able to use the fan on Odroid N2/N2+
   patch -p1 -i ../05-add-gpio-based-pwm-driver-enables-fan.patch
+
+  # Workaround to detect some CSR 4.0 bluetooth adapters sold by SBC providers
+  patch -p1 -i ../06-btusb-csr-fake-detect.patch
 }
 
 build() {
