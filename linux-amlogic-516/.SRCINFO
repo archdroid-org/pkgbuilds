@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-516
 	pkgver = 5.16.7
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/chewitt/linux/tree/amlogic-5.16.y
 	arch = aarch64
 	license = GPL2
