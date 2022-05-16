@@ -9,7 +9,7 @@ _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Tobetter Odroid Branch"
 pkgver=5.18
-pkgrel=7
+pkgrel=8
 arch=('aarch64')
 url="https://github.com/tobetter/linux/tree/${_branch}"
 license=('GPL2')
@@ -25,6 +25,7 @@ source=(
   '60-linux.hook'
   '90-linux.hook'
   '01-aegis-crypto.patch'
+  '02-drm-meson-add-YUV422-output-support.patch'
 )
 md5sums=(
   'SKIP'
@@ -33,6 +34,7 @@ md5sums=(
   'ce6c81ad1ad1f8b333fd6077d47abdaf'
   '3dc88030a8f2f5a5f97266d99b149f77'
   'a4f45dd491148536f89046344a62eeff'
+  '960a409f5f8ad30c4e45101bc83dc386'
 )
 
 prepare() {
@@ -48,6 +50,9 @@ prepare() {
 
   # Fix latest gcc compiling errors with the aegis crypto module.
   patch -p1 -i ../01-aegis-crypto.patch
+
+  # Fix green line on left of screen
+  patch -p1 -i ../02-drm-meson-add-YUV422-output-support.patch
 }
 
 build() {

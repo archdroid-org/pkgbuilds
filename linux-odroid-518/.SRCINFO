@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-518
 	pkgver = 5.18
-	pkgrel = 7
+	pkgrel = 8
 	url = https://github.com/tobetter/linux/tree/odroid-5.18.y
 	arch = aarch64
 	license = GPL2
@@ -20,12 +20,14 @@ pkgbase = linux-odroid-518
 	source = 60-linux.hook
 	source = 90-linux.hook
 	source = 01-aegis-crypto.patch
+	source = 02-drm-meson-add-YUV422-output-support.patch
 	md5sums = SKIP
 	md5sums = SKIP
 	md5sums = 13f7d22e7f0ff81a742fb4c7b02098f5
 	md5sums = ce6c81ad1ad1f8b333fd6077d47abdaf
 	md5sums = 3dc88030a8f2f5a5f97266d99b149f77
 	md5sums = a4f45dd491148536f89046344a62eeff
+	md5sums = 960a409f5f8ad30c4e45101bc83dc386
 
 pkgname = linux-odroid-518
 	pkgdesc = The Linux Kernel and modules - Tobetter Odroid Branch
