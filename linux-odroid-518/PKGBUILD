@@ -3,13 +3,13 @@
 pkgbase=linux-odroid-518
 pkgname=('linux-odroid-518'
          'linux-odroid-518-headers')
-_commit=a4a3b755d6825af3be1a233d3d927f40356ff545
+_commit=f723e0147889906e924ba6a13f3c450ae0d3910e
 _branch=odroid-5.18.y
 _srcname=linux-${_commit}
 _kernelname=${pkgbase#linux}
 _desc="Tobetter Odroid Branch"
-pkgver=5.18
-pkgrel=8
+pkgver=5.18.1
+pkgrel=1
 arch=('aarch64')
 url="https://github.com/tobetter/linux/tree/${_branch}"
 license=('GPL2')
@@ -52,7 +52,7 @@ prepare() {
   patch -p1 -i ../01-aegis-crypto.patch
 
   # Fix green line on left of screen
-  patch -p1 -i ../02-drm-meson-add-YUV422-output-support.patch
+  #patch -p1 -i ../02-drm-meson-add-YUV422-output-support.patch
 }
 
 build() {
