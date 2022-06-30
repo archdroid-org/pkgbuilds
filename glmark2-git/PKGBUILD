@@ -1,48 +1,38 @@
-# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
-# Contributor: Ryo Munakata <afpacket@gmail.com>
-
+# Maintainer: Ryo Munakata <afpacket@gmail.com>
+# Rebased on glmark2 (https://aur.archlinux.org/packages/glmark2/)
+# Maintainer: Mark Wagie <mark dot wagie at tutanota dot com>
+# Contributor: farseerfc <farseerfc@gmail.com>
 pkgname=glmark2-git
-pkgver=r928.c493520
+pkgver=r975.3f1104d
 pkgrel=1
-pkgdesc="OpenGL (ES) 2.0 benchmark (X11, Wayland, DRM)"
-arch=('i686' 'x86_64' 'aarch64')
-url="https://launchpad.net/glmark2"
-license=('GPL3')
-depends=(
-  'libjpeg-turbo' 'libpng' 'libx11' 'libxcb'
-  'wayland' 'libgl' 'libgles' 'wayland-protocols'
-)
-makedepends=('git' 'python')
+pkgdesc="An OpenGL 2.0 and ES 2.0 benchmark (X11, Wayland, DRM)"
+arch=('x86_64' 'aarch64')
+url="https://github.com/glmark2/glmark2"
+license=('GPL' 'custom')
+depends=('libjpeg-turbo' 'libpng' 'libx11' 'mesa' 'systemd-libs' 'libgl' 'libgles' 'wayland' 'egl-wayland')
+makedepends=('git' 'meson' 'systemd' 'wayland-protocols')
 conflicts=('glmark2')
 provides=('glmark2')
-source=(
-  "$pkgname"::'git://github.com/glmark2/glmark2.git'
-)
-md5sums=(
-  'SKIP'
-)
+source=("$pkgname"::'git+https://github.com/glmark2/glmark2.git')
+md5sums=('SKIP')
 
 # GLMARK2 features
 GM2_FLAVORS="x11-gl,x11-glesv2,wayland-gl,wayland-glesv2,drm-gl,drm-glesv2"
 
 pkgver() {
-  cd "${srcdir}/${pkgname}"
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-}
-
-prepare() {
-  cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
-  cd "${srcdir}/${pkgname}"
-  python ./waf configure \
-    --prefix=/usr \
-    --with-flavors=${GM2_FLAVORS}
-  python ./waf -j4
+    pwd
+    arch-meson "$pkgname" build -Dflavors=${GM2_FLAVORS}
+    meson compile -C build
 }
 
 package() {
-  cd "${srcdir}/${pkgname}"
-  DESTDIR="${pkgdir}" python ./waf install
+    DESTDIR="$pkgdir" meson install -C build
+
+    cd "$pkgname"
+    install -Dm644 COPYING.SGI -t "$pkgdir/usr/share/licenses/$pkgname"
 }
