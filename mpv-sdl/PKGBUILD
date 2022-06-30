@@ -7,8 +7,8 @@ pkgname=mpv-sdl
 _pkgname=mpv
 epoch=1
 _tag='4c9d3669a0f672e6754ac456acd324db570964d3' # git rev-parse v${pkgver}
-pkgver=0.33.1
-pkgrel=2
+pkgver=0.34.1
+pkgrel=4
 pkgdesc='a free, open source, and cross-platform media player'
 arch=('x86_64' 'aarch64')
 license=('GPL3')
@@ -16,18 +16,18 @@ url='https://mpv.io/'
 depends=('alsa-lib' 'libasound.so' 'desktop-file-utils' 'ffmpeg' 'libavcodec.so' 'libavdevice.so'
          'libavfilter.so' 'libavformat.so' 'libavutil.so' 'libswresample.so' 'libswscale.so'
          'glibc' 'hicolor-icon-theme' 'jack' 'libjack.so' 'lcms2' 'liblcms2.so' 'libarchive'
-         'libarchive.so' 'libass' 'libass.so' 'libbluray' 'libbluray.so' 'libcaca' 'libcdio'
+         'libarchive.so' 'libass' 'libass.so' 'libbluray' 'libbluray.so' 'libcdio'
          'libcdio-paranoia' 'libdrm' 'libdvdnav' 'libdvdread' 'libegl' 'libgl' 'libglvnd'
-         'libjpeg' 'libjpeg.so' 'libplacebo' 'libplacebo.so' 'libpulse' 'libpulse.so'
-         'libva' 'libva.so' 'libva-drm.so' 'libva-wayland.so' 'libva-x11.so' 'libvdpau' 'libx11'
+         'libjpeg' 'libjpeg.so' 'libpulse' 'libpulse.so' 'libvdpau' 'libx11'
          'libxext' 'libxinerama' 'libxkbcommon' 'libxkbcommon.so' 'libxrandr' 'libxss'
          'libxv' 'lua52' 'mesa' 'mujs' 'rubberband' 'librubberband.so' 'shaderc'
          'libshaderc_shared.so' 'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
          'zlib' 'sdl2')
 makedepends=('git' 'python-docutils' 'ladspa' 'wayland-protocols'
              'ffnvcodec-headers' 'vulkan-headers' 'waf')
-optdepends=('youtube-dl: for video-sharing websites playback')
-provides=('libmpv.so' 'mpv')
+optdepends=('yt-dlp: for video-sharing websites playback'
+            'youtube-dl: for video-sharing websites playback')
+provides=('libmpv.so')
 conflicts=('mpv')
 options=('!emptydirs')
 source=("git+https://github.com/mpv-player/mpv.git#tag=${_tag}")
@@ -36,8 +36,7 @@ md5sums=('SKIP')
 prepare() {
   cd ${_pkgname}
 
-  # vo_gpu: placebo: update for upstream API changes
-  git cherry-pick -n 7c4465cefb27d4e0d07535d368febdf77b579566
+  git cherry-pick fc94c8c365ebeb038af6052bf4ea0506c1220559
 }
 
 build() {
@@ -52,7 +51,10 @@ build() {
     --enable-libmpv-shared \
     --enable-sdl2 \
     --enable-sdl2-video \
-    --disable-build-date
+    --disable-build-date \
+    --disable-caca \
+    --disable-vaapi \
+    --disable-libplacebo
 
   waf build
 }
