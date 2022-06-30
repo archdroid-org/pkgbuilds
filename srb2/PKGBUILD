@@ -1,11 +1,11 @@
-# Maintainer: carstene1ns <arch carsten-teibes de> - http://git.io/ctPKG
+# Maintainer: Jefferson Gonzalez <jgmdev@gmail.com>
+# Contributor: carstene1ns <arch carsten-teibes de> - http://git.io/ctPKG
 # Contributor: DeedleFake <yisszev at beckforce dot com>
 # Contributor: JJK
 
 pkgname=srb2
-pkgver=2.2.8
-_dataver=2.2.8
-_instver=2.2.7
+pkgver=2.2.10
+_instver=2210
 pkgrel=1
 pkgdesc='A 3D Sonic fan game based off of Doom Legacy (aka "Sonic Robo Blast 2")'
 arch=('i686' 'x86_64' 'aarch64')
@@ -17,15 +17,13 @@ makedepends_i686=('nasm')
 conflicts=("srb2-data")
 source=(
   "https://github.com/STJr/SRB2/archive/SRB2_release_${pkgver}.zip"
-  "https://github.com/STJr/SRB2/releases/download/SRB2_release_${_instver}/SRB2-${_instver}-Full.zip"
-  "https://github.com/STJr/SRB2/releases/download/SRB2_release_${pkgver}/SRB2-v${pkgver}-Patch.zip"
+  "https://github.com/STJr/SRB2/releases/download/SRB2_release_${pkgver}/SRB2-v${_instver}-Full.zip"
   "srb2.desktop"
   "srb2-opengl.desktop"
 )
 md5sums=(
-  'ec7fff5c700230f4141c82a52d1450c2'
-  'd167d121a2a7f008e78f6b135f608869'
-  '69521c43dd32afff2dafe718fd098218'
+  'cb4fd06ddfcacaab0eafa5e2037060f8'
+  '92c68194d6e48eb7314d60f0318309b9'
   '41040e7cb9fbe4c9cc6b5a63aaa1ab34'
   '54abffc62f661197d81091c6ead95563'
 )
@@ -40,6 +38,9 @@ prepare() {
   if [ "$CARCH" == "aarch64" ]; then
     sed -i 's/pentium/native/g' Makefile
   fi
+
+  # Fix non SCM version check
+  sed -i "s/exit [0-9]/exit 0/g" ../comptime.sh
 }
 
 build() {
@@ -55,7 +56,7 @@ build() {
 
 package() {
   [ "$CARCH" == "x86_64" ] && IS64BIT="64" || IS64BIT=""
-  install -Dm755 SRB2-SRB2_release_$pkgver/bin/Linux$IS64BIT/Release/lsdl2srb2 \
+  install -Dm755 SRB2-SRB2_release_$pkgver/bin/lsdl2srb2 \
     "$pkgdir"/usr/bin/srb2
 
   # icon + .desktop
@@ -66,5 +67,6 @@ package() {
 
   # game data
   install -d "$pkgdir"/usr/share/games/SRB2
-  install -m644 {player,music}.dta {srb2,zones,patch_music,patch}.pk3 "$pkgdir"/usr/share/games/SRB2
+  cp -a models "$pkgdir"/usr/share/games/SRB2
+  install -m644 models.dat {player,music}.dta {srb2,zones}.pk3 "$pkgdir"/usr/share/games/SRB2
 }
