@@ -3,17 +3,18 @@
 # Contributor: kevku <kevku@gmx.com>
 
 pkgname=kodi-addon-inputstream-adaptive
-pkgver=19.0.1
+pkgver=19.0.5
 _codename=Matrix
 pkgrel=1
-pkgdesc="InputStream client for adaptive streams for Kodi 18+."
+pkgdesc="InputStream client for adaptive streams for Kodi 18+"
 arch=('x86_64' 'aarch64')
 url="https://github.com/peak3d/inputstream.adaptive"
 license=('GPL2')
 groups=('kodi-addons' 'kodi-addons-inputstream')
 makedepends=('cmake' 'kodi-dev' 'gtest')
+options=(!lto debug)
 source=("$pkgname-$pkgver.tar.gz::https://github.com/peak3d/inputstream.adaptive/archive/$pkgver-$_codename.tar.gz")
-sha512sums=('69aaab21dc1f5c383a23f3faa237dea40241ae177b35410537a5af55d9833883e02ce23a7b9a263485ba20230a8900f1151fe4e52eee5f2496d9485bbfc62ca3')
+sha512sums=('d84709bf3193d5628199aa5be3f6154e4414269f1b7795e40318db9c4fec653f018dfe6222cbb197fc2bbeb55279a4d0eeb87b154a2e233aab3893c25068a687')
 
 build() {
     cd "inputstream.adaptive-$pkgver-$_codename"
