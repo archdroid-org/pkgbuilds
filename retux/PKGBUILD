@@ -27,7 +27,7 @@ source=(
 md5sums=(
   '8d0ad92b687519a7e7807816ffa556a5'
   '4ea890841ed39987403ca2180813c4bb'
-  '16052d86b52e582e1a26ab62143bc50f'
+  'ccbf95e58139b2192e4a6b87ce8e2de2'
 )
 
 build() {
