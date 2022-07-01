@@ -68,7 +68,6 @@ pkgbase = kodi
 	noextract = kodi-flatbuffers-1.12.0.tar.gz
 	noextract = kodi-libudfread-1.1.0.tar.gz
 	options = !lto
-	options = debug
 	source = kodi-19.4-Matrix.tar.gz::https://github.com/xbmc/xbmc/archive/19.4-Matrix.tar.gz
 	source = kodi-libdvdcss-1.4.2-Leia-Beta-5.tar.gz::https://github.com/xbmc/libdvdcss/archive/1.4.2-Leia-Beta-5.tar.gz
 	source = kodi-libdvdnav-6.0.0-Leia-Alpha-3.tar.gz::https://github.com/xbmc/libdvdnav/archive/6.0.0-Leia-Alpha-3.tar.gz
