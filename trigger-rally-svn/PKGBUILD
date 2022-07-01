@@ -3,7 +3,7 @@
 pkgname=trigger-rally-svn
 _pkgname=trigger-rally
 _pkgver=0.6.7
-pkgver=0.6.7r1013
+pkgver=0.6.7r1019
 pkgrel=1
 pkgdesc="A fast-paced free software rally racing game "
 arch=('i686' 'x86_64' 'aarch64')
