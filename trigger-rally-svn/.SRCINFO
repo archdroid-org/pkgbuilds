@@ -1,6 +1,6 @@
 pkgbase = trigger-rally-svn
 	pkgdesc = A fast-paced free software rally racing game
-	pkgver = 0.6.7r1013
+	pkgver = 0.6.7r1019
 	pkgrel = 1
 	url = https://trigger-rally.sourceforge.io/
 	arch = i686
@@ -23,4 +23,3 @@ pkgbase = trigger-rally-svn
 	md5sums = SKIP
 
 pkgname = trigger-rally-svn
-
