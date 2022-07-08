@@ -52,7 +52,7 @@ prepare() {
   patch -p1 -i ../01-aegis-crypto.patch
 
   # Add gpio based pwm driver to be able to use the fan on Odroid N2/N2+
-  patch -p1 -i ../05-add-gpio-based-pwm-driver-enables-fan.patch
+  patch -p1 -i ../02-add-gpio-based-pwm-driver-enables-fan.patch
 }
 
 build() {
