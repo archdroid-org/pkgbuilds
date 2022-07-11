@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-518
 	pkgver = 5.18.8
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/tobetter/linux/tree/odroid-5.18.y
 	arch = aarch64
 	license = GPL2
