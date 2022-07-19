@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-519
 	pkgver = 5.19
-	pkgrel = 5
+	pkgrel = 7
 	url = https://github.com/chewitt/linux/tree/amlogic-5.19.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-amlogic-519
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/chewitt/linux/archive/0834e010d3410d301eba9e98f10d166067799ffe.tar.gz
+	source = https://github.com/chewitt/linux/archive/3d24ec1faae4b0434a966a1a863eee23d9590cd7.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
