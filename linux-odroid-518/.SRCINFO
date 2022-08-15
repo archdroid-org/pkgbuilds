@@ -1,6 +1,6 @@
 pkgbase = linux-odroid-518
-	pkgver = 5.18.8
-	pkgrel = 2
+	pkgver = 5.18.12
+	pkgrel = 1
 	url = https://github.com/tobetter/linux/tree/odroid-5.18.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-odroid-518
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/tobetter/linux/archive/7f8a015c9a14c5b2ed6acfe8c9c5c8882eba7331.tar.gz
+	source = https://github.com/tobetter/linux/archive/65a1da3b24ddcf7e4ddc52357d6f22d62ba441ad.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
@@ -37,7 +37,7 @@ pkgname = linux-odroid-518
 	depends = kmod
 	depends = mkinitcpio>=0.7
 	optdepends = crda: to set the correct wireless channels of your country
-	provides = linux=5.18.8
+	provides = linux=5.18.12
 	provides = WIREGUARD-MODULE
 	conflicts = linux
 	replaces = linux-armv8
@@ -45,5 +45,5 @@ pkgname = linux-odroid-518
 
 pkgname = linux-odroid-518-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - Tobetter Odroid Branch
-	provides = linux-headers=5.18.8
+	provides = linux-headers=5.18.12
 	conflicts = linux-headers
