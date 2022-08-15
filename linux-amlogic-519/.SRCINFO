@@ -1,6 +1,6 @@
 pkgbase = linux-amlogic-519
-	pkgver = 5.19
-	pkgrel = 7
+	pkgver = 5.19.1
+	pkgrel = 0
 	url = https://github.com/chewitt/linux/tree/amlogic-5.19.y
 	arch = aarch64
 	license = GPL2
@@ -14,7 +14,7 @@ pkgbase = linux-amlogic-519
 	makedepends = vboot-utils
 	makedepends = dtc
 	options = !strip
-	source = https://github.com/chewitt/linux/archive/3d24ec1faae4b0434a966a1a863eee23d9590cd7.tar.gz
+	source = https://github.com/chewitt/linux/archive/4a2c520484901aa684c6d20b0ab5de4f1bf07f6d.tar.gz
 	source = config
 	source = linux.preset
 	source = 60-linux.hook
@@ -37,7 +37,7 @@ pkgname = linux-amlogic-519
 	depends = kmod
 	depends = mkinitcpio>=0.7
 	optdepends = crda: to set the correct wireless channels of your country
-	provides = linux=5.19
+	provides = linux=5.19.1
 	provides = WIREGUARD-MODULE
 	conflicts = linux
 	replaces = linux-armv8
@@ -45,5 +45,5 @@ pkgname = linux-amlogic-519
 
 pkgname = linux-amlogic-519-headers
 	pkgdesc = Header files and scripts for building modules for linux kernel - Chewitt Amlogic Branch
-	provides = linux-headers=5.19
+	provides = linux-headers=5.19.1
 	conflicts = linux-headers
