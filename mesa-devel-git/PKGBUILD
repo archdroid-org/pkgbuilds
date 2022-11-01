@@ -4,7 +4,7 @@ pkgbase=mesa-devel-git
 pkgname=('mesa-devel-git')
 pkgdesc="Open-source implementation of the OpenGL specification (development version)"
 pkgver=22.0.0_devel.148059.b05d228695b
-pkgrel=1
+pkgrel=2
 arch=('aarch64')
 makedepends=(
   'python-mako' 'libxml2' 'libx11' 'libdrm'
@@ -14,7 +14,7 @@ makedepends=(
 )
 depends=(
   'libdrm' 'libxxf86vm' 'libxdamage' 'libxshmfence' 'libelf'
-  'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm' 'lm_sensors'
+  'libomxil-bellagio' 'libunwind' 'libglvnd' 'llvm-libs' 'lm_sensors'
   'libclc' 'glslang' 'vulkan-icd-loader' 'wayland' 'zstd'
 )
 optdepends=('clang: opencl' 'compiler-rt: opencl')
