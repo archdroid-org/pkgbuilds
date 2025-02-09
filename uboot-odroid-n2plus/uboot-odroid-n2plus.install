@@ -27,8 +27,16 @@ flash_uboot() {
   fi
 }
 
+generate_ramdiskimage() {
+  if [ ! -e "/boot/initramfs-linux.uimg" ]; then
+    /usr/bin/mkimage -n "Ramdisk Image" -A arm64 -O linux -T ramdisk -C none \
+      -d /boot/initramfs-linux.img /boot/initramfs-linux.uimg
+  fi
+}
+
 post_install() {
   /usr/bin/odroid-bootini
+  generate_ramdiskimage
   flash_uboot
 }
 
@@ -36,5 +44,6 @@ post_upgrade() {
   if [ ! -e "/boot/boot.ini" ]; then
       /usr/bin/odroid-bootini
   fi
+  generate_ramdiskimage
   flash_uboot
 }

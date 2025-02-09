@@ -1,7 +1,7 @@
 pkgbase = uboot-odroid-n2plus
 	pkgdesc = U-Boot for ODROID-N2/N2+
 	pkgver = 2015.01.189
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/hardkernel/u-boot
 	install = uboot-odroid-n2plus.install
 	arch = aarch64
@@ -26,9 +26,8 @@ pkgbase = uboot-odroid-n2plus
 	md5sums = 3bd43e59c5f88a7544505288627fe2dd
 	md5sums = 1931c8dfde7088530f173ca59fdb8989
 	md5sums = e1a78b20ea7fe68ed3bb6fe24ff54110
-	md5sums = 9fb25292c1e2df597565e2b74f7dab04
-	md5sums = bb254cd5e389396939ce48164857e4e3
-	md5sums = b6d3cb8e235d889b29ea07f92ffe4946
+	md5sums = bd2e518381ebc938fb6ad28318498cff
+	md5sums = 1fe2334ea67acca6bfd3a5087ebfb097
+	md5sums = b10c021388343b8ab11bdaf25bc3e893
 
 pkgname = uboot-odroid-n2plus
-

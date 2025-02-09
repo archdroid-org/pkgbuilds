@@ -27,47 +27,6 @@ else
     cp $boot_ini /boot/boot.ini
 fi
 
-model=""
-if [ -e /sys/devices/soc0/machine ]; then
-  model="$(cat /sys/devices/soc0/machine | sed "s/Hardkernel //g")"
-elif [ -e /sys/firmware/devicetree/base/model ]; then
-  model="$(cat /sys/firmware/devicetree/base/model | sed "s/Hardkernel //g")"
-fi
-
-if [ "$model" = "ODROID-N2Plus" ]; then
-    if [ -e /boot/dtbs/amlogic/meson64_odroidn2_plus.dtb ]; then
-        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/\/dtbs\/amlogic\/meson64_odroidn2_plus\.dtb/g" \
-            /boot/boot.ini
-    elif [ -e /boot/dtbs/amlogic/meson-g12b-odroid-n2-plus.dtb ]; then
-        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2_plus\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/g" \
-            /boot/boot.ini
-    elif [ -e /boot/dtbs/amlogic/meson64_odroidn2.dtb ]; then
-        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2-plus\.dtb/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/g" \
-            /boot/boot.ini
-        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/g" \
-            /boot/boot.ini
-        echo "Warning: Using odroidn2 dtb on odroidn2+ will provide lower clock speeds'"
-    elif [ -e /boot/dtbs/amlogic/meson-g12b-odroid-n2.dtb ]; then
-        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2_plus\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
-            /boot/boot.ini
-        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
-            /boot/boot.ini
-        echo "Warning: Using odroidn2 dtb on odroidn2+ will provide lower clock speeds'"
-    else
-        echo "Error: The kernel you installed doesn't seems to support the odroidn2+'"
-    fi
-else
-    if [ -e /boot/dtbs/amlogic/meson64_odroidn2.dtb ]; then
-        sed -i "s/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/g" \
-            /boot/boot.ini
-    elif [ -e /boot/dtbs/amlogic/meson-g12b-odroid-n2.dtb ]; then
-        sed -i "s/\/dtbs\/amlogic\/meson64_odroidn2\.dtb/\/dtbs\/amlogic\/meson-g12b-odroid-n2\.dtb/g" \
-            /boot/boot.ini
-    else
-        echo "Error: The kernel you installed doesn't seems to support the odroidn2'"
-    fi
-fi
-
 # Add proper UUID to boot.ini
 major=$(mountpoint -d / | cut -f 1 -d ':')
 minor=$(mountpoint -d / | cut -f 2 -d ':')
