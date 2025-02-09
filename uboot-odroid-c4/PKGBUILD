@@ -7,7 +7,7 @@ buildarch=8
 pkgname=uboot-odroid-c4
 _revision=189
 pkgver=2015.01.${_revision}
-pkgrel=1
+pkgrel=2
 _edid_generator_commit=31a6f80784d289d2faa8c4ca4788409c83b3ea14
 pkgdesc="U-Boot for ODROID-C4/HC4"
 arch=('aarch64')
@@ -34,9 +34,9 @@ md5sums=(
   '3bd43e59c5f88a7544505288627fe2dd'
   '1931c8dfde7088530f173ca59fdb8989'
   'e1a78b20ea7fe68ed3bb6fe24ff54110'
-  'a0925c3da4b399528a07502852d48b5d'
-  '0c436689f5a6c85a2f569322d182a928'
-  'a454262534c21d5b263bca6ec0141ae5'
+  '13dab7ee40db044042ea2a0a509fcfc6'
+  '69bc737d512e5afa63cb5546db6c4039'
+  '4587820d7d14c4d00333a17a4acf93fa'
 )
 
 package() {

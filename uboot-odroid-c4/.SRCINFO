@@ -1,7 +1,7 @@
 pkgbase = uboot-odroid-c4
 	pkgdesc = U-Boot for ODROID-C4/HC4
 	pkgver = 2015.01.189
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/hardkernel/u-boot
 	install = uboot-odroid-c4.install
 	arch = aarch64
@@ -26,9 +26,8 @@ pkgbase = uboot-odroid-c4
 	md5sums = 3bd43e59c5f88a7544505288627fe2dd
 	md5sums = 1931c8dfde7088530f173ca59fdb8989
 	md5sums = e1a78b20ea7fe68ed3bb6fe24ff54110
-	md5sums = a0925c3da4b399528a07502852d48b5d
-	md5sums = 0c436689f5a6c85a2f569322d182a928
-	md5sums = a454262534c21d5b263bca6ec0141ae5
+	md5sums = 13dab7ee40db044042ea2a0a509fcfc6
+	md5sums = 69bc737d512e5afa63cb5546db6c4039
+	md5sums = 4587820d7d14c4d00333a17a4acf93fa
 
 pkgname = uboot-odroid-c4
-
